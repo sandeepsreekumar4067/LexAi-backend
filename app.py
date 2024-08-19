@@ -1,62 +1,54 @@
-from flask import Flask, request, jsonify
-from langchain_core.prompts import ChatPromptTemplate
-from langchain_core.output_parsers import StrOutputParser
-from langchain_ollama.llms import OllamaLLM
-from flask_cors import CORS
-from langchain.document_loaders import PyPDFLoader
-from langchain.vectorstores import FAISS
-# from langchain.embeddings import LlamaEmbeddings
-from langchain.chains import RetrievalQA
 from langchain_ollama import OllamaEmbeddings
-app = Flask(__name__)
-CORS(app)
+from langchain_community.vectorstores import FAISS
+from langchain_community.document_loaders import PyPDFLoader
+from langchain.chains import RetrievalQA
+from langchain.text_splitter import RecursiveCharacterTextSplitter
+# Step 1: Load Your Legal PDFs
+print("ipc detected")
+ipc_loader = PyPDFLoader("../Backend/assets/ipc.pdf")  # Replace with your IPC PDF path
+constitution_loader = PyPDFLoader("../Backend/assets/constitution.pdf")  # Replace with your Constitution PDF path
 
-# Load legal PDFs
-ipc_pdf_loader = PyPDFLoader("../Backend/assets/ipc.pdf")
-constitution_pdf_loader = PyPDFLoader("../Backend/assets/constitution.pdf")
+# Load documents from PDFs
+print("ipc loading..")
 
-ipc_docs = ipc_pdf_loader.load()
-constitution_docs = constitution_pdf_loader.load()
+ipc_docs = ipc_loader.load()
+constitution_docs = constitution_loader.load()
 
-# Create a vector store for document retrieval
-llm = OllamaLLM(model="llama3.1")
+# Combine the documents into a single list
+documents = ipc_docs + constitution_docs
+text_splitter = RecursiveCharacterTextSplitter(chunk_size=1000, chunk_overlap=200)
+chunk_document = text_splitter.split_documents(documents)
+print(chunk_document)
+print("creating embedding model")
+
+# Step 2: Initialize the Ollama Embeddings Model with Llama 3.1
 embedding_model = OllamaEmbeddings(
-    model=llm,
+    model="llama3.1",
 )
-vector_store = FAISS.from_documents(ipc_docs + constitution_docs, embedding_model)
+print("embedding complete")
 
-# Create a QA chain with a more detailed prompt
-def create_prompt(retrieved_text, question):
-    return f"""You are a legal assistant. Analyze the following legal document excerpts and provide a detailed, human-like response to the user's question.
+# Step 3: Create a Vector Store (using FAISS for efficient retrieval)
+print("vectore store creating")
 
-    Document Excerpts:
-    {retrieved_text}
+vector_store = FAISS.from_documents(chunk_document, embedding_model)
+query="what is a petty case ?"
+res=vector_store.similarity_search(query)
+print(res[0].page_content)
 
-    User's Question:
-    {question}
+# # Step 4: Set up the Retrieval-based QA Chain
+# qa_chain = RetrievalQA(llm=embedding_model, retriever=vector_store.as_retriever())
 
-    Your Answer:"""
+# # Function to ask a question and get an answer
+# print("model ready")
+# def ask_question(query):
+#     response = qa_chain.run(query)
+#     return response
 
-@app.route('/ask', methods=['POST'])
-def ask_question():
-    data = request.json
-    question = data.get('question', '')
-    if not question:
-        return jsonify({'error': 'No question provided', 'status': False}), 400
-
-    try:
-        # Retrieve relevant documents based on the question
-        retrieved_docs = vector_store.as_retriever().get_relevant_documents(question)
-        retrieved_text = " ".join([doc.page_content for doc in retrieved_docs])
-
-        # Create a detailed prompt for the LLM
-        prompt = create_prompt(retrieved_text, question)
-        
-        # Get the response from the LLM
-        response = llm(prompt)
-        return jsonify({'response': response, 'status': True}), 200
-    except Exception as e:
-        return jsonify({'error': str(e), 'status': False}), 500
-
-if __name__ == '__main__':
-    app.run(host='0.0.0.0', port=5000)
+# # Example usage: Querying the legal assistant
+# if __name__ == "__main__":
+#     while True:
+#         user_query = input("Enter your legal question: ")
+#         if user_query.lower() == "exit":
+#             break
+#         answer = ask_question(user_query)
+#         print(f"Answer: {answer}")

@@ -1,74 +1,26 @@
 [
     {
-        "label": "Flask",
-        "importPath": "flask",
-        "description": "flask",
+        "label": "OllamaEmbeddings",
+        "importPath": "langchain_ollama",
+        "description": "langchain_ollama",
         "isExtraImport": true,
-        "detail": "flask",
-        "documentation": {}
-    },
-    {
-        "label": "request",
-        "importPath": "flask",
-        "description": "flask",
-        "isExtraImport": true,
-        "detail": "flask",
-        "documentation": {}
-    },
-    {
-        "label": "jsonify",
-        "importPath": "flask",
-        "description": "flask",
-        "isExtraImport": true,
-        "detail": "flask",
-        "documentation": {}
-    },
-    {
-        "label": "ChatPromptTemplate",
-        "importPath": "langchain_core.prompts",
-        "description": "langchain_core.prompts",
-        "isExtraImport": true,
-        "detail": "langchain_core.prompts",
-        "documentation": {}
-    },
-    {
-        "label": "StrOutputParser",
-        "importPath": "langchain_core.output_parsers",
-        "description": "langchain_core.output_parsers",
-        "isExtraImport": true,
-        "detail": "langchain_core.output_parsers",
-        "documentation": {}
-    },
-    {
-        "label": "OllamaLLM",
-        "importPath": "langchain_ollama.llms",
-        "description": "langchain_ollama.llms",
-        "isExtraImport": true,
-        "detail": "langchain_ollama.llms",
-        "documentation": {}
-    },
-    {
-        "label": "CORS",
-        "importPath": "flask_cors",
-        "description": "flask_cors",
-        "isExtraImport": true,
-        "detail": "flask_cors",
-        "documentation": {}
-    },
-    {
-        "label": "PyPDFLoader",
-        "importPath": "langchain.document_loaders",
-        "description": "langchain.document_loaders",
-        "isExtraImport": true,
-        "detail": "langchain.document_loaders",
+        "detail": "langchain_ollama",
         "documentation": {}
     },
     {
         "label": "FAISS",
-        "importPath": "langchain.vectorstores",
-        "description": "langchain.vectorstores",
+        "importPath": "langchain_community.vectorstores",
+        "description": "langchain_community.vectorstores",
         "isExtraImport": true,
-        "detail": "langchain.vectorstores",
+        "detail": "langchain_community.vectorstores",
+        "documentation": {}
+    },
+    {
+        "label": "PyPDFLoader",
+        "importPath": "langchain_community.document_loaders",
+        "description": "langchain_community.document_loaders",
+        "isExtraImport": true,
+        "detail": "langchain_community.document_loaders",
         "documentation": {}
     },
     {
@@ -80,55 +32,28 @@
         "documentation": {}
     },
     {
-        "label": "OllamaEmbeddings",
-        "importPath": "langchain_ollama",
-        "description": "langchain_ollama",
+        "label": "RecursiveCharacterTextSplitter",
+        "importPath": "langchain.text_splitter",
+        "description": "langchain.text_splitter",
         "isExtraImport": true,
-        "detail": "langchain_ollama",
+        "detail": "langchain.text_splitter",
         "documentation": {}
     },
     {
-        "label": "create_prompt",
-        "kind": 2,
-        "importPath": "app",
-        "description": "app",
-        "peekOfCode": "def create_prompt(retrieved_text, question):\n    return f\"\"\"You are a legal assistant. Analyze the following legal document excerpts and provide a detailed, human-like response to the user's question.\n    Document Excerpts:\n    {retrieved_text}\n    User's Question:\n    {question}\n    Your Answer:\"\"\"\n@app.route('/ask', methods=['POST'])\ndef ask_question():\n    data = request.json",
-        "detail": "app",
-        "documentation": {}
-    },
-    {
-        "label": "ask_question",
-        "kind": 2,
-        "importPath": "app",
-        "description": "app",
-        "peekOfCode": "def ask_question():\n    data = request.json\n    question = data.get('question', '')\n    if not question:\n        return jsonify({'error': 'No question provided', 'status': False}), 400\n    try:\n        # Retrieve relevant documents based on the question\n        retrieved_docs = vector_store.as_retriever().get_relevant_documents(question)\n        retrieved_text = \" \".join([doc.page_content for doc in retrieved_docs])\n        # Create a detailed prompt for the LLM",
-        "detail": "app",
-        "documentation": {}
-    },
-    {
-        "label": "app",
+        "label": "ipc_loader",
         "kind": 5,
         "importPath": "app",
         "description": "app",
-        "peekOfCode": "app = Flask(__name__)\nCORS(app)\n# Load legal PDFs\nipc_pdf_loader = PyPDFLoader(\"../Backend/assets/ipc.pdf\")\nconstitution_pdf_loader = PyPDFLoader(\"../Backend/assets/constitution.pdf\")\nipc_docs = ipc_pdf_loader.load()\nconstitution_docs = constitution_pdf_loader.load()\n# Create a vector store for document retrieval\nllm = OllamaLLM(model=\"llama3.1\")\nembedding_model = OllamaEmbeddings(",
+        "peekOfCode": "ipc_loader = PyPDFLoader(\"../Backend/assets/ipc.pdf\")  # Replace with your IPC PDF path\nconstitution_loader = PyPDFLoader(\"../Backend/assets/constitution.pdf\")  # Replace with your Constitution PDF path\n# Load documents from PDFs\nprint(\"ipc loading..\")\nipc_docs = ipc_loader.load()\nconstitution_docs = constitution_loader.load()\n# Combine the documents into a single list\ndocuments = ipc_docs + constitution_docs\ntext_splitter = RecursiveCharacterTextSplitter(chunk_size=1000, chunk_overlap=200)\nchunk_document = text_splitter.split_documents(documents)",
         "detail": "app",
         "documentation": {}
     },
     {
-        "label": "ipc_pdf_loader",
+        "label": "constitution_loader",
         "kind": 5,
         "importPath": "app",
         "description": "app",
-        "peekOfCode": "ipc_pdf_loader = PyPDFLoader(\"../Backend/assets/ipc.pdf\")\nconstitution_pdf_loader = PyPDFLoader(\"../Backend/assets/constitution.pdf\")\nipc_docs = ipc_pdf_loader.load()\nconstitution_docs = constitution_pdf_loader.load()\n# Create a vector store for document retrieval\nllm = OllamaLLM(model=\"llama3.1\")\nembedding_model = OllamaEmbeddings(\n    model=llm,\n)\nvector_store = FAISS.from_documents(ipc_docs + constitution_docs, embedding_model)",
-        "detail": "app",
-        "documentation": {}
-    },
-    {
-        "label": "constitution_pdf_loader",
-        "kind": 5,
-        "importPath": "app",
-        "description": "app",
-        "peekOfCode": "constitution_pdf_loader = PyPDFLoader(\"../Backend/assets/constitution.pdf\")\nipc_docs = ipc_pdf_loader.load()\nconstitution_docs = constitution_pdf_loader.load()\n# Create a vector store for document retrieval\nllm = OllamaLLM(model=\"llama3.1\")\nembedding_model = OllamaEmbeddings(\n    model=llm,\n)\nvector_store = FAISS.from_documents(ipc_docs + constitution_docs, embedding_model)\n# Create a QA chain with a more detailed prompt",
+        "peekOfCode": "constitution_loader = PyPDFLoader(\"../Backend/assets/constitution.pdf\")  # Replace with your Constitution PDF path\n# Load documents from PDFs\nprint(\"ipc loading..\")\nipc_docs = ipc_loader.load()\nconstitution_docs = constitution_loader.load()\n# Combine the documents into a single list\ndocuments = ipc_docs + constitution_docs\ntext_splitter = RecursiveCharacterTextSplitter(chunk_size=1000, chunk_overlap=200)\nchunk_document = text_splitter.split_documents(documents)\nprint(chunk_document)",
         "detail": "app",
         "documentation": {}
     },
@@ -137,7 +62,7 @@
         "kind": 5,
         "importPath": "app",
         "description": "app",
-        "peekOfCode": "ipc_docs = ipc_pdf_loader.load()\nconstitution_docs = constitution_pdf_loader.load()\n# Create a vector store for document retrieval\nllm = OllamaLLM(model=\"llama3.1\")\nembedding_model = OllamaEmbeddings(\n    model=llm,\n)\nvector_store = FAISS.from_documents(ipc_docs + constitution_docs, embedding_model)\n# Create a QA chain with a more detailed prompt\ndef create_prompt(retrieved_text, question):",
+        "peekOfCode": "ipc_docs = ipc_loader.load()\nconstitution_docs = constitution_loader.load()\n# Combine the documents into a single list\ndocuments = ipc_docs + constitution_docs\ntext_splitter = RecursiveCharacterTextSplitter(chunk_size=1000, chunk_overlap=200)\nchunk_document = text_splitter.split_documents(documents)\nprint(chunk_document)\nprint(\"creating embedding model\")\n# Step 2: Initialize the Ollama Embeddings Model with Llama 3.1\nembedding_model = OllamaEmbeddings(",
         "detail": "app",
         "documentation": {}
     },
@@ -146,16 +71,34 @@
         "kind": 5,
         "importPath": "app",
         "description": "app",
-        "peekOfCode": "constitution_docs = constitution_pdf_loader.load()\n# Create a vector store for document retrieval\nllm = OllamaLLM(model=\"llama3.1\")\nembedding_model = OllamaEmbeddings(\n    model=llm,\n)\nvector_store = FAISS.from_documents(ipc_docs + constitution_docs, embedding_model)\n# Create a QA chain with a more detailed prompt\ndef create_prompt(retrieved_text, question):\n    return f\"\"\"You are a legal assistant. Analyze the following legal document excerpts and provide a detailed, human-like response to the user's question.",
+        "peekOfCode": "constitution_docs = constitution_loader.load()\n# Combine the documents into a single list\ndocuments = ipc_docs + constitution_docs\ntext_splitter = RecursiveCharacterTextSplitter(chunk_size=1000, chunk_overlap=200)\nchunk_document = text_splitter.split_documents(documents)\nprint(chunk_document)\nprint(\"creating embedding model\")\n# Step 2: Initialize the Ollama Embeddings Model with Llama 3.1\nembedding_model = OllamaEmbeddings(\n    model=\"llama3.1\",",
         "detail": "app",
         "documentation": {}
     },
     {
-        "label": "llm",
+        "label": "documents",
         "kind": 5,
         "importPath": "app",
         "description": "app",
-        "peekOfCode": "llm = OllamaLLM(model=\"llama3.1\")\nembedding_model = OllamaEmbeddings(\n    model=llm,\n)\nvector_store = FAISS.from_documents(ipc_docs + constitution_docs, embedding_model)\n# Create a QA chain with a more detailed prompt\ndef create_prompt(retrieved_text, question):\n    return f\"\"\"You are a legal assistant. Analyze the following legal document excerpts and provide a detailed, human-like response to the user's question.\n    Document Excerpts:\n    {retrieved_text}",
+        "peekOfCode": "documents = ipc_docs + constitution_docs\ntext_splitter = RecursiveCharacterTextSplitter(chunk_size=1000, chunk_overlap=200)\nchunk_document = text_splitter.split_documents(documents)\nprint(chunk_document)\nprint(\"creating embedding model\")\n# Step 2: Initialize the Ollama Embeddings Model with Llama 3.1\nembedding_model = OllamaEmbeddings(\n    model=\"llama3.1\",\n)\nprint(\"embedding complete\")",
+        "detail": "app",
+        "documentation": {}
+    },
+    {
+        "label": "text_splitter",
+        "kind": 5,
+        "importPath": "app",
+        "description": "app",
+        "peekOfCode": "text_splitter = RecursiveCharacterTextSplitter(chunk_size=1000, chunk_overlap=200)\nchunk_document = text_splitter.split_documents(documents)\nprint(chunk_document)\nprint(\"creating embedding model\")\n# Step 2: Initialize the Ollama Embeddings Model with Llama 3.1\nembedding_model = OllamaEmbeddings(\n    model=\"llama3.1\",\n)\nprint(\"embedding complete\")\n# Step 3: Create a Vector Store (using FAISS for efficient retrieval)",
+        "detail": "app",
+        "documentation": {}
+    },
+    {
+        "label": "chunk_document",
+        "kind": 5,
+        "importPath": "app",
+        "description": "app",
+        "peekOfCode": "chunk_document = text_splitter.split_documents(documents)\nprint(chunk_document)\nprint(\"creating embedding model\")\n# Step 2: Initialize the Ollama Embeddings Model with Llama 3.1\nembedding_model = OllamaEmbeddings(\n    model=\"llama3.1\",\n)\nprint(\"embedding complete\")\n# Step 3: Create a Vector Store (using FAISS for efficient retrieval)\nprint(\"vectore store creating\")",
         "detail": "app",
         "documentation": {}
     },
@@ -164,7 +107,7 @@
         "kind": 5,
         "importPath": "app",
         "description": "app",
-        "peekOfCode": "embedding_model = OllamaEmbeddings(\n    model=llm,\n)\nvector_store = FAISS.from_documents(ipc_docs + constitution_docs, embedding_model)\n# Create a QA chain with a more detailed prompt\ndef create_prompt(retrieved_text, question):\n    return f\"\"\"You are a legal assistant. Analyze the following legal document excerpts and provide a detailed, human-like response to the user's question.\n    Document Excerpts:\n    {retrieved_text}\n    User's Question:",
+        "peekOfCode": "embedding_model = OllamaEmbeddings(\n    model=\"llama3.1\",\n)\nprint(\"embedding complete\")\n# Step 3: Create a Vector Store (using FAISS for efficient retrieval)\nprint(\"vectore store creating\")\nvector_store = FAISS.from_documents(chunk_document, embedding_model)\nquery=\"what is a petty case ?\"\nres=vector_store.similarity_search(query)\nprint(res[0].page_content)",
         "detail": "app",
         "documentation": {}
     },
@@ -173,7 +116,7 @@
         "kind": 5,
         "importPath": "app",
         "description": "app",
-        "peekOfCode": "vector_store = FAISS.from_documents(ipc_docs + constitution_docs, embedding_model)\n# Create a QA chain with a more detailed prompt\ndef create_prompt(retrieved_text, question):\n    return f\"\"\"You are a legal assistant. Analyze the following legal document excerpts and provide a detailed, human-like response to the user's question.\n    Document Excerpts:\n    {retrieved_text}\n    User's Question:\n    {question}\n    Your Answer:\"\"\"\n@app.route('/ask', methods=['POST'])",
+        "peekOfCode": "vector_store = FAISS.from_documents(chunk_document, embedding_model)\nquery=\"what is a petty case ?\"\nres=vector_store.similarity_search(query)\nprint(res[0].page_content)\n# # Step 4: Set up the Retrieval-based QA Chain\n# qa_chain = RetrievalQA(llm=embedding_model, retriever=vector_store.as_retriever())\n# # Function to ask a question and get an answer\n# print(\"model ready\")\n# def ask_question(query):\n#     response = qa_chain.run(query)",
         "detail": "app",
         "documentation": {}
     }
