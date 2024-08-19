@@ -56,11 +56,52 @@
         "documentation": {}
     },
     {
+        "label": "PyPDFLoader",
+        "importPath": "langchain.document_loaders",
+        "description": "langchain.document_loaders",
+        "isExtraImport": true,
+        "detail": "langchain.document_loaders",
+        "documentation": {}
+    },
+    {
+        "label": "FAISS",
+        "importPath": "langchain.vectorstores",
+        "description": "langchain.vectorstores",
+        "isExtraImport": true,
+        "detail": "langchain.vectorstores",
+        "documentation": {}
+    },
+    {
+        "label": "RetrievalQA",
+        "importPath": "langchain.chains",
+        "description": "langchain.chains",
+        "isExtraImport": true,
+        "detail": "langchain.chains",
+        "documentation": {}
+    },
+    {
+        "label": "OllamaEmbeddings",
+        "importPath": "langchain_ollama",
+        "description": "langchain_ollama",
+        "isExtraImport": true,
+        "detail": "langchain_ollama",
+        "documentation": {}
+    },
+    {
+        "label": "create_prompt",
+        "kind": 2,
+        "importPath": "app",
+        "description": "app",
+        "peekOfCode": "def create_prompt(retrieved_text, question):\n    return f\"\"\"You are a legal assistant. Analyze the following legal document excerpts and provide a detailed, human-like response to the user's question.\n    Document Excerpts:\n    {retrieved_text}\n    User's Question:\n    {question}\n    Your Answer:\"\"\"\n@app.route('/ask', methods=['POST'])\ndef ask_question():\n    data = request.json",
+        "detail": "app",
+        "documentation": {}
+    },
+    {
         "label": "ask_question",
         "kind": 2,
         "importPath": "app",
         "description": "app",
-        "peekOfCode": "def ask_question():\n    # Get the question from the POST request\n    data = request.json\n    question = data.get('question', '')\n    print(\"recieved the query..\")\n    if not question:\n        print(\"failed\")\n        return jsonify({'error': 'No question provided' , 'status':False}), 400\n    # Invoke the chain with the provided question\n    try:",
+        "peekOfCode": "def ask_question():\n    data = request.json\n    question = data.get('question', '')\n    if not question:\n        return jsonify({'error': 'No question provided', 'status': False}), 400\n    try:\n        # Retrieve relevant documents based on the question\n        retrieved_docs = vector_store.as_retriever().get_relevant_documents(question)\n        retrieved_text = \" \".join([doc.page_content for doc in retrieved_docs])\n        # Create a detailed prompt for the LLM",
         "detail": "app",
         "documentation": {}
     },
@@ -69,43 +110,70 @@
         "kind": 5,
         "importPath": "app",
         "description": "app",
-        "peekOfCode": "app = Flask(__name__)\nCORS(app)\n# Initialize the model and chain\nprompt = ChatPromptTemplate.from_messages([\n    ('system', 'you are an efficient private assistant, give reply to each question efficiently, for every good answer you provide I will be happy'),\n    ('user', 'question:{question}')\n])\nmodel = OllamaLLM(model=\"llama3.1\")\noutput_parser = StrOutputParser()\nchain = prompt | model | output_parser",
+        "peekOfCode": "app = Flask(__name__)\nCORS(app)\n# Load legal PDFs\nipc_pdf_loader = PyPDFLoader(\"../Backend/assets/ipc.pdf\")\nconstitution_pdf_loader = PyPDFLoader(\"../Backend/assets/constitution.pdf\")\nipc_docs = ipc_pdf_loader.load()\nconstitution_docs = constitution_pdf_loader.load()\n# Create a vector store for document retrieval\nllm = OllamaLLM(model=\"llama3.1\")\nembedding_model = OllamaEmbeddings(",
         "detail": "app",
         "documentation": {}
     },
     {
-        "label": "prompt",
+        "label": "ipc_pdf_loader",
         "kind": 5,
         "importPath": "app",
         "description": "app",
-        "peekOfCode": "prompt = ChatPromptTemplate.from_messages([\n    ('system', 'you are an efficient private assistant, give reply to each question efficiently, for every good answer you provide I will be happy'),\n    ('user', 'question:{question}')\n])\nmodel = OllamaLLM(model=\"llama3.1\")\noutput_parser = StrOutputParser()\nchain = prompt | model | output_parser\n@app.route('/ask', methods=['POST'])\ndef ask_question():\n    # Get the question from the POST request",
+        "peekOfCode": "ipc_pdf_loader = PyPDFLoader(\"../Backend/assets/ipc.pdf\")\nconstitution_pdf_loader = PyPDFLoader(\"../Backend/assets/constitution.pdf\")\nipc_docs = ipc_pdf_loader.load()\nconstitution_docs = constitution_pdf_loader.load()\n# Create a vector store for document retrieval\nllm = OllamaLLM(model=\"llama3.1\")\nembedding_model = OllamaEmbeddings(\n    model=llm,\n)\nvector_store = FAISS.from_documents(ipc_docs + constitution_docs, embedding_model)",
         "detail": "app",
         "documentation": {}
     },
     {
-        "label": "model",
+        "label": "constitution_pdf_loader",
         "kind": 5,
         "importPath": "app",
         "description": "app",
-        "peekOfCode": "model = OllamaLLM(model=\"llama3.1\")\noutput_parser = StrOutputParser()\nchain = prompt | model | output_parser\n@app.route('/ask', methods=['POST'])\ndef ask_question():\n    # Get the question from the POST request\n    data = request.json\n    question = data.get('question', '')\n    print(\"recieved the query..\")\n    if not question:",
+        "peekOfCode": "constitution_pdf_loader = PyPDFLoader(\"../Backend/assets/constitution.pdf\")\nipc_docs = ipc_pdf_loader.load()\nconstitution_docs = constitution_pdf_loader.load()\n# Create a vector store for document retrieval\nllm = OllamaLLM(model=\"llama3.1\")\nembedding_model = OllamaEmbeddings(\n    model=llm,\n)\nvector_store = FAISS.from_documents(ipc_docs + constitution_docs, embedding_model)\n# Create a QA chain with a more detailed prompt",
         "detail": "app",
         "documentation": {}
     },
     {
-        "label": "output_parser",
+        "label": "ipc_docs",
         "kind": 5,
         "importPath": "app",
         "description": "app",
-        "peekOfCode": "output_parser = StrOutputParser()\nchain = prompt | model | output_parser\n@app.route('/ask', methods=['POST'])\ndef ask_question():\n    # Get the question from the POST request\n    data = request.json\n    question = data.get('question', '')\n    print(\"recieved the query..\")\n    if not question:\n        print(\"failed\")",
+        "peekOfCode": "ipc_docs = ipc_pdf_loader.load()\nconstitution_docs = constitution_pdf_loader.load()\n# Create a vector store for document retrieval\nllm = OllamaLLM(model=\"llama3.1\")\nembedding_model = OllamaEmbeddings(\n    model=llm,\n)\nvector_store = FAISS.from_documents(ipc_docs + constitution_docs, embedding_model)\n# Create a QA chain with a more detailed prompt\ndef create_prompt(retrieved_text, question):",
         "detail": "app",
         "documentation": {}
     },
     {
-        "label": "chain",
+        "label": "constitution_docs",
         "kind": 5,
         "importPath": "app",
         "description": "app",
-        "peekOfCode": "chain = prompt | model | output_parser\n@app.route('/ask', methods=['POST'])\ndef ask_question():\n    # Get the question from the POST request\n    data = request.json\n    question = data.get('question', '')\n    print(\"recieved the query..\")\n    if not question:\n        print(\"failed\")\n        return jsonify({'error': 'No question provided' , 'status':False}), 400",
+        "peekOfCode": "constitution_docs = constitution_pdf_loader.load()\n# Create a vector store for document retrieval\nllm = OllamaLLM(model=\"llama3.1\")\nembedding_model = OllamaEmbeddings(\n    model=llm,\n)\nvector_store = FAISS.from_documents(ipc_docs + constitution_docs, embedding_model)\n# Create a QA chain with a more detailed prompt\ndef create_prompt(retrieved_text, question):\n    return f\"\"\"You are a legal assistant. Analyze the following legal document excerpts and provide a detailed, human-like response to the user's question.",
+        "detail": "app",
+        "documentation": {}
+    },
+    {
+        "label": "llm",
+        "kind": 5,
+        "importPath": "app",
+        "description": "app",
+        "peekOfCode": "llm = OllamaLLM(model=\"llama3.1\")\nembedding_model = OllamaEmbeddings(\n    model=llm,\n)\nvector_store = FAISS.from_documents(ipc_docs + constitution_docs, embedding_model)\n# Create a QA chain with a more detailed prompt\ndef create_prompt(retrieved_text, question):\n    return f\"\"\"You are a legal assistant. Analyze the following legal document excerpts and provide a detailed, human-like response to the user's question.\n    Document Excerpts:\n    {retrieved_text}",
+        "detail": "app",
+        "documentation": {}
+    },
+    {
+        "label": "embedding_model",
+        "kind": 5,
+        "importPath": "app",
+        "description": "app",
+        "peekOfCode": "embedding_model = OllamaEmbeddings(\n    model=llm,\n)\nvector_store = FAISS.from_documents(ipc_docs + constitution_docs, embedding_model)\n# Create a QA chain with a more detailed prompt\ndef create_prompt(retrieved_text, question):\n    return f\"\"\"You are a legal assistant. Analyze the following legal document excerpts and provide a detailed, human-like response to the user's question.\n    Document Excerpts:\n    {retrieved_text}\n    User's Question:",
+        "detail": "app",
+        "documentation": {}
+    },
+    {
+        "label": "vector_store",
+        "kind": 5,
+        "importPath": "app",
+        "description": "app",
+        "peekOfCode": "vector_store = FAISS.from_documents(ipc_docs + constitution_docs, embedding_model)\n# Create a QA chain with a more detailed prompt\ndef create_prompt(retrieved_text, question):\n    return f\"\"\"You are a legal assistant. Analyze the following legal document excerpts and provide a detailed, human-like response to the user's question.\n    Document Excerpts:\n    {retrieved_text}\n    User's Question:\n    {question}\n    Your Answer:\"\"\"\n@app.route('/ask', methods=['POST'])",
         "detail": "app",
         "documentation": {}
     }
