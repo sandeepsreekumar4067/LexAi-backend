@@ -6,17 +6,17 @@ from langchain_chroma import Chroma
 from langchain_ollama.llms import OllamaLLM
 from langchain.prompts import PromptTemplate
 from langchain.prompts import ChatPromptTemplate,MessagesPlaceholder
-from langchain.retrievers.self_query.base import SelfQueryRetriever
 from langchain.chains.history_aware_retriever import create_history_aware_retriever
 from langchain.chains.combine_documents import create_stuff_documents_chain
 from langchain.chains import create_retrieval_chain
-
+from langchain.memory import ConversationBufferMemory
 
 llm = ChatOllama(model="llama3.1",temperature=0.7,)
 embedding_model = OllamaEmbeddings(model="llama3.1")
 chat_history=[]
 # uploading the pdf
 print("uploaded the pdf")
+memory = ConversationBufferMemory(memory_key="chat_history", return_messages=True)
 
 pdf_reader = PyPDFLoader("../Backend/assets/ipc.pdf")
 documents = pdf_reader.load_and_split()
@@ -58,36 +58,37 @@ vector_store = Chroma(persist_directory="db", embedding_function=embedding_model
 
 print("Chroma DB loaded successfully")
 
+retriever = vector_store.as_retriever(
+    search_type="similarity_score_threshold",
+    search_kwargs={"k": 20, "score_threshold": 0.1},
+)
+print("document retirver initialised ")
+history_aware_retriever = create_history_aware_retriever(
+    llm=llm, retriever=retriever, prompt=retriever_prompt
+)
 
-def handle_query(query, context=""):
-    # If document search is triggered
-    if "section" in query.lower() or "pdf" in query.lower():
-        results = vector_store.similarity_search(query)
-        if results:
-            context = results[0].page_content  # Add the first result to the context
+print("memmory history created...")
 
-    # Construct the full prompt with context and query
-    full_prompt = chat_prompt.format(input=query, context=context)
-    response = llm.invoke(full_prompt)
-    formatted_response = response.content  # Extract the main content
-    
-    return formatted_response
+document_chain = create_stuff_documents_chain(llm, chat_prompt)
+print("document chaining...")
+
+retrieval_chain = create_retrieval_chain(
+    history_aware_retriever,
+    document_chain,
+)
+
+print("retirever chain created....")
+
+def handle_query(query):
+    result = retrieval_chain.invoke({"input": query})
+    return result["answer"]
 chat_history = []
 
 while True:
-    user_query = input("Ask your question: ")
-    if user_query.lower() == "exit":
+    query = input("Ask your question: ")
+    if query.lower() == "exit":
         break
-    
-    # Add previous conversation to context
-    context = " ".join(chat_history)
-    
-    # Handle the query
-    response = handle_query(user_query, context)
-    
-    # Update chat history
-    chat_history.append(f"User: {user_query}")
-    chat_history.append(f"AI: {response}")
+    response = handle_query(query)
     print("\nAI Response:\n")
     print(response)
     print("\n------------------------------------\n")
