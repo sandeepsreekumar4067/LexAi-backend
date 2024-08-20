@@ -242,11 +242,20 @@
         "documentation": {}
     },
     {
+        "label": "handle_query",
+        "kind": 2,
+        "importPath": "casualBot",
+        "description": "casualBot",
+        "peekOfCode": "def handle_query(query, context=\"\"):\n    # If document search is triggered\n    if \"section\" in query.lower() or \"pdf\" in query.lower():\n        results = vector_store.similarity_search(query)\n        if results:\n            context = results[0].page_content  # Add the first result to the context\n    # Construct the full prompt with context and query\n    full_prompt = chat_prompt.format(input=query, context=context)\n    response = llm.invoke(full_prompt)\n    formatted_response = response.content  # Extract the main content",
+        "detail": "casualBot",
+        "documentation": {}
+    },
+    {
         "label": "llm",
         "kind": 5,
         "importPath": "casualBot",
         "description": "casualBot",
-        "peekOfCode": "llm = ChatOllama(model=\"llama3.1\",temperature=0.7,)\nembedding_model = OllamaEmbeddings(model=\"llama3.1\")\nchat_history=[]\n# uploading the pdf\nprint(\"uploaded the pdf\")\npdf_reader = PyPDFLoader(\"../Backend/assets/ipc.pdf\")\ndocuments = pdf_reader.load_and_split()\nchat_prompt = PromptTemplate.from_template(\n        \"\"\"\n        You are an AI Legal Assistant Skilled in Indian Law ,Also you are a very Friendly Chat Bot .",
+        "peekOfCode": "llm = ChatOllama(model=\"llama3.1\",temperature=0.7,)\nembedding_model = OllamaEmbeddings(model=\"llama3.1\")\nchat_history=[]\n# uploading the pdf\nprint(\"uploaded the pdf\")\npdf_reader = PyPDFLoader(\"../Backend/assets/ipc.pdf\")\ndocuments = pdf_reader.load_and_split()\nchat_prompt = PromptTemplate.from_template(\n        \"\"\"\n        You are an AI Legal Assistant Skilled in Indian Law,Your name is LexAi ,Also you are a very Friendly Chat Bot .",
         "detail": "casualBot",
         "documentation": {}
     },
@@ -255,7 +264,7 @@
         "kind": 5,
         "importPath": "casualBot",
         "description": "casualBot",
-        "peekOfCode": "embedding_model = OllamaEmbeddings(model=\"llama3.1\")\nchat_history=[]\n# uploading the pdf\nprint(\"uploaded the pdf\")\npdf_reader = PyPDFLoader(\"../Backend/assets/ipc.pdf\")\ndocuments = pdf_reader.load_and_split()\nchat_prompt = PromptTemplate.from_template(\n        \"\"\"\n        You are an AI Legal Assistant Skilled in Indian Law ,Also you are a very Friendly Chat Bot .\n        So for each user query provide ACCURATE,USEFUL,THOUGHTFUL Response.",
+        "peekOfCode": "embedding_model = OllamaEmbeddings(model=\"llama3.1\")\nchat_history=[]\n# uploading the pdf\nprint(\"uploaded the pdf\")\npdf_reader = PyPDFLoader(\"../Backend/assets/ipc.pdf\")\ndocuments = pdf_reader.load_and_split()\nchat_prompt = PromptTemplate.from_template(\n        \"\"\"\n        You are an AI Legal Assistant Skilled in Indian Law,Your name is LexAi ,Also you are a very Friendly Chat Bot .\n        So for each user query provide ACCURATE,USEFUL,THOUGHTFUL Response.",
         "detail": "casualBot",
         "documentation": {}
     },
@@ -264,7 +273,7 @@
         "kind": 5,
         "importPath": "casualBot",
         "description": "casualBot",
-        "peekOfCode": "pdf_reader = PyPDFLoader(\"../Backend/assets/ipc.pdf\")\ndocuments = pdf_reader.load_and_split()\nchat_prompt = PromptTemplate.from_template(\n        \"\"\"\n        You are an AI Legal Assistant Skilled in Indian Law ,Also you are a very Friendly Chat Bot .\n        So for each user query provide ACCURATE,USEFUL,THOUGHTFUL Response.\n        also if the user intends to do normal Chatting ; initiate in friendly chatting too,\n        But Remind them of your PURPOSE and ROLE if the user initiates only FRIENDLY CHAT and make them engage in Asking LEGAL QUERIES\n        on Indian Peanal Code\n        Question: {input}",
+        "peekOfCode": "pdf_reader = PyPDFLoader(\"../Backend/assets/ipc.pdf\")\ndocuments = pdf_reader.load_and_split()\nchat_prompt = PromptTemplate.from_template(\n        \"\"\"\n        You are an AI Legal Assistant Skilled in Indian Law,Your name is LexAi ,Also you are a very Friendly Chat Bot .\n        So for each user query provide ACCURATE,USEFUL,THOUGHTFUL Response.\n        also if the user intends to do normal Chatting ; initiate in friendly chatting too,\n        But Remind them of your PURPOSE and ROLE if the user initiates only FRIENDLY CHAT and make them engage in Asking LEGAL QUERIES\n        on Indian Peanal Code\n        Question: {input}",
         "detail": "casualBot",
         "documentation": {}
     },
@@ -273,7 +282,7 @@
         "kind": 5,
         "importPath": "casualBot",
         "description": "casualBot",
-        "peekOfCode": "documents = pdf_reader.load_and_split()\nchat_prompt = PromptTemplate.from_template(\n        \"\"\"\n        You are an AI Legal Assistant Skilled in Indian Law ,Also you are a very Friendly Chat Bot .\n        So for each user query provide ACCURATE,USEFUL,THOUGHTFUL Response.\n        also if the user intends to do normal Chatting ; initiate in friendly chatting too,\n        But Remind them of your PURPOSE and ROLE if the user initiates only FRIENDLY CHAT and make them engage in Asking LEGAL QUERIES\n        on Indian Peanal Code\n        Question: {input}\n        Context: {context}",
+        "peekOfCode": "documents = pdf_reader.load_and_split()\nchat_prompt = PromptTemplate.from_template(\n        \"\"\"\n        You are an AI Legal Assistant Skilled in Indian Law,Your name is LexAi ,Also you are a very Friendly Chat Bot .\n        So for each user query provide ACCURATE,USEFUL,THOUGHTFUL Response.\n        also if the user intends to do normal Chatting ; initiate in friendly chatting too,\n        But Remind them of your PURPOSE and ROLE if the user initiates only FRIENDLY CHAT and make them engage in Asking LEGAL QUERIES\n        on Indian Peanal Code\n        Question: {input}\n        Context: {context}",
         "detail": "casualBot",
         "documentation": {}
     },
@@ -282,7 +291,7 @@
         "kind": 5,
         "importPath": "casualBot",
         "description": "casualBot",
-        "peekOfCode": "chat_prompt = PromptTemplate.from_template(\n        \"\"\"\n        You are an AI Legal Assistant Skilled in Indian Law ,Also you are a very Friendly Chat Bot .\n        So for each user query provide ACCURATE,USEFUL,THOUGHTFUL Response.\n        also if the user intends to do normal Chatting ; initiate in friendly chatting too,\n        But Remind them of your PURPOSE and ROLE if the user initiates only FRIENDLY CHAT and make them engage in Asking LEGAL QUERIES\n        on Indian Peanal Code\n        Question: {input}\n        Context: {context}\n        Response:",
+        "peekOfCode": "chat_prompt = PromptTemplate.from_template(\n        \"\"\"\n        You are an AI Legal Assistant Skilled in Indian Law,Your name is LexAi ,Also you are a very Friendly Chat Bot .\n        So for each user query provide ACCURATE,USEFUL,THOUGHTFUL Response.\n        also if the user intends to do normal Chatting ; initiate in friendly chatting too,\n        But Remind them of your PURPOSE and ROLE if the user initiates only FRIENDLY CHAT and make them engage in Asking LEGAL QUERIES\n        on Indian Peanal Code\n        Question: {input}\n        Context: {context}\n        Response:",
         "detail": "casualBot",
         "documentation": {}
     },
@@ -300,7 +309,7 @@
         "kind": 5,
         "importPath": "casualBot",
         "description": "casualBot",
-        "peekOfCode": "text_splitter = RecursiveCharacterTextSplitter(\n    chunk_size=1024, chunk_overlap=200, length_function=len\n)\n# creating the chunks\nprint(\"creating the chunks\")\nchunks = text_splitter.split_documents(documents)\nprint(\"creating chroma db\")\nvector_store = Chroma(persist_directory=\"db\", embedding_function=embedding_model)\nprint(\"Chroma DB loaded successfully\")\nwhile(1):",
+        "peekOfCode": "text_splitter = RecursiveCharacterTextSplitter(\n    chunk_size=1024, chunk_overlap=200, length_function=len\n)\n# creating the chunks\nprint(\"creating the chunks\")\nchunks = text_splitter.split_documents(documents)\nprint(\"creating chroma db\")\nvector_store = Chroma(persist_directory=\"db\", embedding_function=embedding_model)\nprint(\"Chroma DB loaded successfully\")\ndef handle_query(query, context=\"\"):",
         "detail": "casualBot",
         "documentation": {}
     },
@@ -309,7 +318,7 @@
         "kind": 5,
         "importPath": "casualBot",
         "description": "casualBot",
-        "peekOfCode": "chunks = text_splitter.split_documents(documents)\nprint(\"creating chroma db\")\nvector_store = Chroma(persist_directory=\"db\", embedding_function=embedding_model)\nprint(\"Chroma DB loaded successfully\")\nwhile(1):\n    query=input(\"prompt >> \")",
+        "peekOfCode": "chunks = text_splitter.split_documents(documents)\nprint(\"creating chroma db\")\nvector_store = Chroma(persist_directory=\"db\", embedding_function=embedding_model)\nprint(\"Chroma DB loaded successfully\")\ndef handle_query(query, context=\"\"):\n    # If document search is triggered\n    if \"section\" in query.lower() or \"pdf\" in query.lower():\n        results = vector_store.similarity_search(query)\n        if results:\n            context = results[0].page_content  # Add the first result to the context",
         "detail": "casualBot",
         "documentation": {}
     },
@@ -318,7 +327,16 @@
         "kind": 5,
         "importPath": "casualBot",
         "description": "casualBot",
-        "peekOfCode": "vector_store = Chroma(persist_directory=\"db\", embedding_function=embedding_model)\nprint(\"Chroma DB loaded successfully\")\nwhile(1):\n    query=input(\"prompt >> \")",
+        "peekOfCode": "vector_store = Chroma(persist_directory=\"db\", embedding_function=embedding_model)\nprint(\"Chroma DB loaded successfully\")\ndef handle_query(query, context=\"\"):\n    # If document search is triggered\n    if \"section\" in query.lower() or \"pdf\" in query.lower():\n        results = vector_store.similarity_search(query)\n        if results:\n            context = results[0].page_content  # Add the first result to the context\n    # Construct the full prompt with context and query\n    full_prompt = chat_prompt.format(input=query, context=context)",
+        "detail": "casualBot",
+        "documentation": {}
+    },
+    {
+        "label": "chat_history",
+        "kind": 5,
+        "importPath": "casualBot",
+        "description": "casualBot",
+        "peekOfCode": "chat_history = []\nwhile True:\n    user_query = input(\"Ask your question: \")\n    if user_query.lower() == \"exit\":\n        break\n    # Add previous conversation to context\n    context = \" \".join(chat_history)\n    # Handle the query\n    response = handle_query(user_query, context)\n    # Update chat history",
         "detail": "casualBot",
         "documentation": {}
     }

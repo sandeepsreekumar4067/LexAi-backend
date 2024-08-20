@@ -24,7 +24,7 @@ documents = pdf_reader.load_and_split()
 
 chat_prompt = PromptTemplate.from_template(
         """
-        You are an AI Legal Assistant Skilled in Indian Law ,Also you are a very Friendly Chat Bot .
+        You are an AI Legal Assistant Skilled in Indian Law,Your name is LexAi ,Also you are a very Friendly Chat Bot .
         So for each user query provide ACCURATE,USEFUL,THOUGHTFUL Response.
         also if the user intends to do normal Chatting ; initiate in friendly chatting too,
         But Remind them of your PURPOSE and ROLE if the user initiates only FRIENDLY CHAT and make them engage in Asking LEGAL QUERIES
@@ -59,6 +59,35 @@ vector_store = Chroma(persist_directory="db", embedding_function=embedding_model
 print("Chroma DB loaded successfully")
 
 
-while(1):
-    query=input("prompt >> ")
+def handle_query(query, context=""):
+    # If document search is triggered
+    if "section" in query.lower() or "pdf" in query.lower():
+        results = vector_store.similarity_search(query)
+        if results:
+            context = results[0].page_content  # Add the first result to the context
+
+    # Construct the full prompt with context and query
+    full_prompt = chat_prompt.format(input=query, context=context)
+    response = llm.invoke(full_prompt)
+    formatted_response = response.content  # Extract the main content
     
+    return formatted_response
+chat_history = []
+
+while True:
+    user_query = input("Ask your question: ")
+    if user_query.lower() == "exit":
+        break
+    
+    # Add previous conversation to context
+    context = " ".join(chat_history)
+    
+    # Handle the query
+    response = handle_query(user_query, context)
+    
+    # Update chat history
+    chat_history.append(f"User: {user_query}")
+    chat_history.append(f"AI: {response}")
+    print("\nAI Response:\n")
+    print(response)
+    print("\n------------------------------------\n")
