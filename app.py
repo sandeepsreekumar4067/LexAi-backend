@@ -21,8 +21,8 @@ print("uploaded the pdf")
 
 pdf_reader = PyPDFLoader("../Backend/assets/ipc.pdf")
 documents = pdf_reader.load_and_split()
-# pages = 'hello'
-# print(pages)
+
+
 chat_prompt = ChatPromptTemplate.from_messages([
     """
     <s>[INST] You are an AI legal assistant, skilled in Indian law. Provide accurate legal advice or document lookup based on the query. If you do not have sufficient information to answer, please advise on the next steps or suggest seeking professional legal help. [/INST]</s>

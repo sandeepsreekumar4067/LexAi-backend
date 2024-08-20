@@ -8,11 +8,43 @@
         "documentation": {}
     },
     {
+        "label": "PyPDFLoader",
+        "importPath": "langchain_community.document_loaders",
+        "description": "langchain_community.document_loaders",
+        "isExtraImport": true,
+        "detail": "langchain_community.document_loaders",
+        "documentation": {}
+    },
+    {
         "label": "RecursiveCharacterTextSplitter",
         "importPath": "langchain.text_splitter",
         "description": "langchain.text_splitter",
         "isExtraImport": true,
         "detail": "langchain.text_splitter",
+        "documentation": {}
+    },
+    {
+        "label": "RecursiveCharacterTextSplitter",
+        "importPath": "langchain.text_splitter",
+        "description": "langchain.text_splitter",
+        "isExtraImport": true,
+        "detail": "langchain.text_splitter",
+        "documentation": {}
+    },
+    {
+        "label": "OllamaEmbeddings",
+        "importPath": "langchain_ollama",
+        "description": "langchain_ollama",
+        "isExtraImport": true,
+        "detail": "langchain_ollama",
+        "documentation": {}
+    },
+    {
+        "label": "ChatOllama",
+        "importPath": "langchain_ollama",
+        "description": "langchain_ollama",
+        "isExtraImport": true,
+        "detail": "langchain_ollama",
         "documentation": {}
     },
     {
@@ -40,11 +72,83 @@
         "documentation": {}
     },
     {
+        "label": "OllamaLLM",
+        "importPath": "langchain_ollama.llms",
+        "description": "langchain_ollama.llms",
+        "isExtraImport": true,
+        "detail": "langchain_ollama.llms",
+        "documentation": {}
+    },
+    {
         "label": "ChatPromptTemplate",
         "importPath": "langchain.prompts",
         "description": "langchain.prompts",
         "isExtraImport": true,
         "detail": "langchain.prompts",
+        "documentation": {}
+    },
+    {
+        "label": "PromptTemplate",
+        "importPath": "langchain.prompts",
+        "description": "langchain.prompts",
+        "isExtraImport": true,
+        "detail": "langchain.prompts",
+        "documentation": {}
+    },
+    {
+        "label": "ChatPromptTemplate",
+        "importPath": "langchain.prompts",
+        "description": "langchain.prompts",
+        "isExtraImport": true,
+        "detail": "langchain.prompts",
+        "documentation": {}
+    },
+    {
+        "label": "MessagesPlaceholder",
+        "importPath": "langchain.prompts",
+        "description": "langchain.prompts",
+        "isExtraImport": true,
+        "detail": "langchain.prompts",
+        "documentation": {}
+    },
+    {
+        "label": "Chroma",
+        "importPath": "langchain_chroma",
+        "description": "langchain_chroma",
+        "isExtraImport": true,
+        "detail": "langchain_chroma",
+        "documentation": {}
+    },
+    {
+        "label": "SelfQueryRetriever",
+        "importPath": "langchain.retrievers.self_query.base",
+        "description": "langchain.retrievers.self_query.base",
+        "isExtraImport": true,
+        "detail": "langchain.retrievers.self_query.base",
+        "documentation": {}
+    },
+    {
+        "label": "create_history_aware_retriever",
+        "importPath": "langchain.chains.history_aware_retriever",
+        "description": "langchain.chains.history_aware_retriever",
+        "isExtraImport": true,
+        "detail": "langchain.chains.history_aware_retriever",
+        "documentation": {}
+    },
+    {
+        "label": "create_stuff_documents_chain",
+        "importPath": "langchain.chains.combine_documents",
+        "description": "langchain.chains.combine_documents",
+        "isExtraImport": true,
+        "detail": "langchain.chains.combine_documents",
+        "documentation": {}
+    },
+    {
+        "label": "create_retrieval_chain",
+        "importPath": "langchain.chains",
+        "description": "langchain.chains",
+        "isExtraImport": true,
+        "detail": "langchain.chains",
         "documentation": {}
     },
     {
@@ -61,7 +165,7 @@
         "kind": 5,
         "importPath": "app",
         "description": "app",
-        "peekOfCode": "llm = OllamaLLM(model=\"llama3.1\")\nembedding_model = OllamaEmbeddings(model=\"llama3.1\")\n# uploading the pdf\nprint(\"uploaded the pdf\")\npdf_reader = PyPDFLoader(\"../Backend/assets/ipc.pdf\")\ndocuments = pdf_reader.load_and_split()\n# pages = 'hello'\n# print(pages)\nchat_prompt = ChatPromptTemplate.from_messages([\n    \"\"\"",
+        "peekOfCode": "llm = OllamaLLM(model=\"llama3.1\")\nembedding_model = OllamaEmbeddings(model=\"llama3.1\")\n# uploading the pdf\nprint(\"uploaded the pdf\")\npdf_reader = PyPDFLoader(\"../Backend/assets/ipc.pdf\")\ndocuments = pdf_reader.load_and_split()\nchat_prompt = ChatPromptTemplate.from_messages([\n    \"\"\"\n    <s>[INST] You are an AI legal assistant, skilled in Indian law. Provide accurate legal advice or document lookup based on the query. If you do not have sufficient information to answer, please advise on the next steps or suggest seeking professional legal help. [/INST]</s>\n    [INST] Question: {query}",
         "detail": "app",
         "documentation": {}
     },
@@ -70,7 +174,7 @@
         "kind": 5,
         "importPath": "app",
         "description": "app",
-        "peekOfCode": "embedding_model = OllamaEmbeddings(model=\"llama3.1\")\n# uploading the pdf\nprint(\"uploaded the pdf\")\npdf_reader = PyPDFLoader(\"../Backend/assets/ipc.pdf\")\ndocuments = pdf_reader.load_and_split()\n# pages = 'hello'\n# print(pages)\nchat_prompt = ChatPromptTemplate.from_messages([\n    \"\"\"\n    <s>[INST] You are an AI legal assistant, skilled in Indian law. Provide accurate legal advice or document lookup based on the query. If you do not have sufficient information to answer, please advise on the next steps or suggest seeking professional legal help. [/INST]</s>",
+        "peekOfCode": "embedding_model = OllamaEmbeddings(model=\"llama3.1\")\n# uploading the pdf\nprint(\"uploaded the pdf\")\npdf_reader = PyPDFLoader(\"../Backend/assets/ipc.pdf\")\ndocuments = pdf_reader.load_and_split()\nchat_prompt = ChatPromptTemplate.from_messages([\n    \"\"\"\n    <s>[INST] You are an AI legal assistant, skilled in Indian law. Provide accurate legal advice or document lookup based on the query. If you do not have sufficient information to answer, please advise on the next steps or suggest seeking professional legal help. [/INST]</s>\n    [INST] Question: {query}\n           Context: {context}",
         "detail": "app",
         "documentation": {}
     },
@@ -79,7 +183,7 @@
         "kind": 5,
         "importPath": "app",
         "description": "app",
-        "peekOfCode": "pdf_reader = PyPDFLoader(\"../Backend/assets/ipc.pdf\")\ndocuments = pdf_reader.load_and_split()\n# pages = 'hello'\n# print(pages)\nchat_prompt = ChatPromptTemplate.from_messages([\n    \"\"\"\n    <s>[INST] You are an AI legal assistant, skilled in Indian law. Provide accurate legal advice or document lookup based on the query. If you do not have sufficient information to answer, please advise on the next steps or suggest seeking professional legal help. [/INST]</s>\n    [INST] Question: {query}\n           Context: {context}\n           Response:",
+        "peekOfCode": "pdf_reader = PyPDFLoader(\"../Backend/assets/ipc.pdf\")\ndocuments = pdf_reader.load_and_split()\nchat_prompt = ChatPromptTemplate.from_messages([\n    \"\"\"\n    <s>[INST] You are an AI legal assistant, skilled in Indian law. Provide accurate legal advice or document lookup based on the query. If you do not have sufficient information to answer, please advise on the next steps or suggest seeking professional legal help. [/INST]</s>\n    [INST] Question: {query}\n           Context: {context}\n           Response:\n    [/INST]\n\"\"\"",
         "detail": "app",
         "documentation": {}
     },
@@ -88,7 +192,7 @@
         "kind": 5,
         "importPath": "app",
         "description": "app",
-        "peekOfCode": "documents = pdf_reader.load_and_split()\n# pages = 'hello'\n# print(pages)\nchat_prompt = ChatPromptTemplate.from_messages([\n    \"\"\"\n    <s>[INST] You are an AI legal assistant, skilled in Indian law. Provide accurate legal advice or document lookup based on the query. If you do not have sufficient information to answer, please advise on the next steps or suggest seeking professional legal help. [/INST]</s>\n    [INST] Question: {query}\n           Context: {context}\n           Response:\n    [/INST]",
+        "peekOfCode": "documents = pdf_reader.load_and_split()\nchat_prompt = ChatPromptTemplate.from_messages([\n    \"\"\"\n    <s>[INST] You are an AI legal assistant, skilled in Indian law. Provide accurate legal advice or document lookup based on the query. If you do not have sufficient information to answer, please advise on the next steps or suggest seeking professional legal help. [/INST]</s>\n    [INST] Question: {query}\n           Context: {context}\n           Response:\n    [/INST]\n\"\"\"\n])",
         "detail": "app",
         "documentation": {}
     },
@@ -135,6 +239,87 @@
         "description": "app",
         "peekOfCode": "chat_history = []\nwhile True:\n    user_query = input(\"Ask your question: \")\n    if user_query.lower() == \"exit\":\n        break\n    # Add previous conversation to context\n    context = \" \".join(chat_history)\n    # Handle the query\n    response = handle_query(user_query, context)\n    # Update chat history",
         "detail": "app",
+        "documentation": {}
+    },
+    {
+        "label": "llm",
+        "kind": 5,
+        "importPath": "casualBot",
+        "description": "casualBot",
+        "peekOfCode": "llm = ChatOllama(model=\"llama3.1\",temperature=0.7,)\nembedding_model = OllamaEmbeddings(model=\"llama3.1\")\nchat_history=[]\n# uploading the pdf\nprint(\"uploaded the pdf\")\npdf_reader = PyPDFLoader(\"../Backend/assets/ipc.pdf\")\ndocuments = pdf_reader.load_and_split()\nchat_prompt = PromptTemplate.from_template(\n        \"\"\"\n        You are an AI Legal Assistant Skilled in Indian Law ,Also you are a very Friendly Chat Bot .",
+        "detail": "casualBot",
+        "documentation": {}
+    },
+    {
+        "label": "embedding_model",
+        "kind": 5,
+        "importPath": "casualBot",
+        "description": "casualBot",
+        "peekOfCode": "embedding_model = OllamaEmbeddings(model=\"llama3.1\")\nchat_history=[]\n# uploading the pdf\nprint(\"uploaded the pdf\")\npdf_reader = PyPDFLoader(\"../Backend/assets/ipc.pdf\")\ndocuments = pdf_reader.load_and_split()\nchat_prompt = PromptTemplate.from_template(\n        \"\"\"\n        You are an AI Legal Assistant Skilled in Indian Law ,Also you are a very Friendly Chat Bot .\n        So for each user query provide ACCURATE,USEFUL,THOUGHTFUL Response.",
+        "detail": "casualBot",
+        "documentation": {}
+    },
+    {
+        "label": "pdf_reader",
+        "kind": 5,
+        "importPath": "casualBot",
+        "description": "casualBot",
+        "peekOfCode": "pdf_reader = PyPDFLoader(\"../Backend/assets/ipc.pdf\")\ndocuments = pdf_reader.load_and_split()\nchat_prompt = PromptTemplate.from_template(\n        \"\"\"\n        You are an AI Legal Assistant Skilled in Indian Law ,Also you are a very Friendly Chat Bot .\n        So for each user query provide ACCURATE,USEFUL,THOUGHTFUL Response.\n        also if the user intends to do normal Chatting ; initiate in friendly chatting too,\n        But Remind them of your PURPOSE and ROLE if the user initiates only FRIENDLY CHAT and make them engage in Asking LEGAL QUERIES\n        on Indian Peanal Code\n        Question: {input}",
+        "detail": "casualBot",
+        "documentation": {}
+    },
+    {
+        "label": "documents",
+        "kind": 5,
+        "importPath": "casualBot",
+        "description": "casualBot",
+        "peekOfCode": "documents = pdf_reader.load_and_split()\nchat_prompt = PromptTemplate.from_template(\n        \"\"\"\n        You are an AI Legal Assistant Skilled in Indian Law ,Also you are a very Friendly Chat Bot .\n        So for each user query provide ACCURATE,USEFUL,THOUGHTFUL Response.\n        also if the user intends to do normal Chatting ; initiate in friendly chatting too,\n        But Remind them of your PURPOSE and ROLE if the user initiates only FRIENDLY CHAT and make them engage in Asking LEGAL QUERIES\n        on Indian Peanal Code\n        Question: {input}\n        Context: {context}",
+        "detail": "casualBot",
+        "documentation": {}
+    },
+    {
+        "label": "chat_prompt",
+        "kind": 5,
+        "importPath": "casualBot",
+        "description": "casualBot",
+        "peekOfCode": "chat_prompt = PromptTemplate.from_template(\n        \"\"\"\n        You are an AI Legal Assistant Skilled in Indian Law ,Also you are a very Friendly Chat Bot .\n        So for each user query provide ACCURATE,USEFUL,THOUGHTFUL Response.\n        also if the user intends to do normal Chatting ; initiate in friendly chatting too,\n        But Remind them of your PURPOSE and ROLE if the user initiates only FRIENDLY CHAT and make them engage in Asking LEGAL QUERIES\n        on Indian Peanal Code\n        Question: {input}\n        Context: {context}\n        Response:",
+        "detail": "casualBot",
+        "documentation": {}
+    },
+    {
+        "label": "retriever_prompt",
+        "kind": 5,
+        "importPath": "casualBot",
+        "description": "casualBot",
+        "peekOfCode": "retriever_prompt = ChatPromptTemplate.from_messages(\n    [\n        MessagesPlaceholder(variable_name=\"chat_history\"),\n        (\"human\", \"{input}\"),\n        (\n            \"human\",\n            \"Given the above conversation, generate a search query to look up in order to get information relevant to the conversation\",\n        ),\n    ]\n)",
+        "detail": "casualBot",
+        "documentation": {}
+    },
+    {
+        "label": "text_splitter",
+        "kind": 5,
+        "importPath": "casualBot",
+        "description": "casualBot",
+        "peekOfCode": "text_splitter = RecursiveCharacterTextSplitter(\n    chunk_size=1024, chunk_overlap=200, length_function=len\n)\n# creating the chunks\nprint(\"creating the chunks\")\nchunks = text_splitter.split_documents(documents)\nprint(\"creating chroma db\")\nvector_store = Chroma(persist_directory=\"db\", embedding_function=embedding_model)\nprint(\"Chroma DB loaded successfully\")\nwhile(1):",
+        "detail": "casualBot",
+        "documentation": {}
+    },
+    {
+        "label": "chunks",
+        "kind": 5,
+        "importPath": "casualBot",
+        "description": "casualBot",
+        "peekOfCode": "chunks = text_splitter.split_documents(documents)\nprint(\"creating chroma db\")\nvector_store = Chroma(persist_directory=\"db\", embedding_function=embedding_model)\nprint(\"Chroma DB loaded successfully\")\nwhile(1):\n    query=input(\"prompt >> \")",
+        "detail": "casualBot",
+        "documentation": {}
+    },
+    {
+        "label": "vector_store",
+        "kind": 5,
+        "importPath": "casualBot",
+        "description": "casualBot",
+        "peekOfCode": "vector_store = Chroma(persist_directory=\"db\", embedding_function=embedding_model)\nprint(\"Chroma DB loaded successfully\")\nwhile(1):\n    query=input(\"prompt >> \")",
+        "detail": "casualBot",
         "documentation": {}
     }
 ]
