@@ -1,34 +1,10 @@
 [
     {
-        "label": "OllamaEmbeddings",
-        "importPath": "langchain_ollama",
-        "description": "langchain_ollama",
-        "isExtraImport": true,
-        "detail": "langchain_ollama",
-        "documentation": {}
-    },
-    {
-        "label": "FAISS",
-        "importPath": "langchain_community.vectorstores",
-        "description": "langchain_community.vectorstores",
-        "isExtraImport": true,
-        "detail": "langchain_community.vectorstores",
-        "documentation": {}
-    },
-    {
         "label": "PyPDFLoader",
         "importPath": "langchain_community.document_loaders",
         "description": "langchain_community.document_loaders",
         "isExtraImport": true,
         "detail": "langchain_community.document_loaders",
-        "documentation": {}
-    },
-    {
-        "label": "RetrievalQA",
-        "importPath": "langchain.chains",
-        "description": "langchain.chains",
-        "isExtraImport": true,
-        "detail": "langchain.chains",
         "documentation": {}
     },
     {
@@ -40,47 +16,37 @@
         "documentation": {}
     },
     {
-        "label": "ipc_loader",
+        "label": "OllamaEmbeddings",
+        "importPath": "langchain_ollama",
+        "description": "langchain_ollama",
+        "isExtraImport": true,
+        "detail": "langchain_ollama",
+        "documentation": {}
+    },
+    {
+        "label": "embeddings",
         "kind": 5,
         "importPath": "app",
         "description": "app",
-        "peekOfCode": "ipc_loader = PyPDFLoader(\"../Backend/assets/ipc.pdf\")  # Replace with your IPC PDF path\nconstitution_loader = PyPDFLoader(\"../Backend/assets/constitution.pdf\")  # Replace with your Constitution PDF path\n# Load documents from PDFs\nprint(\"ipc loading..\")\nipc_docs = ipc_loader.load()\nconstitution_docs = constitution_loader.load()\n# Combine the documents into a single list\ndocuments = ipc_docs + constitution_docs\ntext_splitter = RecursiveCharacterTextSplitter(chunk_size=1000, chunk_overlap=200)\nchunk_document = text_splitter.split_documents(documents)",
+        "peekOfCode": "embeddings = OllamaEmbeddings(\n    model=\"llama3.1\",\n)\n#uploading the pdf \nprint(\"uploaded the pdf\")\npdf_reader = PyPDFLoader('../Backend/assets/ipc.pdf')\npages = pdf_reader.load_and_split()\n# print(pages)\nprint(\"creating the text splitter\")\ntext_splitter = RecursiveCharacterTextSplitter(",
         "detail": "app",
         "documentation": {}
     },
     {
-        "label": "constitution_loader",
+        "label": "pdf_reader",
         "kind": 5,
         "importPath": "app",
         "description": "app",
-        "peekOfCode": "constitution_loader = PyPDFLoader(\"../Backend/assets/constitution.pdf\")  # Replace with your Constitution PDF path\n# Load documents from PDFs\nprint(\"ipc loading..\")\nipc_docs = ipc_loader.load()\nconstitution_docs = constitution_loader.load()\n# Combine the documents into a single list\ndocuments = ipc_docs + constitution_docs\ntext_splitter = RecursiveCharacterTextSplitter(chunk_size=1000, chunk_overlap=200)\nchunk_document = text_splitter.split_documents(documents)\nprint(chunk_document)",
+        "peekOfCode": "pdf_reader = PyPDFLoader('../Backend/assets/ipc.pdf')\npages = pdf_reader.load_and_split()\n# print(pages)\nprint(\"creating the text splitter\")\ntext_splitter = RecursiveCharacterTextSplitter(\n    chunk_size=1000,\n    chunk_overlap=200,\n    length_function=len\n)\n#splitting the ipc",
         "detail": "app",
         "documentation": {}
     },
     {
-        "label": "ipc_docs",
+        "label": "pages",
         "kind": 5,
         "importPath": "app",
         "description": "app",
-        "peekOfCode": "ipc_docs = ipc_loader.load()\nconstitution_docs = constitution_loader.load()\n# Combine the documents into a single list\ndocuments = ipc_docs + constitution_docs\ntext_splitter = RecursiveCharacterTextSplitter(chunk_size=1000, chunk_overlap=200)\nchunk_document = text_splitter.split_documents(documents)\nprint(chunk_document)\nprint(\"creating embedding model\")\n# Step 2: Initialize the Ollama Embeddings Model with Llama 3.1\nembedding_model = OllamaEmbeddings(",
-        "detail": "app",
-        "documentation": {}
-    },
-    {
-        "label": "constitution_docs",
-        "kind": 5,
-        "importPath": "app",
-        "description": "app",
-        "peekOfCode": "constitution_docs = constitution_loader.load()\n# Combine the documents into a single list\ndocuments = ipc_docs + constitution_docs\ntext_splitter = RecursiveCharacterTextSplitter(chunk_size=1000, chunk_overlap=200)\nchunk_document = text_splitter.split_documents(documents)\nprint(chunk_document)\nprint(\"creating embedding model\")\n# Step 2: Initialize the Ollama Embeddings Model with Llama 3.1\nembedding_model = OllamaEmbeddings(\n    model=\"llama3.1\",",
-        "detail": "app",
-        "documentation": {}
-    },
-    {
-        "label": "documents",
-        "kind": 5,
-        "importPath": "app",
-        "description": "app",
-        "peekOfCode": "documents = ipc_docs + constitution_docs\ntext_splitter = RecursiveCharacterTextSplitter(chunk_size=1000, chunk_overlap=200)\nchunk_document = text_splitter.split_documents(documents)\nprint(chunk_document)\nprint(\"creating embedding model\")\n# Step 2: Initialize the Ollama Embeddings Model with Llama 3.1\nembedding_model = OllamaEmbeddings(\n    model=\"llama3.1\",\n)\nprint(\"embedding complete\")",
+        "peekOfCode": "pages = pdf_reader.load_and_split()\n# print(pages)\nprint(\"creating the text splitter\")\ntext_splitter = RecursiveCharacterTextSplitter(\n    chunk_size=1000,\n    chunk_overlap=200,\n    length_function=len\n)\n#splitting the ipc\nprint(\"splitted chunks has been created\")",
         "detail": "app",
         "documentation": {}
     },
@@ -89,34 +55,25 @@
         "kind": 5,
         "importPath": "app",
         "description": "app",
-        "peekOfCode": "text_splitter = RecursiveCharacterTextSplitter(chunk_size=1000, chunk_overlap=200)\nchunk_document = text_splitter.split_documents(documents)\nprint(chunk_document)\nprint(\"creating embedding model\")\n# Step 2: Initialize the Ollama Embeddings Model with Llama 3.1\nembedding_model = OllamaEmbeddings(\n    model=\"llama3.1\",\n)\nprint(\"embedding complete\")\n# Step 3: Create a Vector Store (using FAISS for efficient retrieval)",
+        "peekOfCode": "text_splitter = RecursiveCharacterTextSplitter(\n    chunk_size=1000,\n    chunk_overlap=200,\n    length_function=len\n)\n#splitting the ipc\nprint(\"splitted chunks has been created\")\nchunks = text_splitter.split_documents(pages)\nprint(\"Embedding the chunks\")\nembedded_chunks = embeddings.embed_documents([chunk.page_content for chunk in chunks])",
         "detail": "app",
         "documentation": {}
     },
     {
-        "label": "chunk_document",
+        "label": "chunks",
         "kind": 5,
         "importPath": "app",
         "description": "app",
-        "peekOfCode": "chunk_document = text_splitter.split_documents(documents)\nprint(chunk_document)\nprint(\"creating embedding model\")\n# Step 2: Initialize the Ollama Embeddings Model with Llama 3.1\nembedding_model = OllamaEmbeddings(\n    model=\"llama3.1\",\n)\nprint(\"embedding complete\")\n# Step 3: Create a Vector Store (using FAISS for efficient retrieval)\nprint(\"vectore store creating\")",
+        "peekOfCode": "chunks = text_splitter.split_documents(pages)\nprint(\"Embedding the chunks\")\nembedded_chunks = embeddings.embed_documents([chunk.page_content for chunk in chunks])\n# for i, chunk in enumerate(chunks):\n#     print(f\"Chunk {i+1}:\")\n#     print(chunk.page_content)  # `page_content` is the text in this chunk\n#     print(\"-----\")",
         "detail": "app",
         "documentation": {}
     },
     {
-        "label": "embedding_model",
+        "label": "embedded_chunks",
         "kind": 5,
         "importPath": "app",
         "description": "app",
-        "peekOfCode": "embedding_model = OllamaEmbeddings(\n    model=\"llama3.1\",\n)\nprint(\"embedding complete\")\n# Step 3: Create a Vector Store (using FAISS for efficient retrieval)\nprint(\"vectore store creating\")\nvector_store = FAISS.from_documents(chunk_document, embedding_model)\nquery=\"what is a petty case ?\"\nres=vector_store.similarity_search(query)\nprint(res[0].page_content)",
-        "detail": "app",
-        "documentation": {}
-    },
-    {
-        "label": "vector_store",
-        "kind": 5,
-        "importPath": "app",
-        "description": "app",
-        "peekOfCode": "vector_store = FAISS.from_documents(chunk_document, embedding_model)\nquery=\"what is a petty case ?\"\nres=vector_store.similarity_search(query)\nprint(res[0].page_content)\n# # Step 4: Set up the Retrieval-based QA Chain\n# qa_chain = RetrievalQA(llm=embedding_model, retriever=vector_store.as_retriever())\n# # Function to ask a question and get an answer\n# print(\"model ready\")\n# def ask_question(query):\n#     response = qa_chain.run(query)",
+        "peekOfCode": "embedded_chunks = embeddings.embed_documents([chunk.page_content for chunk in chunks])\n# for i, chunk in enumerate(chunks):\n#     print(f\"Chunk {i+1}:\")\n#     print(chunk.page_content)  # `page_content` is the text in this chunk\n#     print(\"-----\")",
         "detail": "app",
         "documentation": {}
     }
