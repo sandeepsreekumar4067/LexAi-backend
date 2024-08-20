@@ -24,11 +24,19 @@
         "documentation": {}
     },
     {
-        "label": "embeddings",
+        "label": "Chroma",
+        "importPath": "langchain_community.vectorstores",
+        "description": "langchain_community.vectorstores",
+        "isExtraImport": true,
+        "detail": "langchain_community.vectorstores",
+        "documentation": {}
+    },
+    {
+        "label": "embedding_model",
         "kind": 5,
         "importPath": "app",
         "description": "app",
-        "peekOfCode": "embeddings = OllamaEmbeddings(\n    model=\"llama3.1\",\n)\n#uploading the pdf \nprint(\"uploaded the pdf\")\npdf_reader = PyPDFLoader('../Backend/assets/ipc.pdf')\npages = pdf_reader.load_and_split()\n# print(pages)\nprint(\"creating the text splitter\")\ntext_splitter = RecursiveCharacterTextSplitter(",
+        "peekOfCode": "embedding_model = OllamaEmbeddings(model=\"llama3.1\")\n# uploading the pdf\nprint(\"uploaded the pdf\")\npdf_reader = PyPDFLoader(\"../Backend/assets/ipc.pdf\")\ndocuments = pdf_reader.load_and_split()\n# pages = 'hello'\n# print(pages)\nprint(\"creating the text splitter\")\ntext_splitter = RecursiveCharacterTextSplitter(\n    chunk_size=1024, chunk_overlap=200, length_function=len",
         "detail": "app",
         "documentation": {}
     },
@@ -37,16 +45,16 @@
         "kind": 5,
         "importPath": "app",
         "description": "app",
-        "peekOfCode": "pdf_reader = PyPDFLoader('../Backend/assets/ipc.pdf')\npages = pdf_reader.load_and_split()\n# print(pages)\nprint(\"creating the text splitter\")\ntext_splitter = RecursiveCharacterTextSplitter(\n    chunk_size=1000,\n    chunk_overlap=200,\n    length_function=len\n)\n#splitting the ipc",
+        "peekOfCode": "pdf_reader = PyPDFLoader(\"../Backend/assets/ipc.pdf\")\ndocuments = pdf_reader.load_and_split()\n# pages = 'hello'\n# print(pages)\nprint(\"creating the text splitter\")\ntext_splitter = RecursiveCharacterTextSplitter(\n    chunk_size=1024, chunk_overlap=200, length_function=len\n)\n# creating the chunks\nprint(\"creating the chunks\")",
         "detail": "app",
         "documentation": {}
     },
     {
-        "label": "pages",
+        "label": "documents",
         "kind": 5,
         "importPath": "app",
         "description": "app",
-        "peekOfCode": "pages = pdf_reader.load_and_split()\n# print(pages)\nprint(\"creating the text splitter\")\ntext_splitter = RecursiveCharacterTextSplitter(\n    chunk_size=1000,\n    chunk_overlap=200,\n    length_function=len\n)\n#splitting the ipc\nprint(\"splitted chunks has been created\")",
+        "peekOfCode": "documents = pdf_reader.load_and_split()\n# pages = 'hello'\n# print(pages)\nprint(\"creating the text splitter\")\ntext_splitter = RecursiveCharacterTextSplitter(\n    chunk_size=1024, chunk_overlap=200, length_function=len\n)\n# creating the chunks\nprint(\"creating the chunks\")\nchunks = text_splitter.split_documents(documents)",
         "detail": "app",
         "documentation": {}
     },
@@ -55,7 +63,7 @@
         "kind": 5,
         "importPath": "app",
         "description": "app",
-        "peekOfCode": "text_splitter = RecursiveCharacterTextSplitter(\n    chunk_size=1000,\n    chunk_overlap=200,\n    length_function=len\n)\n#splitting the ipc\nprint(\"splitted chunks has been created\")\nchunks = text_splitter.split_documents(pages)\nprint(\"Embedding the chunks\")\nembedded_chunks = embeddings.embed_documents([chunk.page_content for chunk in chunks])",
+        "peekOfCode": "text_splitter = RecursiveCharacterTextSplitter(\n    chunk_size=1024, chunk_overlap=200, length_function=len\n)\n# creating the chunks\nprint(\"creating the chunks\")\nchunks = text_splitter.split_documents(documents)\nprint(\"creating chroma db\")\n# creating the vector store\n# vector_store = Chroma.from_documents(\n#     chunks, embedding_model, persist_directory=\"db\"",
         "detail": "app",
         "documentation": {}
     },
@@ -64,16 +72,16 @@
         "kind": 5,
         "importPath": "app",
         "description": "app",
-        "peekOfCode": "chunks = text_splitter.split_documents(pages)\nprint(\"Embedding the chunks\")\nembedded_chunks = embeddings.embed_documents([chunk.page_content for chunk in chunks])\n# for i, chunk in enumerate(chunks):\n#     print(f\"Chunk {i+1}:\")\n#     print(chunk.page_content)  # `page_content` is the text in this chunk\n#     print(\"-----\")",
+        "peekOfCode": "chunks = text_splitter.split_documents(documents)\nprint(\"creating chroma db\")\n# creating the vector store\n# vector_store = Chroma.from_documents(\n#     chunks, embedding_model, persist_directory=\"db\"\n# )\n# Load the existing Chroma vector store\n# vector_store = Chroma(persist_directory=\"db\", embedding_function=embedding_model.embed_query)\nvector_store = Chroma(persist_directory=\"db\", embedding_function=embedding_model)\nprint(\"Chroma DB loaded successfully\")",
         "detail": "app",
         "documentation": {}
     },
     {
-        "label": "embedded_chunks",
+        "label": "vector_store",
         "kind": 5,
         "importPath": "app",
         "description": "app",
-        "peekOfCode": "embedded_chunks = embeddings.embed_documents([chunk.page_content for chunk in chunks])\n# for i, chunk in enumerate(chunks):\n#     print(f\"Chunk {i+1}:\")\n#     print(chunk.page_content)  # `page_content` is the text in this chunk\n#     print(\"-----\")",
+        "peekOfCode": "vector_store = Chroma(persist_directory=\"db\", embedding_function=embedding_model)\nprint(\"Chroma DB loaded successfully\")\n# vector_store.persist()\nwhile(1):\n    query = input(\">>\")\n    results = vector_store.similarity_search(query)\n    for result in results:\n        print(result.page_content)",
         "detail": "app",
         "documentation": {}
     }
