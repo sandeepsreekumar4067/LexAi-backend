@@ -152,6 +152,38 @@
         "documentation": {}
     },
     {
+        "label": "HumanMessage",
+        "importPath": "langchain_core.messages",
+        "description": "langchain_core.messages",
+        "isExtraImport": true,
+        "detail": "langchain_core.messages",
+        "documentation": {}
+    },
+    {
+        "label": "AIMessage",
+        "importPath": "langchain_core.messages",
+        "description": "langchain_core.messages",
+        "isExtraImport": true,
+        "detail": "langchain_core.messages",
+        "documentation": {}
+    },
+    {
+        "label": "MultiQueryRetriever",
+        "importPath": "langchain.retrievers.multi_query",
+        "description": "langchain.retrievers.multi_query",
+        "isExtraImport": true,
+        "detail": "langchain.retrievers.multi_query",
+        "documentation": {}
+    },
+    {
+        "label": "cosine_similarity",
+        "importPath": "sklearn.metrics.pairwise",
+        "description": "sklearn.metrics.pairwise",
+        "isExtraImport": true,
+        "detail": "sklearn.metrics.pairwise",
+        "documentation": {}
+    },
+    {
         "label": "handle_query",
         "kind": 2,
         "importPath": "app",
@@ -242,11 +274,29 @@
         "documentation": {}
     },
     {
+        "label": "is_relevant_below_threshold",
+        "kind": 2,
+        "importPath": "casualBot",
+        "description": "casualBot",
+        "peekOfCode": "def is_relevant_below_threshold(docs,threshold):\n    for doc,score in docs:\n        if score < threshold:\n            d.append({\n                \"status\":\"irrelevant docs\",\n                \"result\":docs,\n                \"score\":score\n            })\n            return d\n        else:",
+        "detail": "casualBot",
+        "documentation": {}
+    },
+    {
+        "label": "classify_query",
+        "kind": 2,
+        "importPath": "casualBot",
+        "description": "casualBot",
+        "peekOfCode": "def classify_query(query):\n    # Embed the query\n    query_embedding = embedding_model.embed_documents([query])\n    # Calculate similarities\n    legal_similarity = cosine_similarity(query_embedding, legal_embeddings)\n    casual_similarity = cosine_similarity(query_embedding, casual_embeddings)\n    # Get the maximum similarity score for legal and casual categories\n    max_legal_similarity = max(legal_similarity[0])\n    max_casual_similarity = max(casual_similarity[0])\n    # Set a threshold for classifying the query",
+        "detail": "casualBot",
+        "documentation": {}
+    },
+    {
         "label": "handle_query",
         "kind": 2,
         "importPath": "casualBot",
         "description": "casualBot",
-        "peekOfCode": "def handle_query(query):\n    result = retrieval_chain.invoke({\"input\": query})\n    return result[\"answer\"]\nchat_history = []\nwhile True:\n    query = input(\"Ask your question: \")\n    if query.lower() == \"exit\":\n        break\n    response = handle_query(query)\n    print(\"\\nAI Response:\\n\")",
+        "peekOfCode": "def handle_query(query):\n    query_type = classify_query(query)\n    if query_type[\"status\"] == \"casual\":\n        # If casual, handle the query normally with LLM\n        context=\"the user wants to have a casual chat\"\n        casual_prompt = chat_prompt.format(input=query,context=context)\n        docs = llm.invoke(casual_prompt)\n    else:\n        # If legal, perform similarity search in Chroma for relevant docs\n        relevant_docs = vector_store.similarity_search_with_score(query, k=10)",
         "detail": "casualBot",
         "documentation": {}
     },
@@ -314,11 +364,20 @@
         "documentation": {}
     },
     {
+        "label": "legal_check_template",
+        "kind": 5,
+        "importPath": "casualBot",
+        "description": "casualBot",
+        "peekOfCode": "legal_check_template = ChatPromptTemplate.from_template(\n    \"\"\"\n    You are an AI Legal Assistant. A legal question typically contains terms related to laws, sections, or legal topics.\n    A query like 'Can you explain Section 420 of IPC?' is a legal query.\n    \"\"\"\n)\nprint(\"creating the text splitter\")\ntext_splitter = RecursiveCharacterTextSplitter(\n    chunk_size=1024, chunk_overlap=200, length_function=len\n)",
+        "detail": "casualBot",
+        "documentation": {}
+    },
+    {
         "label": "text_splitter",
         "kind": 5,
         "importPath": "casualBot",
         "description": "casualBot",
-        "peekOfCode": "text_splitter = RecursiveCharacterTextSplitter(\n    chunk_size=1024, chunk_overlap=200, length_function=len\n)\n# creating the chunks\nprint(\"creating the chunks\")\nchunks = text_splitter.split_documents(documents)\nprint(\"creating chroma db\")\nvector_store = Chroma(persist_directory=\"db\", embedding_function=embedding_model)\nprint(\"Chroma DB loaded successfully\")\nretriever = vector_store.as_retriever(",
+        "peekOfCode": "text_splitter = RecursiveCharacterTextSplitter(\n    chunk_size=1024, chunk_overlap=200, length_function=len\n)\n# creating the chunks\nprint(\"creating the chunks\")\nchunks = text_splitter.split_documents(documents)\nprint(\"creating chroma db\")\nvector_store = Chroma(persist_directory=\"db\", embedding_function=embedding_model)\nprint(\"Chroma DB loaded successfully\")\n#making another approach such as a multi query retrievery",
         "detail": "casualBot",
         "documentation": {}
     },
@@ -327,7 +386,7 @@
         "kind": 5,
         "importPath": "casualBot",
         "description": "casualBot",
-        "peekOfCode": "chunks = text_splitter.split_documents(documents)\nprint(\"creating chroma db\")\nvector_store = Chroma(persist_directory=\"db\", embedding_function=embedding_model)\nprint(\"Chroma DB loaded successfully\")\nretriever = vector_store.as_retriever(\n    search_type=\"similarity_score_threshold\",\n    search_kwargs={\"k\": 20, \"score_threshold\": 0.1},\n)\nprint(\"document retirver initialised \")\nhistory_aware_retriever = create_history_aware_retriever(",
+        "peekOfCode": "chunks = text_splitter.split_documents(documents)\nprint(\"creating chroma db\")\nvector_store = Chroma(persist_directory=\"db\", embedding_function=embedding_model)\nprint(\"Chroma DB loaded successfully\")\n#making another approach such as a multi query retrievery\n# mul_qeury_retirever = MultiQueryRetriever.from_llm(\n#     retriever = vector_store.as_retriever(),llm=llm\n# )\nthreshold = 1.4\nd = []",
         "detail": "casualBot",
         "documentation": {}
     },
@@ -336,43 +395,52 @@
         "kind": 5,
         "importPath": "casualBot",
         "description": "casualBot",
-        "peekOfCode": "vector_store = Chroma(persist_directory=\"db\", embedding_function=embedding_model)\nprint(\"Chroma DB loaded successfully\")\nretriever = vector_store.as_retriever(\n    search_type=\"similarity_score_threshold\",\n    search_kwargs={\"k\": 20, \"score_threshold\": 0.1},\n)\nprint(\"document retirver initialised \")\nhistory_aware_retriever = create_history_aware_retriever(\n    llm=llm, retriever=retriever, prompt=retriever_prompt\n)",
+        "peekOfCode": "vector_store = Chroma(persist_directory=\"db\", embedding_function=embedding_model)\nprint(\"Chroma DB loaded successfully\")\n#making another approach such as a multi query retrievery\n# mul_qeury_retirever = MultiQueryRetriever.from_llm(\n#     retriever = vector_store.as_retriever(),llm=llm\n# )\nthreshold = 1.4\nd = []\ndef is_relevant_below_threshold(docs,threshold):\n    for doc,score in docs:",
         "detail": "casualBot",
         "documentation": {}
     },
     {
-        "label": "retriever",
+        "label": "threshold",
         "kind": 5,
         "importPath": "casualBot",
         "description": "casualBot",
-        "peekOfCode": "retriever = vector_store.as_retriever(\n    search_type=\"similarity_score_threshold\",\n    search_kwargs={\"k\": 20, \"score_threshold\": 0.1},\n)\nprint(\"document retirver initialised \")\nhistory_aware_retriever = create_history_aware_retriever(\n    llm=llm, retriever=retriever, prompt=retriever_prompt\n)\nprint(\"memmory history created...\")\ndocument_chain = create_stuff_documents_chain(llm, chat_prompt)",
+        "peekOfCode": "threshold = 1.4\nd = []\ndef is_relevant_below_threshold(docs,threshold):\n    for doc,score in docs:\n        if score < threshold:\n            d.append({\n                \"status\":\"irrelevant docs\",\n                \"result\":docs,\n                \"score\":score\n            })",
         "detail": "casualBot",
         "documentation": {}
     },
     {
-        "label": "history_aware_retriever",
+        "label": "d",
         "kind": 5,
         "importPath": "casualBot",
         "description": "casualBot",
-        "peekOfCode": "history_aware_retriever = create_history_aware_retriever(\n    llm=llm, retriever=retriever, prompt=retriever_prompt\n)\nprint(\"memmory history created...\")\ndocument_chain = create_stuff_documents_chain(llm, chat_prompt)\nprint(\"document chaining...\")\nretrieval_chain = create_retrieval_chain(\n    history_aware_retriever,\n    document_chain,\n)",
+        "peekOfCode": "d = []\ndef is_relevant_below_threshold(docs,threshold):\n    for doc,score in docs:\n        if score < threshold:\n            d.append({\n                \"status\":\"irrelevant docs\",\n                \"result\":docs,\n                \"score\":score\n            })\n            return d",
         "detail": "casualBot",
         "documentation": {}
     },
     {
-        "label": "document_chain",
+        "label": "examples",
         "kind": 5,
         "importPath": "casualBot",
         "description": "casualBot",
-        "peekOfCode": "document_chain = create_stuff_documents_chain(llm, chat_prompt)\nprint(\"document chaining...\")\nretrieval_chain = create_retrieval_chain(\n    history_aware_retriever,\n    document_chain,\n)\nprint(\"retirever chain created....\")\ndef handle_query(query):\n    result = retrieval_chain.invoke({\"input\": query})\n    return result[\"answer\"]",
+        "peekOfCode": "examples = {\n    \"legal\": [\n        \"What is Section 420 of the Indian Penal Code?\",\n        \"Can you explain the punishment for theft under IPC?\",\n        \"Tell me about bail provisions in Indian law.\",\n        \"What are the laws regarding domestic violence?\",\n        \"How do I file a complaint for defamation?\",\n        \"What is the penalty for cybercrime in India?\",\n        \"Explain the law on trespassing in India.\",\n        \"What are the conditions for anticipatory bail?\",",
         "detail": "casualBot",
         "documentation": {}
     },
     {
-        "label": "retrieval_chain",
+        "label": "legal_embeddings",
         "kind": 5,
         "importPath": "casualBot",
         "description": "casualBot",
-        "peekOfCode": "retrieval_chain = create_retrieval_chain(\n    history_aware_retriever,\n    document_chain,\n)\nprint(\"retirever chain created....\")\ndef handle_query(query):\n    result = retrieval_chain.invoke({\"input\": query})\n    return result[\"answer\"]\nchat_history = []\nwhile True:",
+        "peekOfCode": "legal_embeddings = embedding_model.embed_documents(examples[\"legal\"])\ncasual_embeddings = embedding_model.embed_documents(examples[\"casual\"])\n# Function to calculate similarity with the dictionary\ndef classify_query(query):\n    # Embed the query\n    query_embedding = embedding_model.embed_documents([query])\n    # Calculate similarities\n    legal_similarity = cosine_similarity(query_embedding, legal_embeddings)\n    casual_similarity = cosine_similarity(query_embedding, casual_embeddings)\n    # Get the maximum similarity score for legal and casual categories",
+        "detail": "casualBot",
+        "documentation": {}
+    },
+    {
+        "label": "casual_embeddings",
+        "kind": 5,
+        "importPath": "casualBot",
+        "description": "casualBot",
+        "peekOfCode": "casual_embeddings = embedding_model.embed_documents(examples[\"casual\"])\n# Function to calculate similarity with the dictionary\ndef classify_query(query):\n    # Embed the query\n    query_embedding = embedding_model.embed_documents([query])\n    # Calculate similarities\n    legal_similarity = cosine_similarity(query_embedding, legal_embeddings)\n    casual_similarity = cosine_similarity(query_embedding, casual_embeddings)\n    # Get the maximum similarity score for legal and casual categories\n    max_legal_similarity = max(legal_similarity[0])",
         "detail": "casualBot",
         "documentation": {}
     },
@@ -381,7 +449,7 @@
         "kind": 5,
         "importPath": "casualBot",
         "description": "casualBot",
-        "peekOfCode": "chat_history = []\nwhile True:\n    query = input(\"Ask your question: \")\n    if query.lower() == \"exit\":\n        break\n    response = handle_query(query)\n    print(\"\\nAI Response:\\n\")\n    print(response)\n    print(\"\\n------------------------------------\\n\")",
+        "peekOfCode": "chat_history = []\nwhile True:\n    query = input(\"Ask your question: \")\n    if query.lower() == \"bye\":\n        break\n    response = handle_query(query)\n    handle_query(query)\n    print(\"\\nAI Response:\\n\")\n    print(response)\n    print(\"\\n------------------------------------\\n\")",
         "detail": "casualBot",
         "documentation": {}
     }

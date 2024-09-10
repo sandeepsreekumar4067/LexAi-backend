@@ -10,7 +10,9 @@ from langchain.chains.history_aware_retriever import create_history_aware_retrie
 from langchain.chains.combine_documents import create_stuff_documents_chain
 from langchain.chains import create_retrieval_chain
 from langchain.memory import ConversationBufferMemory
-
+from langchain_core.messages import HumanMessage,AIMessage
+from langchain.retrievers.multi_query import MultiQueryRetriever
+from sklearn.metrics.pairwise import cosine_similarity
 llm = ChatOllama(model="llama3.1",temperature=0.7,)
 embedding_model = OllamaEmbeddings(model="llama3.1")
 chat_history=[]
@@ -44,6 +46,13 @@ retriever_prompt = ChatPromptTemplate.from_messages(
         ),
     ]
 )
+
+legal_check_template = ChatPromptTemplate.from_template(
+    """
+    You are an AI Legal Assistant. A legal question typically contains terms related to laws, sections, or legal topics.
+    A query like 'Can you explain Section 420 of IPC?' is a legal query.
+    """
+)
 print("creating the text splitter")
 
 text_splitter = RecursiveCharacterTextSplitter(
@@ -58,37 +67,166 @@ vector_store = Chroma(persist_directory="db", embedding_function=embedding_model
 
 print("Chroma DB loaded successfully")
 
-retriever = vector_store.as_retriever(
-    search_type="similarity_score_threshold",
-    search_kwargs={"k": 20, "score_threshold": 0.1},
-)
-print("document retirver initialised ")
-history_aware_retriever = create_history_aware_retriever(
-    llm=llm, retriever=retriever, prompt=retriever_prompt
-)
 
-print("memmory history created...")
 
-document_chain = create_stuff_documents_chain(llm, chat_prompt)
-print("document chaining...")
+#making another approach such as a multi query retrievery
 
-retrieval_chain = create_retrieval_chain(
-    history_aware_retriever,
-    document_chain,
-)
+# mul_qeury_retirever = MultiQueryRetriever.from_llm(
+#     retriever = vector_store.as_retriever(),llm=llm
+# )
 
-print("retirever chain created....")
+threshold = 1.4
+d = []
+
+def is_relevant_below_threshold(docs,threshold):
+    for doc,score in docs:
+        if score < threshold:
+            d.append({
+                "status":"irrelevant docs",
+                "result":docs,
+                "score":score
+            })
+            return d
+        else:
+            d.append({
+                "status":"relevant docs",
+                "result":docs,
+                "score":score
+            })
+            return d
+examples = {
+    "legal": [
+        "What is Section 420 of the Indian Penal Code?",
+        "Can you explain the punishment for theft under IPC?",
+        "Tell me about bail provisions in Indian law.",
+        "What are the laws regarding domestic violence?",
+        "How do I file a complaint for defamation?",
+        "What is the penalty for cybercrime in India?",
+        "Explain the law on trespassing in India.",
+        "What are the conditions for anticipatory bail?",
+        "What is the difference between murder and manslaughter?",
+        "Tell me about the legal rights of tenants in India.",
+        "How does Indian law handle intellectual property theft?",
+        "What does the Indian Penal Code say about kidnapping?",
+        "What is the punishment for tax evasion?",
+        "Can you explain the law on child custody?",
+        "What are the rights of employees under Indian labor law?",
+        "How is dowry harassment handled under IPC?",
+        "What are the grounds for divorce in India?",
+        "Tell me about the provisions for medical negligence.",
+        "What are the legal implications of a breach of contract?",
+        "How can someone be arrested without a warrant in India?",
+        "Explain the legal procedures for filing an FIR.",
+        "What are the penalties for drug possession in India?",
+        "Can a minor be tried for a criminal offense in India?",
+        "What is the punishment for money laundering under Indian law?",
+        "How is evidence handled in Indian courts?",
+    ],
+    "casual": [
+        "How's the weather today?",
+        "Tell me a joke.",
+        "What's your name?",
+        "How are you doing today?",
+        "What's the time now?",
+        "What's your favorite color?",
+        "Who is your favorite actor?",
+        "Can you recommend a good book?",
+        "What's your favorite hobby?",
+        "Do you like music?",
+        "Tell me about your favorite movie.",
+        "What's your favorite food?",
+        "Do you have any pets?",
+        "What's the best place to travel?",
+        "What's your favorite sport?",
+        "How do you spend your weekends?",
+        "What kind of music do you enjoy?",
+        "Do you like reading?",
+        "What are your hobbies?",
+        "What's the best vacation you've had?",
+        "Do you have any siblings?",
+        "Can you suggest a good restaurant nearby?",
+        "What's your opinion on the latest movie release?",
+        "How do you relax after a long day?",
+        "What's your favorite TV show?",
+    ]
+}
+
+
+# Embed all legal and casual sentences from the dictionary
+legal_embeddings = embedding_model.embed_documents(examples["legal"])
+casual_embeddings = embedding_model.embed_documents(examples["casual"])
+
+# Function to calculate similarity with the dictionary
+def classify_query(query):
+    # Embed the query
+    query_embedding = embedding_model.embed_documents([query])
+
+    # Calculate similarities
+    legal_similarity = cosine_similarity(query_embedding, legal_embeddings)
+    casual_similarity = cosine_similarity(query_embedding, casual_embeddings)
+
+    # Get the maximum similarity score for legal and casual categories
+    max_legal_similarity = max(legal_similarity[0])
+    max_casual_similarity = max(casual_similarity[0])
+
+    # Set a threshold for classifying the query
+    threshold = 0.4
+
+    # Compare similarities to classify as legal or casual
+    if max_legal_similarity > threshold and max_legal_similarity > max_casual_similarity:
+        return {"status":"legal","score":max_legal_similarity}
+    else:
+        return {"status":"casual","score":max_casual_similarity}
 
 def handle_query(query):
-    result = retrieval_chain.invoke({"input": query})
-    return result["answer"]
+    query_type = classify_query(query)
+
+    if query_type["status"] == "casual":
+        # If casual, handle the query normally with LLM
+        context="the user wants to have a casual chat"
+        casual_prompt = chat_prompt.format(input=query,context=context)
+        docs = llm.invoke(casual_prompt)
+    else:
+        # If legal, perform similarity search in Chroma for relevant docs
+        relevant_docs = vector_store.similarity_search_with_score(query, k=10)
+        context = "".join([doc[0].page_content for doc in relevant_docs])
+        full_prompt = chat_prompt.format(input=query, context=context)
+        docs = llm.invoke(full_prompt)
+
+    return docs.content
+        # return llm.invoke(query)  # Friendly chatbot response for casual query
+        # Perform legal query similarity search in Chroma
+        # context = "".join([doc[0].page_content for doc in relevant_docs])
+        # full_prompt = chat_prompt.format(input=query, context=context)
+        # response = llm.invoke(full_prompt)
+        
+
+    # Perform similarity search
+    # relevant_docs = vector_store.similarity_search_with_score(query,k=1)
+    # val =is_relevant_below_threshold(docs=relevant_docs,threshold=1.8)
+    # print(val)
+    # docs = []
+    # for doc,score in relevant_docs:
+    #     docs.append({
+    #         "result":doc,
+    #         "score":score
+    #     })
+    # return docs
+    #     response = llm.invoke(query)
+    
+        # context = ''.join([doc[0].page_content for doc in relevant_docs])
+        # full_prompt = chat_prompt.format(input=query,context=context)
+        # response = llm.invoke(full_prompt)
+    
+
 chat_history = []
 
 while True:
     query = input("Ask your question: ")
-    if query.lower() == "exit":
+    if query.lower() == "bye":
         break
     response = handle_query(query)
+    handle_query(query)
     print("\nAI Response:\n")
     print(response)
     print("\n------------------------------------\n")
