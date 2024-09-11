@@ -136,6 +136,14 @@
         "documentation": {}
     },
     {
+        "label": "ChatMessageHistory",
+        "importPath": "langchain_community.chat_message_histories",
+        "description": "langchain_community.chat_message_histories",
+        "isExtraImport": true,
+        "detail": "langchain_community.chat_message_histories",
+        "documentation": {}
+    },
+    {
         "label": "cosine_similarity",
         "importPath": "sklearn.metrics.pairwise",
         "description": "sklearn.metrics.pairwise",
@@ -234,15 +242,6 @@
         "documentation": {}
     },
     {
-        "label": "is_relevant_below_threshold",
-        "kind": 2,
-        "importPath": "casualBot",
-        "description": "casualBot",
-        "peekOfCode": "def is_relevant_below_threshold(docs,threshold):\n    for doc,score in docs:\n        if score < threshold:\n            d.append({\n                \"status\":\"irrelevant docs\",\n                \"result\":docs,\n                \"score\":score\n            })\n            return d\n        else:",
-        "detail": "casualBot",
-        "documentation": {}
-    },
-    {
         "label": "classify_query",
         "kind": 2,
         "importPath": "casualBot",
@@ -256,7 +255,7 @@
         "kind": 2,
         "importPath": "casualBot",
         "description": "casualBot",
-        "peekOfCode": "def handle_query(query):\n    query_type = classify_query(query)\n    if query_type[\"status\"] == \"casual\":\n        # If casual, handle the query normally with LLM\n        context=\"the user wants to have a casual chat\"\n        casual_prompt = chat_prompt.format(input=query,context=context)\n        docs = llm.invoke(casual_prompt)\n    else:\n        # If legal, perform similarity search in Chroma for relevant docs\n        relevant_docs = vector_store.similarity_search_with_score(query, k=10)",
+        "peekOfCode": "def handle_query(query):\n    chat_context.append((\"human\",query))\n    query_type = classify_query(query)\n    if query_type[\"status\"] == \"casual\":\n        # If casual, handle the query normally with LLM\n        context = 'friendly chat '\n        casual_prompt = chat_prompt.format(input=query,context=chat_context)\n        print(chat_context,\"\\n\")\n        docs = llm.invoke(casual_prompt)\n        chat_context.append((\"ai\",docs.content))",
         "detail": "casualBot",
         "documentation": {}
     },
@@ -265,7 +264,7 @@
         "kind": 5,
         "importPath": "casualBot",
         "description": "casualBot",
-        "peekOfCode": "llm = ChatOllama(model=\"llama3.1\",temperature=0.7,)\nembedding_model = OllamaEmbeddings(model=\"llama3.1\")\nchat_history=[]\n# uploading the pdf\nprint(\"uploaded the pdf\")\nmemory = ConversationBufferMemory(memory_key=\"chat_history\", return_messages=True)\npdf_reader = PyPDFLoader(\"../Backend/assets/ipc.pdf\")\ndocuments = pdf_reader.load_and_split()\nchat_prompt = PromptTemplate.from_template(\n        \"\"\"",
+        "peekOfCode": "llm = ChatOllama(model=\"llama3.1\",temperature=0.7,)\nembedding_model = OllamaEmbeddings(model=\"llama3.1\")\n# uploading the pdf\nprint(\"uploaded the pdf\")\n# memory = ChatMessageHistory(memory_key=\"chat_history\", return_messages=True)\npdf_reader = PyPDFLoader(\"../Backend/assets/ipc.pdf\")\ndocuments = pdf_reader.load_and_split()\nchat_prompt = PromptTemplate.from_template(\n        \"\"\"\n        You are an AI Legal Assistant Skilled in Indian Law,Your name is LexAi ,Also you are a very Friendly Chat Bot .",
         "detail": "casualBot",
         "documentation": {}
     },
@@ -274,16 +273,7 @@
         "kind": 5,
         "importPath": "casualBot",
         "description": "casualBot",
-        "peekOfCode": "embedding_model = OllamaEmbeddings(model=\"llama3.1\")\nchat_history=[]\n# uploading the pdf\nprint(\"uploaded the pdf\")\nmemory = ConversationBufferMemory(memory_key=\"chat_history\", return_messages=True)\npdf_reader = PyPDFLoader(\"../Backend/assets/ipc.pdf\")\ndocuments = pdf_reader.load_and_split()\nchat_prompt = PromptTemplate.from_template(\n        \"\"\"\n        You are an AI Legal Assistant Skilled in Indian Law,Your name is LexAi ,Also you are a very Friendly Chat Bot .",
-        "detail": "casualBot",
-        "documentation": {}
-    },
-    {
-        "label": "memory",
-        "kind": 5,
-        "importPath": "casualBot",
-        "description": "casualBot",
-        "peekOfCode": "memory = ConversationBufferMemory(memory_key=\"chat_history\", return_messages=True)\npdf_reader = PyPDFLoader(\"../Backend/assets/ipc.pdf\")\ndocuments = pdf_reader.load_and_split()\nchat_prompt = PromptTemplate.from_template(\n        \"\"\"\n        You are an AI Legal Assistant Skilled in Indian Law,Your name is LexAi ,Also you are a very Friendly Chat Bot .\n        So for each user query provide ACCURATE,USEFUL,THOUGHTFUL Response.\n        also if the user intends to do normal Chatting ; initiate in friendly chatting too,\n        But Remind them of your PURPOSE and ROLE if the user initiates only FRIENDLY CHAT and make them engage in Asking LEGAL QUERIES\n        on Indian Peanal Code",
+        "peekOfCode": "embedding_model = OllamaEmbeddings(model=\"llama3.1\")\n# uploading the pdf\nprint(\"uploaded the pdf\")\n# memory = ChatMessageHistory(memory_key=\"chat_history\", return_messages=True)\npdf_reader = PyPDFLoader(\"../Backend/assets/ipc.pdf\")\ndocuments = pdf_reader.load_and_split()\nchat_prompt = PromptTemplate.from_template(\n        \"\"\"\n        You are an AI Legal Assistant Skilled in Indian Law,Your name is LexAi ,Also you are a very Friendly Chat Bot .\n        So for each user query provide ACCURATE,USEFUL,THOUGHTFUL Response.",
         "detail": "casualBot",
         "documentation": {}
     },
@@ -292,7 +282,7 @@
         "kind": 5,
         "importPath": "casualBot",
         "description": "casualBot",
-        "peekOfCode": "pdf_reader = PyPDFLoader(\"../Backend/assets/ipc.pdf\")\ndocuments = pdf_reader.load_and_split()\nchat_prompt = PromptTemplate.from_template(\n        \"\"\"\n        You are an AI Legal Assistant Skilled in Indian Law,Your name is LexAi ,Also you are a very Friendly Chat Bot .\n        So for each user query provide ACCURATE,USEFUL,THOUGHTFUL Response.\n        also if the user intends to do normal Chatting ; initiate in friendly chatting too,\n        But Remind them of your PURPOSE and ROLE if the user initiates only FRIENDLY CHAT and make them engage in Asking LEGAL QUERIES\n        on Indian Peanal Code\n        Question: {input}",
+        "peekOfCode": "pdf_reader = PyPDFLoader(\"../Backend/assets/ipc.pdf\")\ndocuments = pdf_reader.load_and_split()\nchat_prompt = PromptTemplate.from_template(\n        \"\"\"\n        You are an AI Legal Assistant Skilled in Indian Law,Your name is LexAi ,Also you are a very Friendly Chat Bot .\n        So for each user query provide ACCURATE,USEFUL,THOUGHTFUL Response.\n        also if the user intends to do normal Chatting ; initiate in friendly chatting too,\n        But Remind them of your PURPOSE and ROLE if the user initiates only FRIENDLY CHAT and compel them to engage in Asking LEGAL QUERIES\n        on Indian Peanal Code\n        Question: {input},",
         "detail": "casualBot",
         "documentation": {}
     },
@@ -301,7 +291,7 @@
         "kind": 5,
         "importPath": "casualBot",
         "description": "casualBot",
-        "peekOfCode": "documents = pdf_reader.load_and_split()\nchat_prompt = PromptTemplate.from_template(\n        \"\"\"\n        You are an AI Legal Assistant Skilled in Indian Law,Your name is LexAi ,Also you are a very Friendly Chat Bot .\n        So for each user query provide ACCURATE,USEFUL,THOUGHTFUL Response.\n        also if the user intends to do normal Chatting ; initiate in friendly chatting too,\n        But Remind them of your PURPOSE and ROLE if the user initiates only FRIENDLY CHAT and make them engage in Asking LEGAL QUERIES\n        on Indian Peanal Code\n        Question: {input}\n        Context: {context}",
+        "peekOfCode": "documents = pdf_reader.load_and_split()\nchat_prompt = PromptTemplate.from_template(\n        \"\"\"\n        You are an AI Legal Assistant Skilled in Indian Law,Your name is LexAi ,Also you are a very Friendly Chat Bot .\n        So for each user query provide ACCURATE,USEFUL,THOUGHTFUL Response.\n        also if the user intends to do normal Chatting ; initiate in friendly chatting too,\n        But Remind them of your PURPOSE and ROLE if the user initiates only FRIENDLY CHAT and compel them to engage in Asking LEGAL QUERIES\n        on Indian Peanal Code\n        Question: {input},\n        Context: {context},",
         "detail": "casualBot",
         "documentation": {}
     },
@@ -310,7 +300,7 @@
         "kind": 5,
         "importPath": "casualBot",
         "description": "casualBot",
-        "peekOfCode": "chat_prompt = PromptTemplate.from_template(\n        \"\"\"\n        You are an AI Legal Assistant Skilled in Indian Law,Your name is LexAi ,Also you are a very Friendly Chat Bot .\n        So for each user query provide ACCURATE,USEFUL,THOUGHTFUL Response.\n        also if the user intends to do normal Chatting ; initiate in friendly chatting too,\n        But Remind them of your PURPOSE and ROLE if the user initiates only FRIENDLY CHAT and make them engage in Asking LEGAL QUERIES\n        on Indian Peanal Code\n        Question: {input}\n        Context: {context}\n        Response:",
+        "peekOfCode": "chat_prompt = PromptTemplate.from_template(\n        \"\"\"\n        You are an AI Legal Assistant Skilled in Indian Law,Your name is LexAi ,Also you are a very Friendly Chat Bot .\n        So for each user query provide ACCURATE,USEFUL,THOUGHTFUL Response.\n        also if the user intends to do normal Chatting ; initiate in friendly chatting too,\n        But Remind them of your PURPOSE and ROLE if the user initiates only FRIENDLY CHAT and compel them to engage in Asking LEGAL QUERIES\n        on Indian Peanal Code\n        Question: {input},\n        Context: {context},\n        Response:",
         "detail": "casualBot",
         "documentation": {}
     },
@@ -328,7 +318,7 @@
         "kind": 5,
         "importPath": "casualBot",
         "description": "casualBot",
-        "peekOfCode": "text_splitter = RecursiveCharacterTextSplitter(\n    chunk_size=1024, chunk_overlap=200, length_function=len\n)\n# creating the chunks\nprint(\"creating the chunks\")\nchunks = text_splitter.split_documents(documents)\nprint(\"creating chroma db\")\nvector_store = Chroma(persist_directory=\"db\", embedding_function=embedding_model)\nprint(\"Chroma DB loaded successfully\")\nthreshold = 1.4",
+        "peekOfCode": "text_splitter = RecursiveCharacterTextSplitter(\n    chunk_size=1024, chunk_overlap=200, length_function=len\n)\n# creating the chunks\nprint(\"creating the chunks\")\nchunks = text_splitter.split_documents(documents)\nprint(\"creating chroma db\")\nvector_store = Chroma(persist_directory=\"db\", embedding_function=embedding_model)\nprint(\"Chroma DB loaded successfully\")\nexamples = {",
         "detail": "casualBot",
         "documentation": {}
     },
@@ -337,7 +327,7 @@
         "kind": 5,
         "importPath": "casualBot",
         "description": "casualBot",
-        "peekOfCode": "chunks = text_splitter.split_documents(documents)\nprint(\"creating chroma db\")\nvector_store = Chroma(persist_directory=\"db\", embedding_function=embedding_model)\nprint(\"Chroma DB loaded successfully\")\nthreshold = 1.4\nd = []\ndef is_relevant_below_threshold(docs,threshold):\n    for doc,score in docs:\n        if score < threshold:\n            d.append({",
+        "peekOfCode": "chunks = text_splitter.split_documents(documents)\nprint(\"creating chroma db\")\nvector_store = Chroma(persist_directory=\"db\", embedding_function=embedding_model)\nprint(\"Chroma DB loaded successfully\")\nexamples = {\n    \"legal\": [\n        \"What is Section 420 of the Indian Penal Code?\",\n        \"Can you explain the punishment for theft under IPC?\",\n        # \"Tell me about bail provisions in Indian law.\",\n        # \"What are the laws regarding domestic violence?\",",
         "detail": "casualBot",
         "documentation": {}
     },
@@ -346,25 +336,7 @@
         "kind": 5,
         "importPath": "casualBot",
         "description": "casualBot",
-        "peekOfCode": "vector_store = Chroma(persist_directory=\"db\", embedding_function=embedding_model)\nprint(\"Chroma DB loaded successfully\")\nthreshold = 1.4\nd = []\ndef is_relevant_below_threshold(docs,threshold):\n    for doc,score in docs:\n        if score < threshold:\n            d.append({\n                \"status\":\"irrelevant docs\",\n                \"result\":docs,",
-        "detail": "casualBot",
-        "documentation": {}
-    },
-    {
-        "label": "threshold",
-        "kind": 5,
-        "importPath": "casualBot",
-        "description": "casualBot",
-        "peekOfCode": "threshold = 1.4\nd = []\ndef is_relevant_below_threshold(docs,threshold):\n    for doc,score in docs:\n        if score < threshold:\n            d.append({\n                \"status\":\"irrelevant docs\",\n                \"result\":docs,\n                \"score\":score\n            })",
-        "detail": "casualBot",
-        "documentation": {}
-    },
-    {
-        "label": "d",
-        "kind": 5,
-        "importPath": "casualBot",
-        "description": "casualBot",
-        "peekOfCode": "d = []\ndef is_relevant_below_threshold(docs,threshold):\n    for doc,score in docs:\n        if score < threshold:\n            d.append({\n                \"status\":\"irrelevant docs\",\n                \"result\":docs,\n                \"score\":score\n            })\n            return d",
+        "peekOfCode": "vector_store = Chroma(persist_directory=\"db\", embedding_function=embedding_model)\nprint(\"Chroma DB loaded successfully\")\nexamples = {\n    \"legal\": [\n        \"What is Section 420 of the Indian Penal Code?\",\n        \"Can you explain the punishment for theft under IPC?\",\n        # \"Tell me about bail provisions in Indian law.\",\n        # \"What are the laws regarding domestic violence?\",\n        # \"How do I file a complaint for defamation?\",\n        # \"What is the penalty for cybercrime in India?\",",
         "detail": "casualBot",
         "documentation": {}
     },
@@ -373,7 +345,16 @@
         "kind": 5,
         "importPath": "casualBot",
         "description": "casualBot",
-        "peekOfCode": "examples = {\n    \"legal\": [\n        \"What is Section 420 of the Indian Penal Code?\",\n        \"Can you explain the punishment for theft under IPC?\",\n        \"Tell me about bail provisions in Indian law.\",\n        \"What are the laws regarding domestic violence?\",\n        \"How do I file a complaint for defamation?\",\n        \"What is the penalty for cybercrime in India?\",\n        \"Explain the law on trespassing in India.\",\n        \"What are the conditions for anticipatory bail?\",",
+        "peekOfCode": "examples = {\n    \"legal\": [\n        \"What is Section 420 of the Indian Penal Code?\",\n        \"Can you explain the punishment for theft under IPC?\",\n        # \"Tell me about bail provisions in Indian law.\",\n        # \"What are the laws regarding domestic violence?\",\n        # \"How do I file a complaint for defamation?\",\n        # \"What is the penalty for cybercrime in India?\",\n        # \"Explain the law on trespassing in India.\",\n        # \"What are the conditions for anticipatory bail?\",",
+        "detail": "casualBot",
+        "documentation": {}
+    },
+    {
+        "label": "threshold",
+        "kind": 5,
+        "importPath": "casualBot",
+        "description": "casualBot",
+        "peekOfCode": "threshold = 1.4\n# Embed all legal and casual sentences from the dictionary\nlegal_embeddings = embedding_model.embed_documents(examples[\"legal\"])\ncasual_embeddings = embedding_model.embed_documents(examples[\"casual\"])\n# Function to calculate similarity with the dictionary\ndef classify_query(query):\n    # Embed the query\n    query_embedding = embedding_model.embed_documents([query])\n    # Calculate similarities\n    legal_similarity = cosine_similarity(query_embedding, legal_embeddings)",
         "detail": "casualBot",
         "documentation": {}
     },
@@ -396,11 +377,11 @@
         "documentation": {}
     },
     {
-        "label": "chat_history",
+        "label": "chat_context",
         "kind": 5,
         "importPath": "casualBot",
         "description": "casualBot",
-        "peekOfCode": "chat_history = []\nwhile True:\n    query = input(\"Ask your question: \")\n    if query.lower() == \"bye\":\n        break\n    response = handle_query(query)\n    handle_query(query)\n    print(\"\\nAI Response:\\n\")\n    print(response)\n    print(\"\\n------------------------------------\\n\")",
+        "peekOfCode": "chat_context = []\ndef handle_query(query):\n    chat_context.append((\"human\",query))\n    query_type = classify_query(query)\n    if query_type[\"status\"] == \"casual\":\n        # If casual, handle the query normally with LLM\n        context = 'friendly chat '\n        casual_prompt = chat_prompt.format(input=query,context=chat_context)\n        print(chat_context,\"\\n\")\n        docs = llm.invoke(casual_prompt)",
         "detail": "casualBot",
         "documentation": {}
     }
