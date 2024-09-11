@@ -104,43 +104,11 @@
         "documentation": {}
     },
     {
-        "label": "MessagesPlaceholder",
-        "importPath": "langchain.prompts",
-        "description": "langchain.prompts",
-        "isExtraImport": true,
-        "detail": "langchain.prompts",
-        "documentation": {}
-    },
-    {
         "label": "Chroma",
         "importPath": "langchain_chroma",
         "description": "langchain_chroma",
         "isExtraImport": true,
         "detail": "langchain_chroma",
-        "documentation": {}
-    },
-    {
-        "label": "create_history_aware_retriever",
-        "importPath": "langchain.chains.history_aware_retriever",
-        "description": "langchain.chains.history_aware_retriever",
-        "isExtraImport": true,
-        "detail": "langchain.chains.history_aware_retriever",
-        "documentation": {}
-    },
-    {
-        "label": "create_stuff_documents_chain",
-        "importPath": "langchain.chains.combine_documents",
-        "description": "langchain.chains.combine_documents",
-        "isExtraImport": true,
-        "detail": "langchain.chains.combine_documents",
-        "documentation": {}
-    },
-    {
-        "label": "create_retrieval_chain",
-        "importPath": "langchain.chains",
-        "description": "langchain.chains",
-        "isExtraImport": true,
-        "detail": "langchain.chains",
         "documentation": {}
     },
     {
@@ -165,14 +133,6 @@
         "description": "langchain_core.messages",
         "isExtraImport": true,
         "detail": "langchain_core.messages",
-        "documentation": {}
-    },
-    {
-        "label": "MultiQueryRetriever",
-        "importPath": "langchain.retrievers.multi_query",
-        "description": "langchain.retrievers.multi_query",
-        "isExtraImport": true,
-        "detail": "langchain.retrievers.multi_query",
         "documentation": {}
     },
     {
@@ -355,15 +315,6 @@
         "documentation": {}
     },
     {
-        "label": "retriever_prompt",
-        "kind": 5,
-        "importPath": "casualBot",
-        "description": "casualBot",
-        "peekOfCode": "retriever_prompt = ChatPromptTemplate.from_messages(\n    [\n        MessagesPlaceholder(variable_name=\"chat_history\"),\n        (\"human\", \"{input}\"),\n        (\n            \"human\",\n            \"Given the above conversation, generate a search query to look up in order to get information relevant to the conversation\",\n        ),\n    ]\n)",
-        "detail": "casualBot",
-        "documentation": {}
-    },
-    {
         "label": "legal_check_template",
         "kind": 5,
         "importPath": "casualBot",
@@ -377,7 +328,7 @@
         "kind": 5,
         "importPath": "casualBot",
         "description": "casualBot",
-        "peekOfCode": "text_splitter = RecursiveCharacterTextSplitter(\n    chunk_size=1024, chunk_overlap=200, length_function=len\n)\n# creating the chunks\nprint(\"creating the chunks\")\nchunks = text_splitter.split_documents(documents)\nprint(\"creating chroma db\")\nvector_store = Chroma(persist_directory=\"db\", embedding_function=embedding_model)\nprint(\"Chroma DB loaded successfully\")\n#making another approach such as a multi query retrievery",
+        "peekOfCode": "text_splitter = RecursiveCharacterTextSplitter(\n    chunk_size=1024, chunk_overlap=200, length_function=len\n)\n# creating the chunks\nprint(\"creating the chunks\")\nchunks = text_splitter.split_documents(documents)\nprint(\"creating chroma db\")\nvector_store = Chroma(persist_directory=\"db\", embedding_function=embedding_model)\nprint(\"Chroma DB loaded successfully\")\nthreshold = 1.4",
         "detail": "casualBot",
         "documentation": {}
     },
@@ -386,7 +337,7 @@
         "kind": 5,
         "importPath": "casualBot",
         "description": "casualBot",
-        "peekOfCode": "chunks = text_splitter.split_documents(documents)\nprint(\"creating chroma db\")\nvector_store = Chroma(persist_directory=\"db\", embedding_function=embedding_model)\nprint(\"Chroma DB loaded successfully\")\n#making another approach such as a multi query retrievery\n# mul_qeury_retirever = MultiQueryRetriever.from_llm(\n#     retriever = vector_store.as_retriever(),llm=llm\n# )\nthreshold = 1.4\nd = []",
+        "peekOfCode": "chunks = text_splitter.split_documents(documents)\nprint(\"creating chroma db\")\nvector_store = Chroma(persist_directory=\"db\", embedding_function=embedding_model)\nprint(\"Chroma DB loaded successfully\")\nthreshold = 1.4\nd = []\ndef is_relevant_below_threshold(docs,threshold):\n    for doc,score in docs:\n        if score < threshold:\n            d.append({",
         "detail": "casualBot",
         "documentation": {}
     },
@@ -395,7 +346,7 @@
         "kind": 5,
         "importPath": "casualBot",
         "description": "casualBot",
-        "peekOfCode": "vector_store = Chroma(persist_directory=\"db\", embedding_function=embedding_model)\nprint(\"Chroma DB loaded successfully\")\n#making another approach such as a multi query retrievery\n# mul_qeury_retirever = MultiQueryRetriever.from_llm(\n#     retriever = vector_store.as_retriever(),llm=llm\n# )\nthreshold = 1.4\nd = []\ndef is_relevant_below_threshold(docs,threshold):\n    for doc,score in docs:",
+        "peekOfCode": "vector_store = Chroma(persist_directory=\"db\", embedding_function=embedding_model)\nprint(\"Chroma DB loaded successfully\")\nthreshold = 1.4\nd = []\ndef is_relevant_below_threshold(docs,threshold):\n    for doc,score in docs:\n        if score < threshold:\n            d.append({\n                \"status\":\"irrelevant docs\",\n                \"result\":docs,",
         "detail": "casualBot",
         "documentation": {}
     },

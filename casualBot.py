@@ -5,13 +5,9 @@ from langchain_ollama import OllamaEmbeddings
 from langchain_chroma import Chroma
 from langchain_ollama.llms import OllamaLLM
 from langchain.prompts import PromptTemplate
-from langchain.prompts import ChatPromptTemplate,MessagesPlaceholder
-from langchain.chains.history_aware_retriever import create_history_aware_retriever
-from langchain.chains.combine_documents import create_stuff_documents_chain
-from langchain.chains import create_retrieval_chain
+from langchain.prompts import ChatPromptTemplate
 from langchain.memory import ConversationBufferMemory
 from langchain_core.messages import HumanMessage,AIMessage
-from langchain.retrievers.multi_query import MultiQueryRetriever
 from sklearn.metrics.pairwise import cosine_similarity
 llm = ChatOllama(model="llama3.1",temperature=0.7,)
 embedding_model = OllamaEmbeddings(model="llama3.1")
@@ -36,16 +32,6 @@ chat_prompt = PromptTemplate.from_template(
         Response:
     """
 )
-retriever_prompt = ChatPromptTemplate.from_messages(
-    [
-        MessagesPlaceholder(variable_name="chat_history"),
-        ("human", "{input}"),
-        (
-            "human",
-            "Given the above conversation, generate a search query to look up in order to get information relevant to the conversation",
-        ),
-    ]
-)
 
 legal_check_template = ChatPromptTemplate.from_template(
     """
@@ -68,12 +54,6 @@ vector_store = Chroma(persist_directory="db", embedding_function=embedding_model
 print("Chroma DB loaded successfully")
 
 
-
-#making another approach such as a multi query retrievery
-
-# mul_qeury_retirever = MultiQueryRetriever.from_llm(
-#     retriever = vector_store.as_retriever(),llm=llm
-# )
 
 threshold = 1.4
 d = []
@@ -194,29 +174,6 @@ def handle_query(query):
         docs = llm.invoke(full_prompt)
 
     return docs.content
-        # return llm.invoke(query)  # Friendly chatbot response for casual query
-        # Perform legal query similarity search in Chroma
-        # context = "".join([doc[0].page_content for doc in relevant_docs])
-        # full_prompt = chat_prompt.format(input=query, context=context)
-        # response = llm.invoke(full_prompt)
-        
-
-    # Perform similarity search
-    # relevant_docs = vector_store.similarity_search_with_score(query,k=1)
-    # val =is_relevant_below_threshold(docs=relevant_docs,threshold=1.8)
-    # print(val)
-    # docs = []
-    # for doc,score in relevant_docs:
-    #     docs.append({
-    #         "result":doc,
-    #         "score":score
-    #     })
-    # return docs
-    #     response = llm.invoke(query)
-    
-        # context = ''.join([doc[0].page_content for doc in relevant_docs])
-        # full_prompt = chat_prompt.format(input=query,context=context)
-        # response = llm.invoke(full_prompt)
     
 
 chat_history = []
