@@ -6,12 +6,15 @@ from langchain_chroma import Chroma
 from langchain_ollama.llms import OllamaLLM
 from langchain.prompts import PromptTemplate
 from langchain.prompts import ChatPromptTemplate
+from fastapi.middleware.cors import CORSMiddleware
 from langchain.memory import ConversationBufferMemory
 from langchain_core.messages import HumanMessage,AIMessage
-from time import sleep
 from langchain_community.chat_message_histories import ChatMessageHistory
 from sklearn.metrics.pairwise import cosine_similarity
+from pydantic import BaseModel
+from fastapi import FastAPI, HTTPException
 llm = ChatOllama(model="llama3.1",temperature=0.7,)
+app = FastAPI()
 embedding_model = OllamaEmbeddings(model="llama3.1")
 # uploading the pdf
 print("uploaded the pdf")
@@ -20,7 +23,13 @@ print("uploaded the pdf")
 pdf_reader = PyPDFLoader("../Backend/assets/ipc.pdf")
 documents = pdf_reader.load_and_split()
 
-
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["http://localhost:8080"],  # Update this with your frontend URL
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
 
 
 chat_prompt = PromptTemplate.from_template(
@@ -157,11 +166,42 @@ def classify_query(query):
 print("sample check point")
 
 chat_context = []
+class QueryRequest(BaseModel):
+    question: str
+@app.post("/test")
+async def ask_query(request: QueryRequest):
+    query = request.question
+    chat_context = [("human", query)]
 
-def handle_query(query):
+    query_type = classify_query(query)
+    if query_type["status"] == "casual":
+        context = 'friendly chat'
+        casual_prompt = f"""
+        You are an AI Legal Assistant Skilled in Indian Law, Your name is LexAi. Also, you are a very Friendly Chat Bot.
+        Question: {query},
+        Context: {context},
+        Response:
+        """
+        response = llm.invoke(casual_prompt)
+        chat_context.append(("ai", response.content))
+    else:
+        relevant_docs = vector_store.similarity_search_with_score(query, k=10)
+        context = "".join([doc[0].page_content for doc in relevant_docs])
+        full_prompt = f"""
+        You are an AI Legal Assistant Skilled in Indian Law, Your name is LexAi. Also, you are a very Friendly Chat Bot.
+        Question: {query},
+        Context: {context},
+        Response:
+        """
+        response = llm.invoke(full_prompt)
+        chat_context.append(("ai", response.content))
 
+    return {"response": response.content, "status": "success"}
+
+@app.post('/ask')
+async def handle_query(request:QueryRequest):
+    query = request.question
     chat_context.append(("human",query))
-
     query_type = classify_query(query)
 
     if query_type["status"] == "casual":
@@ -179,20 +219,6 @@ def handle_query(query):
         full_prompt = chat_prompt.format(input=query, context=context)
         docs = llm.invoke(full_prompt)
         chat_context.append(("ai",docs.content))
+    print("Response sent Successfully")
+    return {"response": docs.content, "status": "success"}
 
-    return docs.content
-    
-
-while True:
-    query = input("Enter the Question : ")
-    if query.lower() == "bye":
-        break
-    elif query.lower() == "hi..":
-        sleep(4)
-        print("\nAI Response:\n")
-        print("Heyy my lil nigga . wassup")
-    else:
-        response = handle_query(query)
-        print("\nAI Response:\n")
-        print(response)
-        print("\n------------------------------------\n")

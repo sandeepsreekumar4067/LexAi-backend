@@ -16,6 +16,14 @@
         "documentation": {}
     },
     {
+        "label": "PyPDFLoader",
+        "importPath": "langchain_community.document_loaders",
+        "description": "langchain_community.document_loaders",
+        "isExtraImport": true,
+        "detail": "langchain_community.document_loaders",
+        "documentation": {}
+    },
+    {
         "label": "RecursiveCharacterTextSplitter",
         "importPath": "langchain.text_splitter",
         "description": "langchain.text_splitter",
@@ -29,6 +37,30 @@
         "description": "langchain.text_splitter",
         "isExtraImport": true,
         "detail": "langchain.text_splitter",
+        "documentation": {}
+    },
+    {
+        "label": "RecursiveCharacterTextSplitter",
+        "importPath": "langchain.text_splitter",
+        "description": "langchain.text_splitter",
+        "isExtraImport": true,
+        "detail": "langchain.text_splitter",
+        "documentation": {}
+    },
+    {
+        "label": "OllamaEmbeddings",
+        "importPath": "langchain_ollama",
+        "description": "langchain_ollama",
+        "isExtraImport": true,
+        "detail": "langchain_ollama",
+        "documentation": {}
+    },
+    {
+        "label": "ChatOllama",
+        "importPath": "langchain_ollama",
+        "description": "langchain_ollama",
+        "isExtraImport": true,
+        "detail": "langchain_ollama",
         "documentation": {}
     },
     {
@@ -80,6 +112,30 @@
         "documentation": {}
     },
     {
+        "label": "OllamaLLM",
+        "importPath": "langchain_ollama.llms",
+        "description": "langchain_ollama.llms",
+        "isExtraImport": true,
+        "detail": "langchain_ollama.llms",
+        "documentation": {}
+    },
+    {
+        "label": "ChatPromptTemplate",
+        "importPath": "langchain.prompts",
+        "description": "langchain.prompts",
+        "isExtraImport": true,
+        "detail": "langchain.prompts",
+        "documentation": {}
+    },
+    {
+        "label": "PromptTemplate",
+        "importPath": "langchain.prompts",
+        "description": "langchain.prompts",
+        "isExtraImport": true,
+        "detail": "langchain.prompts",
+        "documentation": {}
+    },
+    {
         "label": "ChatPromptTemplate",
         "importPath": "langchain.prompts",
         "description": "langchain.prompts",
@@ -112,6 +168,22 @@
         "documentation": {}
     },
     {
+        "label": "Chroma",
+        "importPath": "langchain_chroma",
+        "description": "langchain_chroma",
+        "isExtraImport": true,
+        "detail": "langchain_chroma",
+        "documentation": {}
+    },
+    {
+        "label": "ConversationBufferMemory",
+        "importPath": "langchain.memory",
+        "description": "langchain.memory",
+        "isExtraImport": true,
+        "detail": "langchain.memory",
+        "documentation": {}
+    },
+    {
         "label": "ConversationBufferMemory",
         "importPath": "langchain.memory",
         "description": "langchain.memory",
@@ -136,6 +208,38 @@
         "documentation": {}
     },
     {
+        "label": "HumanMessage",
+        "importPath": "langchain_core.messages",
+        "description": "langchain_core.messages",
+        "isExtraImport": true,
+        "detail": "langchain_core.messages",
+        "documentation": {}
+    },
+    {
+        "label": "AIMessage",
+        "importPath": "langchain_core.messages",
+        "description": "langchain_core.messages",
+        "isExtraImport": true,
+        "detail": "langchain_core.messages",
+        "documentation": {}
+    },
+    {
+        "label": "sleep",
+        "importPath": "time",
+        "description": "time",
+        "isExtraImport": true,
+        "detail": "time",
+        "documentation": {}
+    },
+    {
+        "label": "ChatMessageHistory",
+        "importPath": "langchain_community.chat_message_histories",
+        "description": "langchain_community.chat_message_histories",
+        "isExtraImport": true,
+        "detail": "langchain_community.chat_message_histories",
+        "documentation": {}
+    },
+    {
         "label": "ChatMessageHistory",
         "importPath": "langchain_community.chat_message_histories",
         "description": "langchain_community.chat_message_histories",
@@ -149,6 +253,46 @@
         "description": "sklearn.metrics.pairwise",
         "isExtraImport": true,
         "detail": "sklearn.metrics.pairwise",
+        "documentation": {}
+    },
+    {
+        "label": "cosine_similarity",
+        "importPath": "sklearn.metrics.pairwise",
+        "description": "sklearn.metrics.pairwise",
+        "isExtraImport": true,
+        "detail": "sklearn.metrics.pairwise",
+        "documentation": {}
+    },
+    {
+        "label": "CORSMiddleware",
+        "importPath": "fastapi.middleware.cors",
+        "description": "fastapi.middleware.cors",
+        "isExtraImport": true,
+        "detail": "fastapi.middleware.cors",
+        "documentation": {}
+    },
+    {
+        "label": "BaseModel",
+        "importPath": "pydantic",
+        "description": "pydantic",
+        "isExtraImport": true,
+        "detail": "pydantic",
+        "documentation": {}
+    },
+    {
+        "label": "FastAPI",
+        "importPath": "fastapi",
+        "description": "fastapi",
+        "isExtraImport": true,
+        "detail": "fastapi",
+        "documentation": {}
+    },
+    {
+        "label": "HTTPException",
+        "importPath": "fastapi",
+        "description": "fastapi",
+        "isExtraImport": true,
+        "detail": "fastapi",
         "documentation": {}
     },
     {
@@ -383,6 +527,159 @@
         "description": "casualBot",
         "peekOfCode": "chat_context = []\ndef handle_query(query):\n    chat_context.append((\"human\",query))\n    query_type = classify_query(query)\n    if query_type[\"status\"] == \"casual\":\n        # If casual, handle the query normally with LLM\n        context = 'friendly chat '\n        casual_prompt = chat_prompt.format(input=query,context=chat_context)\n        print(chat_context,\"\\n\")\n        docs = llm.invoke(casual_prompt)",
         "detail": "casualBot",
+        "documentation": {}
+    },
+    {
+        "label": "QueryRequest",
+        "kind": 6,
+        "importPath": "endpoint",
+        "description": "endpoint",
+        "peekOfCode": "class QueryRequest(BaseModel):\n    question: str\n@app.post(\"/test\")\nasync def ask_query(request: QueryRequest):\n    query = request.question\n    chat_context = [(\"human\", query)]\n    query_type = classify_query(query)\n    if query_type[\"status\"] == \"casual\":\n        context = 'friendly chat'\n        casual_prompt = f\"\"\"",
+        "detail": "endpoint",
+        "documentation": {}
+    },
+    {
+        "label": "classify_query",
+        "kind": 2,
+        "importPath": "endpoint",
+        "description": "endpoint",
+        "peekOfCode": "def classify_query(query):\n    # Embed the query\n    query_embedding = embedding_model.embed_documents([query])\n    # Calculate similarities\n    legal_similarity = cosine_similarity(query_embedding, legal_embeddings)\n    casual_similarity = cosine_similarity(query_embedding, casual_embeddings)\n    # Get the maximum similarity score for legal and casual categories\n    max_legal_similarity = max(legal_similarity[0])\n    max_casual_similarity = max(casual_similarity[0])\n    # Set a threshold for classifying the query",
+        "detail": "endpoint",
+        "documentation": {}
+    },
+    {
+        "label": "llm",
+        "kind": 5,
+        "importPath": "endpoint",
+        "description": "endpoint",
+        "peekOfCode": "llm = ChatOllama(model=\"llama3.1\",temperature=0.7,)\napp = FastAPI()\nembedding_model = OllamaEmbeddings(model=\"llama3.1\")\n# uploading the pdf\nprint(\"uploaded the pdf\")\n# memory = ChatMessageHistory(memory_key=\"chat_history\", return_messages=True)\npdf_reader = PyPDFLoader(\"../Backend/assets/ipc.pdf\")\ndocuments = pdf_reader.load_and_split()\napp.add_middleware(\n    CORSMiddleware,",
+        "detail": "endpoint",
+        "documentation": {}
+    },
+    {
+        "label": "app",
+        "kind": 5,
+        "importPath": "endpoint",
+        "description": "endpoint",
+        "peekOfCode": "app = FastAPI()\nembedding_model = OllamaEmbeddings(model=\"llama3.1\")\n# uploading the pdf\nprint(\"uploaded the pdf\")\n# memory = ChatMessageHistory(memory_key=\"chat_history\", return_messages=True)\npdf_reader = PyPDFLoader(\"../Backend/assets/ipc.pdf\")\ndocuments = pdf_reader.load_and_split()\napp.add_middleware(\n    CORSMiddleware,\n    allow_origins=[\"http://localhost:8080\"],  # Update this with your frontend URL",
+        "detail": "endpoint",
+        "documentation": {}
+    },
+    {
+        "label": "embedding_model",
+        "kind": 5,
+        "importPath": "endpoint",
+        "description": "endpoint",
+        "peekOfCode": "embedding_model = OllamaEmbeddings(model=\"llama3.1\")\n# uploading the pdf\nprint(\"uploaded the pdf\")\n# memory = ChatMessageHistory(memory_key=\"chat_history\", return_messages=True)\npdf_reader = PyPDFLoader(\"../Backend/assets/ipc.pdf\")\ndocuments = pdf_reader.load_and_split()\napp.add_middleware(\n    CORSMiddleware,\n    allow_origins=[\"http://localhost:8080\"],  # Update this with your frontend URL\n    allow_credentials=True,",
+        "detail": "endpoint",
+        "documentation": {}
+    },
+    {
+        "label": "pdf_reader",
+        "kind": 5,
+        "importPath": "endpoint",
+        "description": "endpoint",
+        "peekOfCode": "pdf_reader = PyPDFLoader(\"../Backend/assets/ipc.pdf\")\ndocuments = pdf_reader.load_and_split()\napp.add_middleware(\n    CORSMiddleware,\n    allow_origins=[\"http://localhost:8080\"],  # Update this with your frontend URL\n    allow_credentials=True,\n    allow_methods=[\"*\"],\n    allow_headers=[\"*\"],\n)\nchat_prompt = PromptTemplate.from_template(",
+        "detail": "endpoint",
+        "documentation": {}
+    },
+    {
+        "label": "documents",
+        "kind": 5,
+        "importPath": "endpoint",
+        "description": "endpoint",
+        "peekOfCode": "documents = pdf_reader.load_and_split()\napp.add_middleware(\n    CORSMiddleware,\n    allow_origins=[\"http://localhost:8080\"],  # Update this with your frontend URL\n    allow_credentials=True,\n    allow_methods=[\"*\"],\n    allow_headers=[\"*\"],\n)\nchat_prompt = PromptTemplate.from_template(\n        \"\"\"",
+        "detail": "endpoint",
+        "documentation": {}
+    },
+    {
+        "label": "chat_prompt",
+        "kind": 5,
+        "importPath": "endpoint",
+        "description": "endpoint",
+        "peekOfCode": "chat_prompt = PromptTemplate.from_template(\n        \"\"\"\n        You are an AI Legal Assistant Skilled in Indian Law,Your name is LexAi ,Also you are a very Friendly Chat Bot .\n        So for each user query provide ACCURATE,USEFUL,THOUGHTFUL Response.\n        also if the user intends to do normal Chatting ; initiate in friendly chatting too,\n        But Remind them of your PURPOSE and ROLE if the user initiates only FRIENDLY CHAT and compel them to engage in Asking LEGAL QUERIES\n        on Indian Peanal Code\n        Question: {input},\n        Context: {context},\n        Response:",
+        "detail": "endpoint",
+        "documentation": {}
+    },
+    {
+        "label": "legal_check_template",
+        "kind": 5,
+        "importPath": "endpoint",
+        "description": "endpoint",
+        "peekOfCode": "legal_check_template = ChatPromptTemplate.from_template(\n    \"\"\"\n    You are an AI Legal Assistant. A legal question typically contains terms related to laws, sections, or legal topics.\n    A query like 'Can you explain Section 420 of IPC?' is a legal query.\n    \"\"\"\n)\nprint(\"creating the text splitter\")\ntext_splitter = RecursiveCharacterTextSplitter(\n    chunk_size=1024, chunk_overlap=200, length_function=len\n)",
+        "detail": "endpoint",
+        "documentation": {}
+    },
+    {
+        "label": "text_splitter",
+        "kind": 5,
+        "importPath": "endpoint",
+        "description": "endpoint",
+        "peekOfCode": "text_splitter = RecursiveCharacterTextSplitter(\n    chunk_size=1024, chunk_overlap=200, length_function=len\n)\n# creating the chunks\nprint(\"creating the chunks\")\nchunks = text_splitter.split_documents(documents)\nprint(\"creating chroma db\")\nvector_store = Chroma(persist_directory=\"db\", embedding_function=embedding_model)\nprint(\"Chroma DB loaded successfully\")\nexamples = {",
+        "detail": "endpoint",
+        "documentation": {}
+    },
+    {
+        "label": "chunks",
+        "kind": 5,
+        "importPath": "endpoint",
+        "description": "endpoint",
+        "peekOfCode": "chunks = text_splitter.split_documents(documents)\nprint(\"creating chroma db\")\nvector_store = Chroma(persist_directory=\"db\", embedding_function=embedding_model)\nprint(\"Chroma DB loaded successfully\")\nexamples = {\n    \"legal\": [\n        \"What is Section 420 of the Indian Penal Code?\",\n        \"Can you explain the punishment for theft under IPC?\",\n        # \"Tell me about bail provisions in Indian law.\",\n        # \"What are the laws regarding domestic violence?\",",
+        "detail": "endpoint",
+        "documentation": {}
+    },
+    {
+        "label": "vector_store",
+        "kind": 5,
+        "importPath": "endpoint",
+        "description": "endpoint",
+        "peekOfCode": "vector_store = Chroma(persist_directory=\"db\", embedding_function=embedding_model)\nprint(\"Chroma DB loaded successfully\")\nexamples = {\n    \"legal\": [\n        \"What is Section 420 of the Indian Penal Code?\",\n        \"Can you explain the punishment for theft under IPC?\",\n        # \"Tell me about bail provisions in Indian law.\",\n        # \"What are the laws regarding domestic violence?\",\n        # \"How do I file a complaint for defamation?\",\n        # \"What is the penalty for cybercrime in India?\",",
+        "detail": "endpoint",
+        "documentation": {}
+    },
+    {
+        "label": "examples",
+        "kind": 5,
+        "importPath": "endpoint",
+        "description": "endpoint",
+        "peekOfCode": "examples = {\n    \"legal\": [\n        \"What is Section 420 of the Indian Penal Code?\",\n        \"Can you explain the punishment for theft under IPC?\",\n        # \"Tell me about bail provisions in Indian law.\",\n        # \"What are the laws regarding domestic violence?\",\n        # \"How do I file a complaint for defamation?\",\n        # \"What is the penalty for cybercrime in India?\",\n        # \"Explain the law on trespassing in India.\",\n        # \"What are the conditions for anticipatory bail?\",",
+        "detail": "endpoint",
+        "documentation": {}
+    },
+    {
+        "label": "threshold",
+        "kind": 5,
+        "importPath": "endpoint",
+        "description": "endpoint",
+        "peekOfCode": "threshold = 1.4\n# Embed all legal and casual sentences from the dictionary\nlegal_embeddings = embedding_model.embed_documents(examples[\"legal\"])\ncasual_embeddings = embedding_model.embed_documents(examples[\"casual\"])\n# Function to calculate similarity with the dictionary\ndef classify_query(query):\n    # Embed the query\n    query_embedding = embedding_model.embed_documents([query])\n    # Calculate similarities\n    legal_similarity = cosine_similarity(query_embedding, legal_embeddings)",
+        "detail": "endpoint",
+        "documentation": {}
+    },
+    {
+        "label": "legal_embeddings",
+        "kind": 5,
+        "importPath": "endpoint",
+        "description": "endpoint",
+        "peekOfCode": "legal_embeddings = embedding_model.embed_documents(examples[\"legal\"])\ncasual_embeddings = embedding_model.embed_documents(examples[\"casual\"])\n# Function to calculate similarity with the dictionary\ndef classify_query(query):\n    # Embed the query\n    query_embedding = embedding_model.embed_documents([query])\n    # Calculate similarities\n    legal_similarity = cosine_similarity(query_embedding, legal_embeddings)\n    casual_similarity = cosine_similarity(query_embedding, casual_embeddings)\n    # Get the maximum similarity score for legal and casual categories",
+        "detail": "endpoint",
+        "documentation": {}
+    },
+    {
+        "label": "casual_embeddings",
+        "kind": 5,
+        "importPath": "endpoint",
+        "description": "endpoint",
+        "peekOfCode": "casual_embeddings = embedding_model.embed_documents(examples[\"casual\"])\n# Function to calculate similarity with the dictionary\ndef classify_query(query):\n    # Embed the query\n    query_embedding = embedding_model.embed_documents([query])\n    # Calculate similarities\n    legal_similarity = cosine_similarity(query_embedding, legal_embeddings)\n    casual_similarity = cosine_similarity(query_embedding, casual_embeddings)\n    # Get the maximum similarity score for legal and casual categories\n    max_legal_similarity = max(legal_similarity[0])",
+        "detail": "endpoint",
+        "documentation": {}
+    },
+    {
+        "label": "chat_context",
+        "kind": 5,
+        "importPath": "endpoint",
+        "description": "endpoint",
+        "peekOfCode": "chat_context = []\nclass QueryRequest(BaseModel):\n    question: str\n@app.post(\"/test\")\nasync def ask_query(request: QueryRequest):\n    query = request.question\n    chat_context = [(\"human\", query)]\n    query_type = classify_query(query)\n    if query_type[\"status\"] == \"casual\":\n        context = 'friendly chat'",
+        "detail": "endpoint",
         "documentation": {}
     }
 ]
