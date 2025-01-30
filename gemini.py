@@ -1,36 +1,39 @@
+import google.generativeai as genai
+from langchain_google_genai import ChatGoogleGenerativeAI
+from langchain_google_genai import GoogleGenerativeAIEmbeddings
 from langchain_community.document_loaders import PyPDFLoader
 from langchain.text_splitter import RecursiveCharacterTextSplitter
-from langchain_ollama import ChatOllama
-from langchain_ollama import OllamaEmbeddings
-from langchain_chroma import Chroma
-from langchain_ollama.llms import OllamaLLM
 from langchain.prompts import PromptTemplate
+from langchain_chroma import Chroma
 from langchain.prompts import ChatPromptTemplate
-from fastapi.middleware.cors import CORSMiddleware
-from langchain.memory import ConversationBufferMemory
-from langchain_core.messages import HumanMessage,AIMessage
-from langchain_community.chat_message_histories import ChatMessageHistory
+from time import sleep
 from sklearn.metrics.pairwise import cosine_similarity
-from pydantic import BaseModel
-from fastapi import FastAPI, HTTPException
 from summarisation import summariseChat
-llm = ChatOllama(model="llama3.1",temperature=0.7,)
-app = FastAPI()
-embedding_model = OllamaEmbeddings(model="llama3.1")
+import getpass
+import os
+import os
+from dotenv import load_dotenv
+import pydantic
+
+# Ensure compatibility
+
+load_dotenv()
+print("primary check point")
+
+llm = ChatGoogleGenerativeAI(
+    model="gemini-1.5-pro",
+    temperature=0.7,
+    # other params...
+)
+embedding_model = GoogleGenerativeAIEmbeddings(model="models/embedding-001")
 # uploading the pdf
-print("uploaded the pdf")
-# memory = ChatMessageHistory(memory_key="chat_history", return_messages=True)
 
 pdf_reader = PyPDFLoader("../Backend/assets/ipc.pdf")
+print("uploaded the pdf")
+
 documents = pdf_reader.load_and_split()
 
-app.add_middleware(
-    CORSMiddleware,
-    allow_origins=["http://localhost:8080"],  # Update this with your frontend URL
-    allow_credentials=True,
-    allow_methods=["*"],
-    allow_headers=["*"],
-)
+
 
 
 chat_prompt = PromptTemplate.from_template(
@@ -39,7 +42,9 @@ chat_prompt = PromptTemplate.from_template(
         So for each user query provide ACCURATE,USEFUL,THOUGHTFUL Response.
         also if the user intends to do normal Chatting ; initiate in friendly chatting too,
         But Remind them of your PURPOSE and ROLE if the user initiates only FRIENDLY CHAT and compel them to engage in Asking LEGAL QUERIES
-        on Indian Peanal Code
+        on Indian Peanal Code,
+        Also Introduce only once ; Analyse the given context and Dont introduce yourself again if you have already introduced yourself previously in the context .
+        No need to mention previous replies unless asked . keep in mind of the current question and answer only it based on the context 
         Question: {input},
         Context: {context},
         Response:
@@ -167,43 +172,13 @@ def classify_query(query):
 print("sample check point")
 
 chat_context = []
-class QueryRequest(BaseModel):
-    question: str
-@app.post("/test")
-async def ask_query(request: QueryRequest):
-    query = request.question
-    chat_context = [("human", query)]
 
-    query_type = classify_query(query)
-    if query_type["status"] == "casual":
-        context = 'friendly chat'
-        casual_prompt = f"""
-        You are an AI Legal Assistant Skilled in Indian Law, Your name is LexAi. Also, you are a very Friendly Chat Bot.
-        Question: {query},
-        Context: {context},
-        Response:
-        """
-        response = llm.invoke(casual_prompt)
-        chat_context.append(("ai", response.content))
-    else:
-        relevant_docs = vector_store.similarity_search_with_score(query, k=10)
-        context = "".join([doc[0].page_content for doc in relevant_docs])
-        full_prompt = f"""
-        You are an AI Legal Assistant Skilled in Indian Law, Your name is LexAi. Also, you are a very Friendly Chat Bot.
-        Question: {query},
-        Context: {context},
-        Response:
-        """
-        response = llm.invoke(full_prompt)
-        chat_context.append(("ai", response.content))
+def handle_query(query):
 
-    return {"response": response.content, "status": "success"}
-
-@app.post('/ask')
-async def handle_query(request:QueryRequest):
-    query = request.question
     chat_context.append(("human",query))
+
     query_type = classify_query(query)
+
     if query_type["status"] == "casual":
         # If casual, handle the query normally with LLM
         context = 'friendly chat '
@@ -219,13 +194,25 @@ async def handle_query(request:QueryRequest):
         full_prompt = chat_prompt.format(input=query, context=context)
         docs = llm.invoke(full_prompt)
         chat_context.append(("ai",docs.content))
-    print("Response sent Successfully")
-    print(f"response : {docs.content}")
-    return {"response": docs.content, "status": "success"}
 
-@app.get('/summary')
-async def handle_summary():
-    chat_summary = summariseChat(chat_context)
-    chat_context.clear()
-    print("response sent successfully")
-    return {"response":chat_summary,"status":"success"}
+    return docs.content
+    
+
+while True:
+    query = input("Enter the Question : ")
+    if query.lower() == "bye":
+        break
+    elif query.lower() == "hi..":
+        sleep(4)
+        print("\nAI Response:\n")
+        print("Heyy my lil nigga . wassup")
+    else:
+        response = handle_query(query)
+        print("\nAI Response:\n")
+        print(response)
+        print("\n------------------------------------\n")
+
+chat_summary = summariseChat(chat_context)
+print(chat_summary)
+
+

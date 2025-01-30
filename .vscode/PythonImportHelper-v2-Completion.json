@@ -24,6 +24,38 @@
         "documentation": {}
     },
     {
+        "label": "PyPDFLoader",
+        "importPath": "langchain_community.document_loaders",
+        "description": "langchain_community.document_loaders",
+        "isExtraImport": true,
+        "detail": "langchain_community.document_loaders",
+        "documentation": {}
+    },
+    {
+        "label": "PyPDFLoader",
+        "importPath": "langchain_community.document_loaders",
+        "description": "langchain_community.document_loaders",
+        "isExtraImport": true,
+        "detail": "langchain_community.document_loaders",
+        "documentation": {}
+    },
+    {
+        "label": "PyPDFLoader",
+        "importPath": "langchain_community.document_loaders",
+        "description": "langchain_community.document_loaders",
+        "isExtraImport": true,
+        "detail": "langchain_community.document_loaders",
+        "documentation": {}
+    },
+    {
+        "label": "RecursiveCharacterTextSplitter",
+        "importPath": "langchain.text_splitter",
+        "description": "langchain.text_splitter",
+        "isExtraImport": true,
+        "detail": "langchain.text_splitter",
+        "documentation": {}
+    },
+    {
         "label": "RecursiveCharacterTextSplitter",
         "importPath": "langchain.text_splitter",
         "description": "langchain.text_splitter",
@@ -45,6 +77,38 @@
         "description": "langchain.text_splitter",
         "isExtraImport": true,
         "detail": "langchain.text_splitter",
+        "documentation": {}
+    },
+    {
+        "label": "RecursiveCharacterTextSplitter",
+        "importPath": "langchain.text_splitter",
+        "description": "langchain.text_splitter",
+        "isExtraImport": true,
+        "detail": "langchain.text_splitter",
+        "documentation": {}
+    },
+    {
+        "label": "RecursiveCharacterTextSplitter",
+        "importPath": "langchain.text_splitter",
+        "description": "langchain.text_splitter",
+        "isExtraImport": true,
+        "detail": "langchain.text_splitter",
+        "documentation": {}
+    },
+    {
+        "label": "OllamaEmbeddings",
+        "importPath": "langchain_ollama",
+        "description": "langchain_ollama",
+        "isExtraImport": true,
+        "detail": "langchain_ollama",
+        "documentation": {}
+    },
+    {
+        "label": "ChatOllama",
+        "importPath": "langchain_ollama",
+        "description": "langchain_ollama",
+        "isExtraImport": true,
+        "detail": "langchain_ollama",
         "documentation": {}
     },
     {
@@ -96,6 +160,22 @@
         "documentation": {}
     },
     {
+        "label": "Chroma",
+        "importPath": "langchain_community.vectorstores",
+        "description": "langchain_community.vectorstores",
+        "isExtraImport": true,
+        "detail": "langchain_community.vectorstores",
+        "documentation": {}
+    },
+    {
+        "label": "OllamaLLM",
+        "importPath": "langchain_ollama.llms",
+        "description": "langchain_ollama.llms",
+        "isExtraImport": true,
+        "detail": "langchain_ollama.llms",
+        "documentation": {}
+    },
+    {
         "label": "OllamaLLM",
         "importPath": "langchain_ollama.llms",
         "description": "langchain_ollama.llms",
@@ -160,6 +240,46 @@
         "documentation": {}
     },
     {
+        "label": "PromptTemplate",
+        "importPath": "langchain.prompts",
+        "description": "langchain.prompts",
+        "isExtraImport": true,
+        "detail": "langchain.prompts",
+        "documentation": {}
+    },
+    {
+        "label": "ChatPromptTemplate",
+        "importPath": "langchain.prompts",
+        "description": "langchain.prompts",
+        "isExtraImport": true,
+        "detail": "langchain.prompts",
+        "documentation": {}
+    },
+    {
+        "label": "PromptTemplate",
+        "importPath": "langchain.prompts",
+        "description": "langchain.prompts",
+        "isExtraImport": true,
+        "detail": "langchain.prompts",
+        "documentation": {}
+    },
+    {
+        "label": "ChatPromptTemplate",
+        "importPath": "langchain.prompts",
+        "description": "langchain.prompts",
+        "isExtraImport": true,
+        "detail": "langchain.prompts",
+        "documentation": {}
+    },
+    {
+        "label": "ChatPromptTemplate",
+        "importPath": "langchain.prompts",
+        "description": "langchain.prompts",
+        "isExtraImport": true,
+        "detail": "langchain.prompts",
+        "documentation": {}
+    },
+    {
         "label": "Chroma",
         "importPath": "langchain_chroma",
         "description": "langchain_chroma",
@@ -173,6 +293,30 @@
         "description": "langchain_chroma",
         "isExtraImport": true,
         "detail": "langchain_chroma",
+        "documentation": {}
+    },
+    {
+        "label": "Chroma",
+        "importPath": "langchain_chroma",
+        "description": "langchain_chroma",
+        "isExtraImport": true,
+        "detail": "langchain_chroma",
+        "documentation": {}
+    },
+    {
+        "label": "Chroma",
+        "importPath": "langchain_chroma",
+        "description": "langchain_chroma",
+        "isExtraImport": true,
+        "detail": "langchain_chroma",
+        "documentation": {}
+    },
+    {
+        "label": "ConversationBufferMemory",
+        "importPath": "langchain.memory",
+        "description": "langchain.memory",
+        "isExtraImport": true,
+        "detail": "langchain.memory",
         "documentation": {}
     },
     {
@@ -221,6 +365,39 @@
         "description": "langchain_core.messages",
         "isExtraImport": true,
         "detail": "langchain_core.messages",
+        "documentation": {}
+    },
+    {
+        "label": "HumanMessage",
+        "importPath": "langchain_core.messages",
+        "description": "langchain_core.messages",
+        "isExtraImport": true,
+        "detail": "langchain_core.messages",
+        "documentation": {}
+    },
+    {
+        "label": "AIMessage",
+        "importPath": "langchain_core.messages",
+        "description": "langchain_core.messages",
+        "isExtraImport": true,
+        "detail": "langchain_core.messages",
+        "documentation": {}
+    },
+    {
+        "label": "time",
+        "kind": 6,
+        "isExtraImport": true,
+        "importPath": "time",
+        "description": "time",
+        "detail": "time",
+        "documentation": {}
+    },
+    {
+        "label": "sleep",
+        "importPath": "time",
+        "description": "time",
+        "isExtraImport": true,
+        "detail": "time",
         "documentation": {}
     },
     {
@@ -248,6 +425,14 @@
         "documentation": {}
     },
     {
+        "label": "ChatMessageHistory",
+        "importPath": "langchain_community.chat_message_histories",
+        "description": "langchain_community.chat_message_histories",
+        "isExtraImport": true,
+        "detail": "langchain_community.chat_message_histories",
+        "documentation": {}
+    },
+    {
         "label": "cosine_similarity",
         "importPath": "sklearn.metrics.pairwise",
         "description": "sklearn.metrics.pairwise",
@@ -261,6 +446,46 @@
         "description": "sklearn.metrics.pairwise",
         "isExtraImport": true,
         "detail": "sklearn.metrics.pairwise",
+        "documentation": {}
+    },
+    {
+        "label": "cosine_similarity",
+        "importPath": "sklearn.metrics.pairwise",
+        "description": "sklearn.metrics.pairwise",
+        "isExtraImport": true,
+        "detail": "sklearn.metrics.pairwise",
+        "documentation": {}
+    },
+    {
+        "label": "cosine_similarity",
+        "importPath": "sklearn.metrics.pairwise",
+        "description": "sklearn.metrics.pairwise",
+        "isExtraImport": true,
+        "detail": "sklearn.metrics.pairwise",
+        "documentation": {}
+    },
+    {
+        "label": "summariseChat",
+        "importPath": "summarisation",
+        "description": "summarisation",
+        "isExtraImport": true,
+        "detail": "summarisation",
+        "documentation": {}
+    },
+    {
+        "label": "summariseChat",
+        "importPath": "summarisation",
+        "description": "summarisation",
+        "isExtraImport": true,
+        "detail": "summarisation",
+        "documentation": {}
+    },
+    {
+        "label": "summariseChat",
+        "importPath": "summarisation",
+        "description": "summarisation",
+        "isExtraImport": true,
+        "detail": "summarisation",
         "documentation": {}
     },
     {
@@ -269,6 +494,15 @@
         "description": "fastapi.middleware.cors",
         "isExtraImport": true,
         "detail": "fastapi.middleware.cors",
+        "documentation": {}
+    },
+    {
+        "label": "pydantic",
+        "kind": 6,
+        "isExtraImport": true,
+        "importPath": "pydantic",
+        "description": "pydantic",
+        "detail": "pydantic",
         "documentation": {}
     },
     {
@@ -293,6 +527,90 @@
         "description": "fastapi",
         "isExtraImport": true,
         "detail": "fastapi",
+        "documentation": {}
+    },
+    {
+        "label": "google.generativeai",
+        "kind": 6,
+        "isExtraImport": true,
+        "importPath": "google.generativeai",
+        "description": "google.generativeai",
+        "detail": "google.generativeai",
+        "documentation": {}
+    },
+    {
+        "label": "ChatGoogleGenerativeAI",
+        "importPath": "langchain_google_genai",
+        "description": "langchain_google_genai",
+        "isExtraImport": true,
+        "detail": "langchain_google_genai",
+        "documentation": {}
+    },
+    {
+        "label": "GoogleGenerativeAIEmbeddings",
+        "importPath": "langchain_google_genai",
+        "description": "langchain_google_genai",
+        "isExtraImport": true,
+        "detail": "langchain_google_genai",
+        "documentation": {}
+    },
+    {
+        "label": "ChatGoogleGenerativeAI",
+        "importPath": "langchain_google_genai",
+        "description": "langchain_google_genai",
+        "isExtraImport": true,
+        "detail": "langchain_google_genai",
+        "documentation": {}
+    },
+    {
+        "label": "GoogleGenerativeAIEmbeddings",
+        "importPath": "langchain_google_genai",
+        "description": "langchain_google_genai",
+        "isExtraImport": true,
+        "detail": "langchain_google_genai",
+        "documentation": {}
+    },
+    {
+        "label": "getpass",
+        "kind": 6,
+        "isExtraImport": true,
+        "importPath": "getpass",
+        "description": "getpass",
+        "detail": "getpass",
+        "documentation": {}
+    },
+    {
+        "label": "os",
+        "kind": 6,
+        "isExtraImport": true,
+        "importPath": "os",
+        "description": "os",
+        "detail": "os",
+        "documentation": {}
+    },
+    {
+        "label": "load_dotenv",
+        "importPath": "dotenv",
+        "description": "dotenv",
+        "isExtraImport": true,
+        "detail": "dotenv",
+        "documentation": {}
+    },
+    {
+        "label": "load_dotenv",
+        "importPath": "dotenv",
+        "description": "dotenv",
+        "isExtraImport": true,
+        "detail": "dotenv",
+        "documentation": {}
+    },
+    {
+        "label": "spacy",
+        "kind": 6,
+        "isExtraImport": true,
+        "importPath": "spacy",
+        "description": "spacy",
+        "detail": "spacy",
         "documentation": {}
     },
     {
@@ -426,7 +744,7 @@
         "kind": 5,
         "importPath": "casualBot",
         "description": "casualBot",
-        "peekOfCode": "pdf_reader = PyPDFLoader(\"../Backend/assets/ipc.pdf\")\ndocuments = pdf_reader.load_and_split()\nchat_prompt = PromptTemplate.from_template(\n        \"\"\"\n        You are an AI Legal Assistant Skilled in Indian Law,Your name is LexAi ,Also you are a very Friendly Chat Bot .\n        So for each user query provide ACCURATE,USEFUL,THOUGHTFUL Response.\n        also if the user intends to do normal Chatting ; initiate in friendly chatting too,\n        But Remind them of your PURPOSE and ROLE if the user initiates only FRIENDLY CHAT and compel them to engage in Asking LEGAL QUERIES\n        on Indian Peanal Code\n        Question: {input},",
+        "peekOfCode": "pdf_reader = PyPDFLoader(\"../Backend/assets/ipc.pdf\")\ndocuments = pdf_reader.load_and_split()\nchat_prompt = PromptTemplate.from_template(\n        \"\"\"\n        You are an AI Legal Assistant Skilled in Indian Law,Your name is LexAi ,Also you are a very Friendly Chat Bot .\n        So for each user query provide ACCURATE,USEFUL,THOUGHTFUL Response.\n        also if the user intends to do normal Chatting ; initiate in friendly chatting too,\n        But Remind them of your PURPOSE and ROLE if the user initiates only FRIENDLY CHAT and compel them to engage in Asking LEGAL QUERIES\n        on Indian Peanal Code,\n        Also Introduce only once ; Analyse the given context and Dont introduce yourself again if you have already introduced yourself previously in the context .",
         "detail": "casualBot",
         "documentation": {}
     },
@@ -435,7 +753,7 @@
         "kind": 5,
         "importPath": "casualBot",
         "description": "casualBot",
-        "peekOfCode": "documents = pdf_reader.load_and_split()\nchat_prompt = PromptTemplate.from_template(\n        \"\"\"\n        You are an AI Legal Assistant Skilled in Indian Law,Your name is LexAi ,Also you are a very Friendly Chat Bot .\n        So for each user query provide ACCURATE,USEFUL,THOUGHTFUL Response.\n        also if the user intends to do normal Chatting ; initiate in friendly chatting too,\n        But Remind them of your PURPOSE and ROLE if the user initiates only FRIENDLY CHAT and compel them to engage in Asking LEGAL QUERIES\n        on Indian Peanal Code\n        Question: {input},\n        Context: {context},",
+        "peekOfCode": "documents = pdf_reader.load_and_split()\nchat_prompt = PromptTemplate.from_template(\n        \"\"\"\n        You are an AI Legal Assistant Skilled in Indian Law,Your name is LexAi ,Also you are a very Friendly Chat Bot .\n        So for each user query provide ACCURATE,USEFUL,THOUGHTFUL Response.\n        also if the user intends to do normal Chatting ; initiate in friendly chatting too,\n        But Remind them of your PURPOSE and ROLE if the user initiates only FRIENDLY CHAT and compel them to engage in Asking LEGAL QUERIES\n        on Indian Peanal Code,\n        Also Introduce only once ; Analyse the given context and Dont introduce yourself again if you have already introduced yourself previously in the context .\n        No need to mention previous replies unless asked . keep in mind of the current question and answer only it based on the context ",
         "detail": "casualBot",
         "documentation": {}
     },
@@ -444,7 +762,7 @@
         "kind": 5,
         "importPath": "casualBot",
         "description": "casualBot",
-        "peekOfCode": "chat_prompt = PromptTemplate.from_template(\n        \"\"\"\n        You are an AI Legal Assistant Skilled in Indian Law,Your name is LexAi ,Also you are a very Friendly Chat Bot .\n        So for each user query provide ACCURATE,USEFUL,THOUGHTFUL Response.\n        also if the user intends to do normal Chatting ; initiate in friendly chatting too,\n        But Remind them of your PURPOSE and ROLE if the user initiates only FRIENDLY CHAT and compel them to engage in Asking LEGAL QUERIES\n        on Indian Peanal Code\n        Question: {input},\n        Context: {context},\n        Response:",
+        "peekOfCode": "chat_prompt = PromptTemplate.from_template(\n        \"\"\"\n        You are an AI Legal Assistant Skilled in Indian Law,Your name is LexAi ,Also you are a very Friendly Chat Bot .\n        So for each user query provide ACCURATE,USEFUL,THOUGHTFUL Response.\n        also if the user intends to do normal Chatting ; initiate in friendly chatting too,\n        But Remind them of your PURPOSE and ROLE if the user initiates only FRIENDLY CHAT and compel them to engage in Asking LEGAL QUERIES\n        on Indian Peanal Code,\n        Also Introduce only once ; Analyse the given context and Dont introduce yourself again if you have already introduced yourself previously in the context .\n        No need to mention previous replies unless asked . keep in mind of the current question and answer only it based on the context \n        Question: {input},",
         "detail": "casualBot",
         "documentation": {}
     },
@@ -526,6 +844,15 @@
         "importPath": "casualBot",
         "description": "casualBot",
         "peekOfCode": "chat_context = []\ndef handle_query(query):\n    chat_context.append((\"human\",query))\n    query_type = classify_query(query)\n    if query_type[\"status\"] == \"casual\":\n        # If casual, handle the query normally with LLM\n        context = 'friendly chat '\n        casual_prompt = chat_prompt.format(input=query,context=chat_context)\n        print(chat_context,\"\\n\")\n        docs = llm.invoke(casual_prompt)",
+        "detail": "casualBot",
+        "documentation": {}
+    },
+    {
+        "label": "chat_summary",
+        "kind": 5,
+        "importPath": "casualBot",
+        "description": "casualBot",
+        "peekOfCode": "chat_summary = summariseChat(chat_context)\nprint(chat_summary)",
         "detail": "casualBot",
         "documentation": {}
     },
@@ -680,6 +1007,321 @@
         "description": "endpoint",
         "peekOfCode": "chat_context = []\nclass QueryRequest(BaseModel):\n    question: str\n@app.post(\"/test\")\nasync def ask_query(request: QueryRequest):\n    query = request.question\n    chat_context = [(\"human\", query)]\n    query_type = classify_query(query)\n    if query_type[\"status\"] == \"casual\":\n        context = 'friendly chat'",
         "detail": "endpoint",
+        "documentation": {}
+    },
+    {
+        "label": "classify_query",
+        "kind": 2,
+        "importPath": "gemini",
+        "description": "gemini",
+        "peekOfCode": "def classify_query(query):\n    # Embed the query\n    query_embedding = embedding_model.embed_documents([query])\n    # Calculate similarities\n    legal_similarity = cosine_similarity(query_embedding, legal_embeddings)\n    casual_similarity = cosine_similarity(query_embedding, casual_embeddings)\n    # Get the maximum similarity score for legal and casual categories\n    max_legal_similarity = max(legal_similarity[0])\n    max_casual_similarity = max(casual_similarity[0])\n    # Set a threshold for classifying the query",
+        "detail": "gemini",
+        "documentation": {}
+    },
+    {
+        "label": "handle_query",
+        "kind": 2,
+        "importPath": "gemini",
+        "description": "gemini",
+        "peekOfCode": "def handle_query(query):\n    chat_context.append((\"human\",query))\n    query_type = classify_query(query)\n    if query_type[\"status\"] == \"casual\":\n        # If casual, handle the query normally with LLM\n        context = 'friendly chat '\n        casual_prompt = chat_prompt.format(input=query,context=chat_context)\n        print(chat_context,\"\\n\")\n        docs = llm.invoke(casual_prompt)\n        chat_context.append((\"ai\",docs.content))",
+        "detail": "gemini",
+        "documentation": {}
+    },
+    {
+        "label": "llm",
+        "kind": 5,
+        "importPath": "gemini",
+        "description": "gemini",
+        "peekOfCode": "llm = ChatGoogleGenerativeAI(\n    model=\"gemini-1.5-pro\",\n    temperature=0.7,\n    # other params...\n)\nembedding_model = GoogleGenerativeAIEmbeddings(model=\"models/embedding-001\")\n# uploading the pdf\npdf_reader = PyPDFLoader(\"../Backend/assets/ipc.pdf\")\nprint(\"uploaded the pdf\")\ndocuments = pdf_reader.load_and_split()",
+        "detail": "gemini",
+        "documentation": {}
+    },
+    {
+        "label": "embedding_model",
+        "kind": 5,
+        "importPath": "gemini",
+        "description": "gemini",
+        "peekOfCode": "embedding_model = GoogleGenerativeAIEmbeddings(model=\"models/embedding-001\")\n# uploading the pdf\npdf_reader = PyPDFLoader(\"../Backend/assets/ipc.pdf\")\nprint(\"uploaded the pdf\")\ndocuments = pdf_reader.load_and_split()\nchat_prompt = PromptTemplate.from_template(\n        \"\"\"\n        You are an AI Legal Assistant Skilled in Indian Law,Your name is LexAi ,Also you are a very Friendly Chat Bot .\n        So for each user query provide ACCURATE,USEFUL,THOUGHTFUL Response.\n        also if the user intends to do normal Chatting ; initiate in friendly chatting too,",
+        "detail": "gemini",
+        "documentation": {}
+    },
+    {
+        "label": "pdf_reader",
+        "kind": 5,
+        "importPath": "gemini",
+        "description": "gemini",
+        "peekOfCode": "pdf_reader = PyPDFLoader(\"../Backend/assets/ipc.pdf\")\nprint(\"uploaded the pdf\")\ndocuments = pdf_reader.load_and_split()\nchat_prompt = PromptTemplate.from_template(\n        \"\"\"\n        You are an AI Legal Assistant Skilled in Indian Law,Your name is LexAi ,Also you are a very Friendly Chat Bot .\n        So for each user query provide ACCURATE,USEFUL,THOUGHTFUL Response.\n        also if the user intends to do normal Chatting ; initiate in friendly chatting too,\n        But Remind them of your PURPOSE and ROLE if the user initiates only FRIENDLY CHAT and compel them to engage in Asking LEGAL QUERIES\n        on Indian Peanal Code,",
+        "detail": "gemini",
+        "documentation": {}
+    },
+    {
+        "label": "documents",
+        "kind": 5,
+        "importPath": "gemini",
+        "description": "gemini",
+        "peekOfCode": "documents = pdf_reader.load_and_split()\nchat_prompt = PromptTemplate.from_template(\n        \"\"\"\n        You are an AI Legal Assistant Skilled in Indian Law,Your name is LexAi ,Also you are a very Friendly Chat Bot .\n        So for each user query provide ACCURATE,USEFUL,THOUGHTFUL Response.\n        also if the user intends to do normal Chatting ; initiate in friendly chatting too,\n        But Remind them of your PURPOSE and ROLE if the user initiates only FRIENDLY CHAT and compel them to engage in Asking LEGAL QUERIES\n        on Indian Peanal Code,\n        Also Introduce only once ; Analyse the given context and Dont introduce yourself again if you have already introduced yourself previously in the context .\n        No need to mention previous replies unless asked . keep in mind of the current question and answer only it based on the context ",
+        "detail": "gemini",
+        "documentation": {}
+    },
+    {
+        "label": "chat_prompt",
+        "kind": 5,
+        "importPath": "gemini",
+        "description": "gemini",
+        "peekOfCode": "chat_prompt = PromptTemplate.from_template(\n        \"\"\"\n        You are an AI Legal Assistant Skilled in Indian Law,Your name is LexAi ,Also you are a very Friendly Chat Bot .\n        So for each user query provide ACCURATE,USEFUL,THOUGHTFUL Response.\n        also if the user intends to do normal Chatting ; initiate in friendly chatting too,\n        But Remind them of your PURPOSE and ROLE if the user initiates only FRIENDLY CHAT and compel them to engage in Asking LEGAL QUERIES\n        on Indian Peanal Code,\n        Also Introduce only once ; Analyse the given context and Dont introduce yourself again if you have already introduced yourself previously in the context .\n        No need to mention previous replies unless asked . keep in mind of the current question and answer only it based on the context \n        Question: {input},",
+        "detail": "gemini",
+        "documentation": {}
+    },
+    {
+        "label": "legal_check_template",
+        "kind": 5,
+        "importPath": "gemini",
+        "description": "gemini",
+        "peekOfCode": "legal_check_template = ChatPromptTemplate.from_template(\n    \"\"\"\n    You are an AI Legal Assistant. A legal question typically contains terms related to laws, sections, or legal topics.\n    A query like 'Can you explain Section 420 of IPC?' is a legal query.\n    \"\"\"\n)\nprint(\"creating the text splitter\")\ntext_splitter = RecursiveCharacterTextSplitter(\n    chunk_size=1024, chunk_overlap=200, length_function=len\n)",
+        "detail": "gemini",
+        "documentation": {}
+    },
+    {
+        "label": "text_splitter",
+        "kind": 5,
+        "importPath": "gemini",
+        "description": "gemini",
+        "peekOfCode": "text_splitter = RecursiveCharacterTextSplitter(\n    chunk_size=1024, chunk_overlap=200, length_function=len\n)\n# creating the chunks\nprint(\"creating the chunks\")\nchunks = text_splitter.split_documents(documents)\nprint(\"creating chroma db\")\nvector_store = Chroma(persist_directory=\"db\", embedding_function=embedding_model)\nprint(\"Chroma DB loaded successfully\")\nexamples = {",
+        "detail": "gemini",
+        "documentation": {}
+    },
+    {
+        "label": "chunks",
+        "kind": 5,
+        "importPath": "gemini",
+        "description": "gemini",
+        "peekOfCode": "chunks = text_splitter.split_documents(documents)\nprint(\"creating chroma db\")\nvector_store = Chroma(persist_directory=\"db\", embedding_function=embedding_model)\nprint(\"Chroma DB loaded successfully\")\nexamples = {\n    \"legal\": [\n        \"What is Section 420 of the Indian Penal Code?\",\n        \"Can you explain the punishment for theft under IPC?\",\n        # \"Tell me about bail provisions in Indian law.\",\n        # \"What are the laws regarding domestic violence?\",",
+        "detail": "gemini",
+        "documentation": {}
+    },
+    {
+        "label": "vector_store",
+        "kind": 5,
+        "importPath": "gemini",
+        "description": "gemini",
+        "peekOfCode": "vector_store = Chroma(persist_directory=\"db\", embedding_function=embedding_model)\nprint(\"Chroma DB loaded successfully\")\nexamples = {\n    \"legal\": [\n        \"What is Section 420 of the Indian Penal Code?\",\n        \"Can you explain the punishment for theft under IPC?\",\n        # \"Tell me about bail provisions in Indian law.\",\n        # \"What are the laws regarding domestic violence?\",\n        # \"How do I file a complaint for defamation?\",\n        # \"What is the penalty for cybercrime in India?\",",
+        "detail": "gemini",
+        "documentation": {}
+    },
+    {
+        "label": "examples",
+        "kind": 5,
+        "importPath": "gemini",
+        "description": "gemini",
+        "peekOfCode": "examples = {\n    \"legal\": [\n        \"What is Section 420 of the Indian Penal Code?\",\n        \"Can you explain the punishment for theft under IPC?\",\n        # \"Tell me about bail provisions in Indian law.\",\n        # \"What are the laws regarding domestic violence?\",\n        # \"How do I file a complaint for defamation?\",\n        # \"What is the penalty for cybercrime in India?\",\n        # \"Explain the law on trespassing in India.\",\n        # \"What are the conditions for anticipatory bail?\",",
+        "detail": "gemini",
+        "documentation": {}
+    },
+    {
+        "label": "threshold",
+        "kind": 5,
+        "importPath": "gemini",
+        "description": "gemini",
+        "peekOfCode": "threshold = 1.4\n# Embed all legal and casual sentences from the dictionary\nlegal_embeddings = embedding_model.embed_documents(examples[\"legal\"])\ncasual_embeddings = embedding_model.embed_documents(examples[\"casual\"])\n# Function to calculate similarity with the dictionary\ndef classify_query(query):\n    # Embed the query\n    query_embedding = embedding_model.embed_documents([query])\n    # Calculate similarities\n    legal_similarity = cosine_similarity(query_embedding, legal_embeddings)",
+        "detail": "gemini",
+        "documentation": {}
+    },
+    {
+        "label": "legal_embeddings",
+        "kind": 5,
+        "importPath": "gemini",
+        "description": "gemini",
+        "peekOfCode": "legal_embeddings = embedding_model.embed_documents(examples[\"legal\"])\ncasual_embeddings = embedding_model.embed_documents(examples[\"casual\"])\n# Function to calculate similarity with the dictionary\ndef classify_query(query):\n    # Embed the query\n    query_embedding = embedding_model.embed_documents([query])\n    # Calculate similarities\n    legal_similarity = cosine_similarity(query_embedding, legal_embeddings)\n    casual_similarity = cosine_similarity(query_embedding, casual_embeddings)\n    # Get the maximum similarity score for legal and casual categories",
+        "detail": "gemini",
+        "documentation": {}
+    },
+    {
+        "label": "casual_embeddings",
+        "kind": 5,
+        "importPath": "gemini",
+        "description": "gemini",
+        "peekOfCode": "casual_embeddings = embedding_model.embed_documents(examples[\"casual\"])\n# Function to calculate similarity with the dictionary\ndef classify_query(query):\n    # Embed the query\n    query_embedding = embedding_model.embed_documents([query])\n    # Calculate similarities\n    legal_similarity = cosine_similarity(query_embedding, legal_embeddings)\n    casual_similarity = cosine_similarity(query_embedding, casual_embeddings)\n    # Get the maximum similarity score for legal and casual categories\n    max_legal_similarity = max(legal_similarity[0])",
+        "detail": "gemini",
+        "documentation": {}
+    },
+    {
+        "label": "chat_context",
+        "kind": 5,
+        "importPath": "gemini",
+        "description": "gemini",
+        "peekOfCode": "chat_context = []\ndef handle_query(query):\n    chat_context.append((\"human\",query))\n    query_type = classify_query(query)\n    if query_type[\"status\"] == \"casual\":\n        # If casual, handle the query normally with LLM\n        context = 'friendly chat '\n        casual_prompt = chat_prompt.format(input=query,context=chat_context)\n        print(chat_context,\"\\n\")\n        docs = llm.invoke(casual_prompt)",
+        "detail": "gemini",
+        "documentation": {}
+    },
+    {
+        "label": "chat_summary",
+        "kind": 5,
+        "importPath": "gemini",
+        "description": "gemini",
+        "peekOfCode": "chat_summary = summariseChat(chat_context)\nprint(chat_summary)",
+        "detail": "gemini",
+        "documentation": {}
+    },
+    {
+        "label": "summariseChat",
+        "kind": 2,
+        "importPath": "summarisation",
+        "description": "summarisation",
+        "peekOfCode": "def summariseChat(chat_history):\n    chat_as_text = '\\n'.join([f\"{role} : {message}\"for role,message in chat_history ])\n    summarised_prompt = summarisation_template.format(chat_history=chat_as_text)\n    return llm.invoke(summarised_prompt).content",
+        "detail": "summarisation",
+        "documentation": {}
+    },
+    {
+        "label": "start",
+        "kind": 5,
+        "importPath": "summarisation",
+        "description": "summarisation",
+        "peekOfCode": "start = time.time()\nllm = ChatOllama(\n    model=\"llama3.1\",\n    temperature=0.7,\n)\nembedding_model = OllamaEmbeddings(model=\"llama3.1\")\n# sample chat context\nnlp = spacy.load(\"en_core_web_sm\")\nchat_context = [\n    (\"human\", \"Hi there!\"),",
+        "detail": "summarisation",
+        "documentation": {}
+    },
+    {
+        "label": "llm",
+        "kind": 5,
+        "importPath": "summarisation",
+        "description": "summarisation",
+        "peekOfCode": "llm = ChatOllama(\n    model=\"llama3.1\",\n    temperature=0.7,\n)\nembedding_model = OllamaEmbeddings(model=\"llama3.1\")\n# sample chat context\nnlp = spacy.load(\"en_core_web_sm\")\nchat_context = [\n    (\"human\", \"Hi there!\"),\n    (\"ai\", \"Hello! How can I assist you today?\"),",
+        "detail": "summarisation",
+        "documentation": {}
+    },
+    {
+        "label": "embedding_model",
+        "kind": 5,
+        "importPath": "summarisation",
+        "description": "summarisation",
+        "peekOfCode": "embedding_model = OllamaEmbeddings(model=\"llama3.1\")\n# sample chat context\nnlp = spacy.load(\"en_core_web_sm\")\nchat_context = [\n    (\"human\", \"Hi there!\"),\n    (\"ai\", \"Hello! How can I assist you today?\"),\n    (\"human\", \"Can you tell me about the weather today?\"),\n    (\"ai\", \"Sure! The weather today is sunny with a high of 25°C and a low of 15°C.\"),\n    (\"human\", \"Can you tell me about Section 420 of the Indian Penal Code?\"),\n    (\"ai\", \"Section 420 of the Indian Penal Code deals with cheating and dishonestly inducing delivery of property. It prescribes imprisonment of up to 7 years and a fine.\"),",
+        "detail": "summarisation",
+        "documentation": {}
+    },
+    {
+        "label": "nlp",
+        "kind": 5,
+        "importPath": "summarisation",
+        "description": "summarisation",
+        "peekOfCode": "nlp = spacy.load(\"en_core_web_sm\")\nchat_context = [\n    (\"human\", \"Hi there!\"),\n    (\"ai\", \"Hello! How can I assist you today?\"),\n    (\"human\", \"Can you tell me about the weather today?\"),\n    (\"ai\", \"Sure! The weather today is sunny with a high of 25°C and a low of 15°C.\"),\n    (\"human\", \"Can you tell me about Section 420 of the Indian Penal Code?\"),\n    (\"ai\", \"Section 420 of the Indian Penal Code deals with cheating and dishonestly inducing delivery of property. It prescribes imprisonment of up to 7 years and a fine.\"),\n    (\"human\", \"How do I file a complaint under this section?\"),\n    (\"ai\", \"To file a complaint under Section 420, you need to approach the police station and file an FIR providing evidence of the cheating incident.\"),",
+        "detail": "summarisation",
+        "documentation": {}
+    },
+    {
+        "label": "chat_context",
+        "kind": 5,
+        "importPath": "summarisation",
+        "description": "summarisation",
+        "peekOfCode": "chat_context = [\n    (\"human\", \"Hi there!\"),\n    (\"ai\", \"Hello! How can I assist you today?\"),\n    (\"human\", \"Can you tell me about the weather today?\"),\n    (\"ai\", \"Sure! The weather today is sunny with a high of 25°C and a low of 15°C.\"),\n    (\"human\", \"Can you tell me about Section 420 of the Indian Penal Code?\"),\n    (\"ai\", \"Section 420 of the Indian Penal Code deals with cheating and dishonestly inducing delivery of property. It prescribes imprisonment of up to 7 years and a fine.\"),\n    (\"human\", \"How do I file a complaint under this section?\"),\n    (\"ai\", \"To file a complaint under Section 420, you need to approach the police station and file an FIR providing evidence of the cheating incident.\"),\n    (\"human\", \"What evidence is required for filing a complaint under Section 420?\"),",
+        "detail": "summarisation",
+        "documentation": {}
+    },
+    {
+        "label": "summarisation_template",
+        "kind": 5,
+        "importPath": "summarisation",
+        "description": "summarisation",
+        "peekOfCode": "summarisation_template = PromptTemplate.from_template(\n    \"\"\"\n        Summarize the following chat conversation. Focus on the key points, user intentions, and AI responses:\n        also find the most appropriate title for the conversation . Make it within two to three words\n        Return the title inside an object container : {chat_history}\n        Summary , Title :\n    \"\"\"\n)\ntokenisation_template = PromptTemplate.from_template(\n    \"\"\"",
+        "detail": "summarisation",
+        "documentation": {}
+    },
+    {
+        "label": "tokenisation_template",
+        "kind": 5,
+        "importPath": "summarisation",
+        "description": "summarisation",
+        "peekOfCode": "tokenisation_template = PromptTemplate.from_template(\n    \"\"\"\n        Tokenize the following chat conversation . focus on the key points , user intentions and AI response , \n        Extract IMPORTANT tokens from the given conversation : {chat_history},\n        Tokens:\n    \"\"\"\n)\ndef summariseChat(chat_history):\n    chat_as_text = '\\n'.join([f\"{role} : {message}\"for role,message in chat_history ])\n    summarised_prompt = summarisation_template.format(chat_history=chat_as_text)",
+        "detail": "summarisation",
+        "documentation": {}
+    },
+    {
+        "label": "handle_query",
+        "kind": 2,
+        "importPath": "tempCodeRunnerFile",
+        "description": "tempCodeRunnerFile",
+        "peekOfCode": "def handle_query(query, context=\"\"):\n    # If document search is triggered\n    if \"section\" in query.lower() or \"pdf\" in query.lower():\n        results = vector_store.similarity_search(query)\n        if results:\n            context = results[0].page_content  # Add the first result to the context\n    # Construct the full prompt with context and query\n    full_prompt = chat_prompt.format(query=query, context=context)\n    return llm.invoke(full_prompt)\n# Example usage",
+        "detail": "tempCodeRunnerFile",
+        "documentation": {}
+    },
+    {
+        "label": "llm",
+        "kind": 5,
+        "importPath": "tempCodeRunnerFile",
+        "description": "tempCodeRunnerFile",
+        "peekOfCode": "llm = ChatGoogleGenerativeAI(\n    model=\"gemini-1.5-pro\",\n    temperature=0.7,\n    max_tokens=None,\n    timeout=None,\n    max_retries=2,\n    # other params...\n)\nembedding_model = GoogleGenerativeAIEmbeddings(model=\"models/embedding-001\")\n# uploading the pdf",
+        "detail": "tempCodeRunnerFile",
+        "documentation": {}
+    },
+    {
+        "label": "embedding_model",
+        "kind": 5,
+        "importPath": "tempCodeRunnerFile",
+        "description": "tempCodeRunnerFile",
+        "peekOfCode": "embedding_model = GoogleGenerativeAIEmbeddings(model=\"models/embedding-001\")\n# uploading the pdf\nprint(\"uploaded the pdf\")\npdf_reader = PyPDFLoader(\"../Backend/assets/ipc.pdf\")\ndocuments = pdf_reader.load_and_split()\nchat_prompt = ChatPromptTemplate.from_messages([\n    \"\"\"\n    <s>[INST] You are an AI legal assistant, skilled in Indian law. Provide accurate legal advice or document lookup based on the query. If you do not have sufficient information to answer, please advise on the next steps or suggest seeking professional legal help. [/INST]</s>\n    [INST] Question: {query}\n           Context: {context}",
+        "detail": "tempCodeRunnerFile",
+        "documentation": {}
+    },
+    {
+        "label": "pdf_reader",
+        "kind": 5,
+        "importPath": "tempCodeRunnerFile",
+        "description": "tempCodeRunnerFile",
+        "peekOfCode": "pdf_reader = PyPDFLoader(\"../Backend/assets/ipc.pdf\")\ndocuments = pdf_reader.load_and_split()\nchat_prompt = ChatPromptTemplate.from_messages([\n    \"\"\"\n    <s>[INST] You are an AI legal assistant, skilled in Indian law. Provide accurate legal advice or document lookup based on the query. If you do not have sufficient information to answer, please advise on the next steps or suggest seeking professional legal help. [/INST]</s>\n    [INST] Question: {query}\n           Context: {context}\n           Response:\n    [/INST]\n\"\"\"",
+        "detail": "tempCodeRunnerFile",
+        "documentation": {}
+    },
+    {
+        "label": "documents",
+        "kind": 5,
+        "importPath": "tempCodeRunnerFile",
+        "description": "tempCodeRunnerFile",
+        "peekOfCode": "documents = pdf_reader.load_and_split()\nchat_prompt = ChatPromptTemplate.from_messages([\n    \"\"\"\n    <s>[INST] You are an AI legal assistant, skilled in Indian law. Provide accurate legal advice or document lookup based on the query. If you do not have sufficient information to answer, please advise on the next steps or suggest seeking professional legal help. [/INST]</s>\n    [INST] Question: {query}\n           Context: {context}\n           Response:\n    [/INST]\n\"\"\"\n])",
+        "detail": "tempCodeRunnerFile",
+        "documentation": {}
+    },
+    {
+        "label": "chat_prompt",
+        "kind": 5,
+        "importPath": "tempCodeRunnerFile",
+        "description": "tempCodeRunnerFile",
+        "peekOfCode": "chat_prompt = ChatPromptTemplate.from_messages([\n    \"\"\"\n    <s>[INST] You are an AI legal assistant, skilled in Indian law. Provide accurate legal advice or document lookup based on the query. If you do not have sufficient information to answer, please advise on the next steps or suggest seeking professional legal help. [/INST]</s>\n    [INST] Question: {query}\n           Context: {context}\n           Response:\n    [/INST]\n\"\"\"\n])\nprint(\"creating the text splitter\")",
+        "detail": "tempCodeRunnerFile",
+        "documentation": {}
+    },
+    {
+        "label": "text_splitter",
+        "kind": 5,
+        "importPath": "tempCodeRunnerFile",
+        "description": "tempCodeRunnerFile",
+        "peekOfCode": "text_splitter = RecursiveCharacterTextSplitter(\n    chunk_size=1024, chunk_overlap=200, length_function=len\n)\n# creating the chunks\nprint(\"creating the chunks\")\nchunks = text_splitter.split_documents(documents)\nprint(\"creating chroma db\")\n# creating the vector store\n# vector_store = Chroma.from_documents(\n#     chunks, embedding_model, persist_directory=\"db\"",
+        "detail": "tempCodeRunnerFile",
+        "documentation": {}
+    },
+    {
+        "label": "chunks",
+        "kind": 5,
+        "importPath": "tempCodeRunnerFile",
+        "description": "tempCodeRunnerFile",
+        "peekOfCode": "chunks = text_splitter.split_documents(documents)\nprint(\"creating chroma db\")\n# creating the vector store\n# vector_store = Chroma.from_documents(\n#     chunks, embedding_model, persist_directory=\"db\"\n# )\n# Load the existing Chroma vector store\n# vector_store = Chroma(persist_directory=\"db\", embedding_function=embedding_model.embed_query)\nvector_store = Chroma(persist_directory=\"db\", embedding_function=embedding_model)\nprint(\"Chroma DB loaded successfully\")",
+        "detail": "tempCodeRunnerFile",
+        "documentation": {}
+    },
+    {
+        "label": "vector_store",
+        "kind": 5,
+        "importPath": "tempCodeRunnerFile",
+        "description": "tempCodeRunnerFile",
+        "peekOfCode": "vector_store = Chroma(persist_directory=\"db\", embedding_function=embedding_model)\nprint(\"Chroma DB loaded successfully\")\ndef handle_query(query, context=\"\"):\n    # If document search is triggered\n    if \"section\" in query.lower() or \"pdf\" in query.lower():\n        results = vector_store.similarity_search(query)\n        if results:\n            context = results[0].page_content  # Add the first result to the context\n    # Construct the full prompt with context and query\n    full_prompt = chat_prompt.format(query=query, context=context)",
+        "detail": "tempCodeRunnerFile",
+        "documentation": {}
+    },
+    {
+        "label": "chat_history",
+        "kind": 5,
+        "importPath": "tempCodeRunnerFile",
+        "description": "tempCodeRunnerFile",
+        "peekOfCode": "chat_history = []\nwhile True:\n    user_query = input(\"Ask your question: \")\n    if user_query.lower() == \"exit\":\n        break\n    # Add previous conversation to context\n    context = \" \".join(chat_history)\n    # Handle the query\n    response = handle_query(user_query, context)\n    # Update chat history",
+        "detail": "tempCodeRunnerFile",
         "documentation": {}
     }
 ]

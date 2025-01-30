@@ -11,6 +11,8 @@ from langchain_core.messages import HumanMessage,AIMessage
 from time import sleep
 from langchain_community.chat_message_histories import ChatMessageHistory
 from sklearn.metrics.pairwise import cosine_similarity
+from summarisation import summariseChat
+
 llm = ChatOllama(model="llama3.1",temperature=0.7,)
 embedding_model = OllamaEmbeddings(model="llama3.1")
 # uploading the pdf
@@ -29,7 +31,9 @@ chat_prompt = PromptTemplate.from_template(
         So for each user query provide ACCURATE,USEFUL,THOUGHTFUL Response.
         also if the user intends to do normal Chatting ; initiate in friendly chatting too,
         But Remind them of your PURPOSE and ROLE if the user initiates only FRIENDLY CHAT and compel them to engage in Asking LEGAL QUERIES
-        on Indian Peanal Code
+        on Indian Peanal Code,
+        Also Introduce only once ; Analyse the given context and Dont introduce yourself again if you have already introduced yourself previously in the context .
+        No need to mention previous replies unless asked . keep in mind of the current question and answer only it based on the context 
         Question: {input},
         Context: {context},
         Response:
@@ -196,3 +200,6 @@ while True:
         print("\nAI Response:\n")
         print(response)
         print("\n------------------------------------\n")
+
+chat_summary = summariseChat(chat_context)
+print(chat_summary)
