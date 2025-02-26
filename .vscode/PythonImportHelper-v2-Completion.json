@@ -1167,7 +1167,7 @@
         "kind": 2,
         "importPath": "summarisation",
         "description": "summarisation",
-        "peekOfCode": "def summariseChat(chat_history):\n    chat_as_text = '\\n'.join([f\"{role} : {message}\"for role,message in chat_history ])\n    summarised_prompt = summarisation_template.format(chat_history=chat_as_text)\n    return llm.invoke(summarised_prompt).content",
+        "peekOfCode": "def summariseChat(chat_history):\n    chat_as_text = \"\\n\".join([f\"{role} : {message}\" for role, message in chat_history])\n    summarised_prompt = summarisation_template.format(chat_history=chat_as_text)\n    return llm.invoke(summarised_prompt).content",
         "detail": "summarisation",
         "documentation": {}
     },
@@ -1176,7 +1176,7 @@
         "kind": 5,
         "importPath": "summarisation",
         "description": "summarisation",
-        "peekOfCode": "start = time.time()\nllm = ChatOllama(\n    model=\"llama3.1\",\n    temperature=0.7,\n)\nembedding_model = OllamaEmbeddings(model=\"llama3.1\")\n# sample chat context\nnlp = spacy.load(\"en_core_web_sm\")\nchat_context = [\n    (\"human\", \"Hi there!\"),",
+        "peekOfCode": "start = time.time()\nllm = ChatOllama(\n    model=\"llama3.1\",\n    temperature=0.7,\n)\nembedding_model = OllamaEmbeddings(model=\"llama3.1\")\n# sample chat context\ntitle_model = ChatOllama(\n    model=\"llama3.1\",\n    temperature=0.1",
         "detail": "summarisation",
         "documentation": {}
     },
@@ -1185,7 +1185,7 @@
         "kind": 5,
         "importPath": "summarisation",
         "description": "summarisation",
-        "peekOfCode": "llm = ChatOllama(\n    model=\"llama3.1\",\n    temperature=0.7,\n)\nembedding_model = OllamaEmbeddings(model=\"llama3.1\")\n# sample chat context\nnlp = spacy.load(\"en_core_web_sm\")\nchat_context = [\n    (\"human\", \"Hi there!\"),\n    (\"ai\", \"Hello! How can I assist you today?\"),",
+        "peekOfCode": "llm = ChatOllama(\n    model=\"llama3.1\",\n    temperature=0.7,\n)\nembedding_model = OllamaEmbeddings(model=\"llama3.1\")\n# sample chat context\ntitle_model = ChatOllama(\n    model=\"llama3.1\",\n    temperature=0.1\n)",
         "detail": "summarisation",
         "documentation": {}
     },
@@ -1194,7 +1194,25 @@
         "kind": 5,
         "importPath": "summarisation",
         "description": "summarisation",
-        "peekOfCode": "embedding_model = OllamaEmbeddings(model=\"llama3.1\")\n# sample chat context\nnlp = spacy.load(\"en_core_web_sm\")\nchat_context = [\n    (\"human\", \"Hi there!\"),\n    (\"ai\", \"Hello! How can I assist you today?\"),\n    (\"human\", \"Can you tell me about the weather today?\"),\n    (\"ai\", \"Sure! The weather today is sunny with a high of 25°C and a low of 15°C.\"),\n    (\"human\", \"Can you tell me about Section 420 of the Indian Penal Code?\"),\n    (\"ai\", \"Section 420 of the Indian Penal Code deals with cheating and dishonestly inducing delivery of property. It prescribes imprisonment of up to 7 years and a fine.\"),",
+        "peekOfCode": "embedding_model = OllamaEmbeddings(model=\"llama3.1\")\n# sample chat context\ntitle_model = ChatOllama(\n    model=\"llama3.1\",\n    temperature=0.1\n)\nlawyer_model = ChatOllama(\n    model=\"llama3.1\",\n    temperature=0.1\n)",
+        "detail": "summarisation",
+        "documentation": {}
+    },
+    {
+        "label": "title_model",
+        "kind": 5,
+        "importPath": "summarisation",
+        "description": "summarisation",
+        "peekOfCode": "title_model = ChatOllama(\n    model=\"llama3.1\",\n    temperature=0.1\n)\nlawyer_model = ChatOllama(\n    model=\"llama3.1\",\n    temperature=0.1\n)\nnlp = spacy.load(\"en_core_web_sm\")\nchat_context = [",
+        "detail": "summarisation",
+        "documentation": {}
+    },
+    {
+        "label": "lawyer_model",
+        "kind": 5,
+        "importPath": "summarisation",
+        "description": "summarisation",
+        "peekOfCode": "lawyer_model = ChatOllama(\n    model=\"llama3.1\",\n    temperature=0.1\n)\nnlp = spacy.load(\"en_core_web_sm\")\nchat_context = [\n    (\"human\", \"Hi there!\"),\n    (\"ai\", \"Hello! How can I assist you today?\"),\n    (\"human\", \"Can you tell me about the weather today?\"),\n    (\"ai\", \"Sure! The weather today is sunny with a high of 25°C and a low of 15°C.\"),",
         "detail": "summarisation",
         "documentation": {}
     },
@@ -1203,7 +1221,7 @@
         "kind": 5,
         "importPath": "summarisation",
         "description": "summarisation",
-        "peekOfCode": "nlp = spacy.load(\"en_core_web_sm\")\nchat_context = [\n    (\"human\", \"Hi there!\"),\n    (\"ai\", \"Hello! How can I assist you today?\"),\n    (\"human\", \"Can you tell me about the weather today?\"),\n    (\"ai\", \"Sure! The weather today is sunny with a high of 25°C and a low of 15°C.\"),\n    (\"human\", \"Can you tell me about Section 420 of the Indian Penal Code?\"),\n    (\"ai\", \"Section 420 of the Indian Penal Code deals with cheating and dishonestly inducing delivery of property. It prescribes imprisonment of up to 7 years and a fine.\"),\n    (\"human\", \"How do I file a complaint under this section?\"),\n    (\"ai\", \"To file a complaint under Section 420, you need to approach the police station and file an FIR providing evidence of the cheating incident.\"),",
+        "peekOfCode": "nlp = spacy.load(\"en_core_web_sm\")\nchat_context = [\n    (\"human\", \"Hi there!\"),\n    (\"ai\", \"Hello! How can I assist you today?\"),\n    (\"human\", \"Can you tell me about the weather today?\"),\n    (\"ai\", \"Sure! The weather today is sunny with a high of 25°C and a low of 15°C.\"),\n    (\"human\", \"Can you tell me about Section 420 of the Indian Penal Code?\"),\n    (\n        \"ai\",\n        \"Section 420 of the Indian Penal Code deals with cheating and dishonestly inducing delivery of property. It prescribes imprisonment of up to 7 years and a fine.\",",
         "detail": "summarisation",
         "documentation": {}
     },
@@ -1212,7 +1230,7 @@
         "kind": 5,
         "importPath": "summarisation",
         "description": "summarisation",
-        "peekOfCode": "chat_context = [\n    (\"human\", \"Hi there!\"),\n    (\"ai\", \"Hello! How can I assist you today?\"),\n    (\"human\", \"Can you tell me about the weather today?\"),\n    (\"ai\", \"Sure! The weather today is sunny with a high of 25°C and a low of 15°C.\"),\n    (\"human\", \"Can you tell me about Section 420 of the Indian Penal Code?\"),\n    (\"ai\", \"Section 420 of the Indian Penal Code deals with cheating and dishonestly inducing delivery of property. It prescribes imprisonment of up to 7 years and a fine.\"),\n    (\"human\", \"How do I file a complaint under this section?\"),\n    (\"ai\", \"To file a complaint under Section 420, you need to approach the police station and file an FIR providing evidence of the cheating incident.\"),\n    (\"human\", \"What evidence is required for filing a complaint under Section 420?\"),",
+        "peekOfCode": "chat_context = [\n    (\"human\", \"Hi there!\"),\n    (\"ai\", \"Hello! How can I assist you today?\"),\n    (\"human\", \"Can you tell me about the weather today?\"),\n    (\"ai\", \"Sure! The weather today is sunny with a high of 25°C and a low of 15°C.\"),\n    (\"human\", \"Can you tell me about Section 420 of the Indian Penal Code?\"),\n    (\n        \"ai\",\n        \"Section 420 of the Indian Penal Code deals with cheating and dishonestly inducing delivery of property. It prescribes imprisonment of up to 7 years and a fine.\",\n    ),",
         "detail": "summarisation",
         "documentation": {}
     },
@@ -1221,7 +1239,25 @@
         "kind": 5,
         "importPath": "summarisation",
         "description": "summarisation",
-        "peekOfCode": "summarisation_template = PromptTemplate.from_template(\n    \"\"\"\n        Summarize the following chat conversation. Focus on the key points, user intentions, and AI responses:\n        also find the most appropriate title for the conversation . Make it within two to three words\n        Return the title inside an object container : {chat_history}\n        Summary , Title :\n    \"\"\"\n)\ntokenisation_template = PromptTemplate.from_template(\n    \"\"\"",
+        "peekOfCode": "summarisation_template = PromptTemplate.from_template(\n    \"\"\"\n        Summarize the following chat conversation. Focus on the key points, user intentions, and AI responses:\n        dont make it too long . make it within 120 words.\n        Chat History : {chat_history}\n        Summary:\n    \"\"\"\n)\ntitle_template = PromptTemplate.from_template(\n    \"\"\"",
+        "detail": "summarisation",
+        "documentation": {}
+    },
+    {
+        "label": "title_template",
+        "kind": 5,
+        "importPath": "summarisation",
+        "description": "summarisation",
+        "peekOfCode": "title_template = PromptTemplate.from_template(\n    \"\"\"\n    You are assigned with a task to find the most appropriate title to the summary that will be providing.\n    make it within 2 to 3 words. most of the summary will be related to the law \n    Summary : {summary}\n    \"\"\"\n)\nproficiency_field_template = PromptTemplate.from_template(\n    \"\"\"\n    i will provide you a summary .",
+        "detail": "summarisation",
+        "documentation": {}
+    },
+    {
+        "label": "proficiency_field_template",
+        "kind": 5,
+        "importPath": "summarisation",
+        "description": "summarisation",
+        "peekOfCode": "proficiency_field_template = PromptTemplate.from_template(\n    \"\"\"\n    i will provide you a summary .\n    based on the summary find the most appropriate type of lawyer that can be assigned to this case.\n    strictly select the lawyer from these 5 types : [\"Civil Lawyer\",\"Criminal Lawyer\",\"Corporate Lawyer\",\"Family Lawyer\",\"Intellectual Property (IP) Lawyer\"].\n    do not select one other than these 5 types .\n    these are the description for each lawyer type: \n    Civil Lawyer : Handles non-criminal disputes like property, contracts, and consumer rights cases.\n    Criminal Lawyer : Defends or prosecutes individuals accused of crimes like theft, fraud, or assault.\n    Corporate Lawyer : Advises businesses on legal compliance, contracts, mergers, and corporate governance.",
         "detail": "summarisation",
         "documentation": {}
     },
@@ -1230,7 +1266,7 @@
         "kind": 5,
         "importPath": "summarisation",
         "description": "summarisation",
-        "peekOfCode": "tokenisation_template = PromptTemplate.from_template(\n    \"\"\"\n        Tokenize the following chat conversation . focus on the key points , user intentions and AI response , \n        Extract IMPORTANT tokens from the given conversation : {chat_history},\n        Tokens:\n    \"\"\"\n)\ndef summariseChat(chat_history):\n    chat_as_text = '\\n'.join([f\"{role} : {message}\"for role,message in chat_history ])\n    summarised_prompt = summarisation_template.format(chat_history=chat_as_text)",
+        "peekOfCode": "tokenisation_template = PromptTemplate.from_template(\n    \"\"\"\n        Tokenize the following chat conversation . focus on the key points , user intentions and AI response , \n        Extract IMPORTANT tokens from the given conversation : {chat_history},\n        Tokens:\n    \"\"\"\n)\ndef summariseChat(chat_history):\n    chat_as_text = \"\\n\".join([f\"{role} : {message}\" for role, message in chat_history])\n    summarised_prompt = summarisation_template.format(chat_history=chat_as_text)",
         "detail": "summarisation",
         "documentation": {}
     },
