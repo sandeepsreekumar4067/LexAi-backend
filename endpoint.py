@@ -225,7 +225,8 @@ async def handle_query(request:QueryRequest):
 
 @app.get('/summary')
 async def handle_summary():
+    print(chat_context)
     chat_summary = summariseChat(chat_context)
     chat_context.clear()
     print("response sent successfully")
-    return {"response":chat_summary,"status":"success"}
+    print(chat_summary)

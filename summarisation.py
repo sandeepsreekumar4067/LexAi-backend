@@ -17,7 +17,7 @@ print("execution started")
 start = time.time()
 llm = ChatOllama(
     model="llama3.1",
-    temperature=0.7,
+    temperature=0.5,
 )
 embedding_model = OllamaEmbeddings(model="llama3.1")
 # sample chat context
@@ -199,6 +199,8 @@ summarisation_template = PromptTemplate.from_template(
     """
         Summarize the following chat conversation. Focus on the key points, user intentions, and AI responses:
         dont make it too long . make it within 120 words.
+        plus please avoid additional introduction such as 'here is a summary about the conversation in 120 words ' etc..
+        no introduction , no additional details just straight up summary
         Chat History : {chat_history}
         Summary:
     """
@@ -240,4 +242,9 @@ tokenisation_template = PromptTemplate.from_template(
 def summariseChat(chat_history):
     chat_as_text = "\n".join([f"{role} : {message}" for role, message in chat_history])
     summarised_prompt = summarisation_template.format(chat_history=chat_as_text)
-    return llm.invoke(summarised_prompt).content
+    summary = llm.invoke(summarised_prompt).content
+    title_prompt = title_template.format(summary=summary)
+    lawyer_prompt = proficiency_field_template.format(summary=summary)
+    title = title_model.invoke(title_prompt).content
+    lawyer = lawyer_model.invoke(lawyer_prompt).content
+    return {"response":summary,"title":title,"lawyer":lawyer,"status":"success"}

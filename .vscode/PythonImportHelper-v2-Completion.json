@@ -1167,7 +1167,7 @@
         "kind": 2,
         "importPath": "summarisation",
         "description": "summarisation",
-        "peekOfCode": "def summariseChat(chat_history):\n    chat_as_text = \"\\n\".join([f\"{role} : {message}\" for role, message in chat_history])\n    summarised_prompt = summarisation_template.format(chat_history=chat_as_text)\n    return llm.invoke(summarised_prompt).content",
+        "peekOfCode": "def summariseChat(chat_history):\n    chat_as_text = \"\\n\".join([f\"{role} : {message}\" for role, message in chat_history])\n    summarised_prompt = summarisation_template.format(chat_history=chat_as_text)\n    summary = llm.invoke(summarised_prompt).content\n    title_prompt = title_template.format(summary=summary)\n    lawyer_prompt = proficiency_field_template.format(summary=summary)\n    title = title_model.invoke(title_prompt).content\n    lawyer = lawyer_model.invoke(lawyer_prompt).content\n    return {\"response\":summary,\"title\":title,\"lawyer\":lawyer,\"status\":\"success\"}",
         "detail": "summarisation",
         "documentation": {}
     },
@@ -1176,7 +1176,7 @@
         "kind": 5,
         "importPath": "summarisation",
         "description": "summarisation",
-        "peekOfCode": "start = time.time()\nllm = ChatOllama(\n    model=\"llama3.1\",\n    temperature=0.7,\n)\nembedding_model = OllamaEmbeddings(model=\"llama3.1\")\n# sample chat context\ntitle_model = ChatOllama(\n    model=\"llama3.1\",\n    temperature=0.1",
+        "peekOfCode": "start = time.time()\nllm = ChatOllama(\n    model=\"llama3.1\",\n    temperature=0.5,\n)\nembedding_model = OllamaEmbeddings(model=\"llama3.1\")\n# sample chat context\ntitle_model = ChatOllama(\n    model=\"llama3.1\",\n    temperature=0.1",
         "detail": "summarisation",
         "documentation": {}
     },
@@ -1185,7 +1185,7 @@
         "kind": 5,
         "importPath": "summarisation",
         "description": "summarisation",
-        "peekOfCode": "llm = ChatOllama(\n    model=\"llama3.1\",\n    temperature=0.7,\n)\nembedding_model = OllamaEmbeddings(model=\"llama3.1\")\n# sample chat context\ntitle_model = ChatOllama(\n    model=\"llama3.1\",\n    temperature=0.1\n)",
+        "peekOfCode": "llm = ChatOllama(\n    model=\"llama3.1\",\n    temperature=0.5,\n)\nembedding_model = OllamaEmbeddings(model=\"llama3.1\")\n# sample chat context\ntitle_model = ChatOllama(\n    model=\"llama3.1\",\n    temperature=0.1\n)",
         "detail": "summarisation",
         "documentation": {}
     },
@@ -1239,7 +1239,7 @@
         "kind": 5,
         "importPath": "summarisation",
         "description": "summarisation",
-        "peekOfCode": "summarisation_template = PromptTemplate.from_template(\n    \"\"\"\n        Summarize the following chat conversation. Focus on the key points, user intentions, and AI responses:\n        dont make it too long . make it within 120 words.\n        Chat History : {chat_history}\n        Summary:\n    \"\"\"\n)\ntitle_template = PromptTemplate.from_template(\n    \"\"\"",
+        "peekOfCode": "summarisation_template = PromptTemplate.from_template(\n    \"\"\"\n        Summarize the following chat conversation. Focus on the key points, user intentions, and AI responses:\n        dont make it too long . make it within 120 words.\n        plus please avoid additional introduction such as 'here is a summary about the conversation in 120 words ' etc..\n        no introduction , no additional details just straight up summary\n        Chat History : {chat_history}\n        Summary:\n    \"\"\"\n)",
         "detail": "summarisation",
         "documentation": {}
     },

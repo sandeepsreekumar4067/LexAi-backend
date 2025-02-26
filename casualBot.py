@@ -177,8 +177,9 @@ def handle_query(query):
         chat_context.append(("ai",docs.content))
     else:
         # If legal, perform similarity search in Chroma for relevant docs
-        relevant_docs = vector_store.similarity_search_with_score(query, k=10)
-        context = "".join([doc[0].page_content for doc in relevant_docs])
+        # relevant_docs = vector_store.similarity_search_with_score(query, k=10)
+        # context = "".join([doc[0].page_content for doc in relevant_docs])
+        context=chat_context
         print(chat_context,"\n")
         full_prompt = chat_prompt.format(input=query, context=context)
         docs = llm.invoke(full_prompt)
