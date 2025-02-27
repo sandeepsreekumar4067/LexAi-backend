@@ -210,6 +210,12 @@ title_template = PromptTemplate.from_template(
     """
     You are assigned with a task to find the most appropriate title to the summary that will be providing.
     make it within 2 to 3 words. most of the summary will be related to the law 
+    strictly follow and obey following instructions 
+    #no need for explanation based on how you selected the Title .
+    #no introduction or anything .
+    #pick a most suitable title
+    # Strictly do not provide any other sentence other than the title
+    #just straight up provide a title you would reccomend.
     Summary : {summary}
     """
 )
@@ -226,6 +232,12 @@ proficiency_field_template = PromptTemplate.from_template(
     Corporate Lawyer : Advises businesses on legal compliance, contracts, mergers, and corporate governance.
     Family Lawyer : Deals with divorce, child custody, adoption, and domestic disputes.
     Intellectual Property (IP) Lawyer : Protects patents, trademarks, copyrights, and trade secrets.
+    strictly follow and obey following instructions 
+    #no need for explanation based on how you selected the lawyer .
+    #no introduction or anything .
+    #always select a lawyer among the ones i provided
+    #strictly do no provide any other sentence other than the reccomended lawyer
+    #just straight up provide the lawyer you would reccomend without any additional details or sentences.
     Summary : {summary}
     """
 )

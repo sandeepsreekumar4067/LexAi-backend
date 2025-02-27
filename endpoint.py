@@ -229,4 +229,4 @@ async def handle_summary():
     chat_summary = summariseChat(chat_context)
     chat_context.clear()
     print("response sent successfully")
-    print(chat_summary)
+    return chat_summary

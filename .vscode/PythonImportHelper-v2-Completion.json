@@ -1248,7 +1248,7 @@
         "kind": 5,
         "importPath": "summarisation",
         "description": "summarisation",
-        "peekOfCode": "title_template = PromptTemplate.from_template(\n    \"\"\"\n    You are assigned with a task to find the most appropriate title to the summary that will be providing.\n    make it within 2 to 3 words. most of the summary will be related to the law \n    Summary : {summary}\n    \"\"\"\n)\nproficiency_field_template = PromptTemplate.from_template(\n    \"\"\"\n    i will provide you a summary .",
+        "peekOfCode": "title_template = PromptTemplate.from_template(\n    \"\"\"\n    You are assigned with a task to find the most appropriate title to the summary that will be providing.\n    make it within 2 to 3 words. most of the summary will be related to the law \n    strictly follow and obey following instructions \n    #no need for explanation based on how you selected the Title .\n    #no introduction or anything .\n    #pick a most suitable title\n    # Strictly do not provide any other sentence other than the title\n    #just straight up provide a title you would reccomend.",
         "detail": "summarisation",
         "documentation": {}
     },
